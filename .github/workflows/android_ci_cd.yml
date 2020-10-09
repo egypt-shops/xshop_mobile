@@ -1,4 +1,4 @@
-name: Demo App Android Release
+name: XShop Mobile Android Release
 
 on:
   push:
