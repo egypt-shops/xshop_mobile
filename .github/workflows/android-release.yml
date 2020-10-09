@@ -2,7 +2,7 @@ name: Demo App Android Release
 
 on:
   push:
-    branches: [ master ]
+    branches: [ flutter-ci ]
 
 jobs:
   version:
