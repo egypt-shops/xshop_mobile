@@ -2,9 +2,9 @@ name: Demo App Android Release
 
 on:
   push:
-    branches: [ develop, master ]
+    branches: [develop, master]
   pull_request:
-    branches: [ develop, master ]
+    branches: [develop, master]
 
 jobs:
   version:
