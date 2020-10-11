@@ -10,8 +10,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:xshop_mobile/main.dart';
 
-/*void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+void main() {
+/*  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
 
@@ -27,4 +27,4 @@ import 'package:xshop_mobile/main.dart';
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
   });
-}
+*/}
