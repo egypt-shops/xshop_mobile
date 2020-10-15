@@ -1,11 +1,10 @@
-name: XShop Mobile Android Release
+name: xshop Android Release
 
 on:
   push:
     branches: [develop, master]
   pull_request:
     branches: [develop, master]
-
 jobs:
   version:
     name: Create version number
