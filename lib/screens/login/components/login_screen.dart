@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:xshop_mobile/screens/login/login.dart';
+import 'package:xshop_mobile/services/loginAPI.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
+final TextEditingController mobileController = new TextEditingController();
+final TextEditingController passwordController = new TextEditingController();
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -16,32 +21,30 @@ class LoginScreen extends StatelessWidget {
             ),
             Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
               TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Username',
-                ),
-              ),
+                  decoration: InputDecoration(
+                    hintText: 'Username',
+                  ),
+                  controller: mobileController),
               TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Password',
-                ),
-                obscureText: true,
-              ),
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                  ),
+                  obscureText: true,
+                  controller: passwordController),
               SizedBox(
                 height: 24,
               ),
               RaisedButton(
                 color: Colors.blue[500],
                 child: Text('LOGIN'),
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/home');
-                },
+                onPressed: //(mobileController.text == "" || passwordController.text == "") ? (){print('error ${mobileController.text}'); }: 
+                () {
+          
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => LoginAPI(mobile: mobileController.text,password: passwordController.text,)), (Route<dynamic> route) => false);
+        }
               )
             ])
           ],
         ));
   }
-}
-
-Future<http.Response> fetchAlbum() {
-  return http.get('https://jsonplaceholder.typicode.com/albums/1');
 }
