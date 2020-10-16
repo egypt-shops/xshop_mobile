@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:xshop_mobile/screens/login/login.dart';
 import 'package:xshop_mobile/services/loginAPI.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+
 
 final TextEditingController mobileController = new TextEditingController();
 final TextEditingController passwordController = new TextEditingController();
@@ -9,7 +8,9 @@ final TextEditingController passwordController = new TextEditingController();
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Scaffold(
+        body: Center(
+      child: Container(
         padding: EdgeInsets.all(80.0),
         color: Colors.blue[50],
         child: Column(
@@ -19,10 +20,12 @@ class LoginScreen extends StatelessWidget {
               'xshop',
               style: Theme.of(context).textTheme.headline2,
             ),
-            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
               TextFormField(
+              
                   decoration: InputDecoration(
-                    hintText: 'Username',
+                    hintText: 'Mobile',
                   ),
                   controller: mobileController),
               TextFormField(
@@ -45,6 +48,6 @@ class LoginScreen extends StatelessWidget {
               )
             ])
           ],
-        ));
+        ))));
   }
 }
