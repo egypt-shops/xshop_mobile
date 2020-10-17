@@ -4,10 +4,10 @@ import './screens/home/home.dart';
 import './services/loginAPI.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Xshop());
 }
 
-class MyApp extends StatelessWidget {
+class Xshop extends StatelessWidget {
 
   
   // This widget is the root of your application.
