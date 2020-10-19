@@ -11,6 +11,7 @@ class LoginAPI extends StatefulWidget {
   final String mobile;
   final String password;
   LoginAPI({this.mobile,this.password});
+  
 
   @override
   _LoginAPIState createState() => _LoginAPIState();
@@ -34,10 +35,10 @@ void initState() {
     CircularProgressIndicator());
   }
 
-  signIn(String email, pass) async {
+  signIn(String mobile, pass) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map data = {
-      'mobile': email,
+      'mobile': mobile,
       'password': pass
     };
     var jsonResponse = null;
