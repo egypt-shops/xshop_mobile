@@ -1,10 +1,9 @@
-name: xshop Android Release
+name: xshop continuous delivery
 
 on:
   push:
     branches: [develop, master]
-  pull_request:
-    branches: [develop, master]
+
 jobs:
   version:
     name: Create version number
@@ -50,7 +49,6 @@ jobs:
       with:
         path: version.txt
     - run: flutter pub get
-    - run: flutter test
     - run: flutter build apk -t lib/main.dart --split-per-abi
     - run: flutter build appbundle
     - name: Create a Release in GitHub
