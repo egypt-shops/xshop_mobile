@@ -12,14 +12,18 @@ Future<User> signIn(mobile, pass) async {
       'password': pass
     };
     var  response = await http.post("https://dev-egshops.herokuapp.com/api/users/token/", body: data);
+    print(response.statusCode);
     if(response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
 
       if(jsonResponse != null) {
-        print(jsonResponse);
+        print(jsonResponse['user']);
         sharedPreferences.setString("token", jsonResponse['token']);
-    
-        return User.fromJson( jsonResponse['user']);
+        User user_data= User.fromJson( jsonResponse['user']);
+        sharedPreferences.setString('name', user_data.name);
+        sharedPreferences.setString('mobile', user_data.mobile);
+        sharedPreferences.setString('email', user_data.email);
+        return user_data;
         
       }
     }
