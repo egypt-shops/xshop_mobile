@@ -6,7 +6,7 @@ class PrductCreatingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          backgroundColor: Colors.black26,
+          backgroundColor: Colors.blue[50],
           appBar: AppBar(
             title: Row(
               mainAxisAlignment: MainAxisAlignment.start,

@@ -30,6 +30,27 @@ class _HomeScreenState extends State<HomeScreen> {
     checkLoginStatus();
   }
 
+  createAlertDialog(BuildContext context, String user_info) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('change $user_info'),
+            content: TextFormField(
+                decoration: InputDecoration(
+              hintText: 'new ' + user_info,
+            )),
+            actions: <Widget>[
+              FlatButton(
+                  child: new Text("Save"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  })
+            ],
+          );
+        });
+  }
+
   checkLoginStatus() async {
     sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
@@ -81,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                     margin: EdgeInsets.only(right: 20),
                     child: Text(
-                      'Create',
+                      'Data Entry',
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -110,15 +131,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             ListTile(
-              title: Text('Mobile: ' + this.mobile),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
+                title: Text('Mobile: ' + this.mobile),
+                trailing: Icon(Icons.create),
+                onTap: () {
+                  createAlertDialog(context, 'mobile');
+                }),
             ListTile(
               title: Text('Email: ' + this.email),
+              trailing: Icon(Icons.create),
               onTap: () {
-                Navigator.pop(context);
+                createAlertDialog(context, 'email');
               },
             ),
             ListTile(
