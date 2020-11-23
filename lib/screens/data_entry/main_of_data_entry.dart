@@ -107,7 +107,7 @@ class MaindataEntryPage extends StatelessWidget {
 
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.black26,
+        backgroundColor: Colors.blue[50],
         appBar: AppBar(
           title: Row(
             children: [
