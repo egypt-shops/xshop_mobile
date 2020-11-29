@@ -120,13 +120,13 @@ class _CashierState extends State<Cashier> {
                 ListTile(
                   title: Text('Item 3'),
                   onTap: () {
-                    Navigator.pop(context);
+                    //Navigator.pop(context);
                   },
                 ),
                 ListTile(
                   title: Text('Item 4'),
                   onTap: () {
-                    Navigator.pop(context);
+                    //Navigator.pop(context);
                   },
                 ),
               ],

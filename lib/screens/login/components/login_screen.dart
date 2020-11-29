@@ -16,6 +16,24 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final signin = SignIn();
+  createAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text('incorrect mobile or password',
+                style: TextStyle(color: Colors.red)),
+            actions: <Widget>[
+              FlatButton(
+                  child: new Text("Close"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  })
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +79,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           builder: (BuildContext context) =>
                                               Home()),
                                       (Route<dynamic> route) => false);
+                                } else {
+                                  createAlertDialog(context);
                                 }
 
                                 //Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => LoginAPI(mobile: mobileController.text,password: passwordController.text,)), (Route<dynamic> route) => false);
