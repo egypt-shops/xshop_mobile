@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:xshop_mobile/screens/home/components/sub_manager.dart';
+import 'package:xshop_mobile/screens/home/components/customer.dart';
+import 'package:xshop_mobile/screens/home/components/cashier.dart';
 import 'package:xshop_mobile/screens/home/home.dart';
-import 'package:xshop_mobile/services/signin_test.dart';
+import 'package:xshop_mobile/services/signin.dart';
 
 final TextEditingController mobileController = new TextEditingController();
 final TextEditingController passwordController = new TextEditingController();
@@ -56,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Navigator.of(context).pushAndRemoveUntil(
                                       MaterialPageRoute(
                                           builder: (BuildContext context) =>
-                                              Home(name: 'boyka')),
+                                              Home()),
                                       (Route<dynamic> route) => false);
                                 }
 
