@@ -1,7 +1,7 @@
 name: xshop continuous delivery
 
 on:
-  push:
+  pull_request:
     branches: [develop, master]
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
           versionSpec: '5.x'
     - name: Use GitVersion
       id: gitversion
-      uses: gittools/actions/gitversion/execute@v0.9.3
+      uses: gittools/actions/gitversion/execute@v0.9.7
     - name: Create version.txt with nuGetVersion
       run: echo ${{ steps.gitversion.outputs.nuGetVersion  }} > version.txt
     - name: Upload version.txt
