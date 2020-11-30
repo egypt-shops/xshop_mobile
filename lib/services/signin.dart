@@ -35,7 +35,9 @@ class User {
   User({this.type, this.mobile, this.email});
 
   factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-        type: json['type'][0], mobile: json['mobile'], email: json['email']);
+    String userType = 'empty';
+
+    if (json['type'].length != 0) userType = json['type'][0];
+    return User(type: userType, mobile: json['mobile'], email: json['email']);
   }
 }

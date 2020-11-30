@@ -11,8 +11,8 @@ class Customer extends StatefulWidget {
 class _CustomerState extends State<Customer> {
   SharedPreferences sharedPreferences;
   String name = 'Boyka';
-  String mobile = 'empty';
-  String email = 'empty';
+  String mobile;
+  String email;
 
   @override
   void initState() {
@@ -30,15 +30,15 @@ class _CustomerState extends State<Customer> {
     });
   }
 
-  createAlertDialog(BuildContext context, String user_info) {
+  createAlertDialog(BuildContext context, String userInfo) {
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('change $user_info'),
+            title: Text('change $userInfo'),
             content: TextFormField(
                 decoration: InputDecoration(
-              hintText: 'new ' + user_info,
+              hintText: 'new ' + userInfo,
             )),
             actions: <Widget>[
               FlatButton(
@@ -105,13 +105,13 @@ class _CustomerState extends State<Customer> {
                   ),
                 ),
                 ListTile(
-                    title: Text('Mobile: ' + mobile),
+                    title: Text('Mobile: $mobile'),
                     trailing: Icon(Icons.create),
                     onTap: () {
                       createAlertDialog(context, 'mobile');
                     }),
                 ListTile(
-                  title: Text('Email: ' + email),
+                  title: Text('Email: $email'),
                   trailing: Icon(Icons.create),
                   onTap: () {
                     createAlertDialog(context, 'email');
@@ -120,13 +120,13 @@ class _CustomerState extends State<Customer> {
                 ListTile(
                   title: Text('Item 3'),
                   onTap: () {
-                    Navigator.pop(context);
+                    //Navigator.pop(context);
                   },
                 ),
                 ListTile(
                   title: Text('Item 4'),
                   onTap: () {
-                    Navigator.pop(context);
+                    //Navigator.pop(context);
                   },
                 ),
               ],
