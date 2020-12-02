@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xshop_mobile/screens/home/components/cashier.dart';
 import 'package:xshop_mobile/screens/home/components/customer.dart';
-import 'package:xshop_mobile/screens/home/components/sub_manager.dart';
+import 'package:xshop_mobile/screens/home/components/General_manager.dart';
 import 'package:xshop_mobile/screens/home/components/data_entry_clerk.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
+import 'package:xshop_mobile/components/circular_indicator.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -42,16 +43,16 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     switch (type) {
-      case 'CUSTOMER':
+      case 'Customer':
         return MaterialApp(home: Customer());
         break;
-      case 'CASHIER':
+      case 'Cashier':
         return MaterialApp(home: Cashier());
         break;
-      case 'SUB_MANAGER':
-        return MaterialApp(home: SubManager());
+      case 'General Manager':
+        return MaterialApp(home: GeneralManager());
         break;
-      case 'DATA_ENTRY_CLERK':
+      case 'Data Entry Clerk':
         return MaterialApp(home: DataEntryClerk());
         break;
       default:

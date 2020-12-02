@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:xshop_mobile/screens/home/components/sub_manager.dart';
+import 'package:xshop_mobile/screens/home/components/General_manager.dart';
 import 'package:xshop_mobile/screens/home/components/customer.dart';
 import 'package:xshop_mobile/screens/home/components/cashier.dart';
 import 'package:xshop_mobile/screens/home/home.dart';
 import 'package:xshop_mobile/services/signin.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 final TextEditingController mobileController = new TextEditingController();
 final TextEditingController passwordController = new TextEditingController();
@@ -16,6 +17,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final signin = SignIn();
+  ProgressDialog pr;
   createAlertDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -36,6 +38,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    pr = new ProgressDialog(context);
+    pr.style(
+        message: '  logging in..',
+        borderRadius: 10.0,
+        backgroundColor: Colors.white,
+        progressWidget: CircularProgressIndicator(),
+        elevation: 10.0,
+        insetAnimCurve: Curves.easeInOut,
+        progress: 0.0,
+        maxProgress: 100.0,
+        progressTextStyle: TextStyle(
+            color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
+        messageTextStyle: TextStyle(
+            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600));
     return Scaffold(
         body: Center(
             child: Container(
@@ -70,17 +86,22 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: Text('LOGIN'),
                               onPressed: //(mobileController.text == "" || passwordController.text == "") ? (){print('error ${mobileController.text}'); }:
                                   () async {
+                                pr.show();
                                 User user_data = await signin.signIn(
                                     mobileController.text,
                                     passwordController.text);
                                 if (user_data != null) {
-                                  Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              Home()),
-                                      (Route<dynamic> route) => false);
+                                  pr.hide().whenComplete(() {
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                Home()),
+                                        (Route<dynamic> route) => false);
+                                  });
                                 } else {
-                                  createAlertDialog(context);
+                                  pr.hide().whenComplete(() {
+                                    createAlertDialog(context);
+                                  });
                                 }
 
                                 //Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => LoginAPI(mobile: mobileController.text,password: passwordController.text,)), (Route<dynamic> route) => false);
