@@ -3,12 +3,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
 import 'package:xshop_mobile/screens/data_entry/main_of_data_entry.dart';
 
-class SubManager extends StatefulWidget {
+class GeneralManager extends StatefulWidget {
   @override
-  _SubManagerState createState() => _SubManagerState();
+  _GeneralManagerState createState() => _GeneralManagerState();
 }
 
-class _SubManagerState extends State<SubManager> {
+class _GeneralManagerState extends State<GeneralManager> {
   SharedPreferences sharedPreferences;
   String name = 'Boyka';
   String mobile = 'empty';
@@ -81,7 +81,7 @@ class _SubManagerState extends State<SubManager> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                Text('Sub Manager',
+                Text('General Manager',
                     style: TextStyle(fontSize: 30, color: Colors.red)),
               ])),
           drawer: Drawer(
