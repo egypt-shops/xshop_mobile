@@ -34,50 +34,13 @@ class Product {
   }
 }
 
+/*
 class ProductPage extends StatelessWidget {
   ProductPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: FutureBuilder<List<Product>>(
-        future: fetchProducts(http.Client()),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) print(snapshot.error);
-
-          return snapshot.hasData
-              ? ProductsList(products: snapshot.data)
-              : Center(child: CircularProgressIndicator());
-        },
-      ),
-    );
+    return 
   }
 }
-
-class ProductsList extends StatelessWidget {
-  final List<Product> products;
-
-  ProductsList({Key key, this.products}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-      ),
-      itemCount: products.length,
-      itemBuilder: (context, index) {
-        return Card(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-              Text('${products[index].name}',
-                  style: TextStyle(fontSize: 20, color: Colors.blue[900])),
-              Text('${products[index].price} EGP',
-                  style: TextStyle(fontSize: 12, color: Colors.red[900]))
-            ]));
-      },
-    );
-  }
-}
+*/
