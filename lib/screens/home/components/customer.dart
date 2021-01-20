@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:xshop_mobile/screens/customer/shops.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
 import 'package:xshop_mobile/screens/customer/products.dart';
 
@@ -102,8 +103,10 @@ class _CustomerState extends State<Customer> {
                               )),
                           GestureDetector(
                               onTap: () {
-                                //Navigator.push(context,
-                                //  MaterialPageRoute(builder: (context) => Devices()));
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (c) => ShopPage()),
+                                );
                               },
                               child: CardBtn(
                                 icon: Icons.store,
