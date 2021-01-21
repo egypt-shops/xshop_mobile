@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:xshop_mobile/screens/customer/shops.dart';
 
 class ShopApi extends StatelessWidget {
   ShopApi({Key key}) : super(key: key);
@@ -54,69 +55,5 @@ Future<List<Shop>> fetchShops(http.Client client) async {
     return compute(parseShop, response.body);
   } else {
     throw Exception('failed to load shop');
-  }
-}
-
-class ShopList extends StatelessWidget {
-  final List<Shop> shops;
-  ShopList({Key key, this.shops}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: shops.length,
-        itemBuilder: (context, index) {
-          return Card(
-            margin: EdgeInsets.fromLTRB(4.0, 10.0, 4.0, 0.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  '${shops[index].name}',
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.teal,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.star,
-                      size: 20.0,
-                      color: Colors.teal.shade300,
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 20.0,
-                      color: Colors.teal.shade300,
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 20.0,
-                      color: Colors.teal.shade300,
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 20.0,
-                      color: Colors.teal.shade300,
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 20.0,
-                      color: Colors.teal.shade300,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        });
   }
 }
