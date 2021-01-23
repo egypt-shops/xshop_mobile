@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:xshop_mobile/services/products.dart';
+import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:http/http.dart' as http;
 
 class Products extends StatefulWidget {
@@ -13,17 +14,24 @@ class _ProductsState extends State<Products> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            appBar: AppBar(title: Text("Products"), actions: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  size: 30,
-                  color: Colors.white,
+            appBar: AppBar(
+                backgroundColor: AppTheme.colors.primary,
+                iconTheme: IconThemeData(color: AppTheme.colors.secondry),
+                title: Text(
+                  "Products",
+                  style: TextStyle(color: AppTheme.colors.textPrimary),
                 ),
-                tooltip: 'Search',
-                onPressed: null,
-              ),
-            ]),
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      Icons.search,
+                      size: 30,
+                      color: AppTheme.colors.secondry,
+                    ),
+                    tooltip: 'Search',
+                    onPressed: null,
+                  ),
+                ]),
             body: Center(
               child: FutureBuilder<List<Product>>(
                 future: fetchProducts(http.Client()),
@@ -35,30 +43,7 @@ class _ProductsState extends State<Products> {
                       : Center(child: CircularProgressIndicator());
                 },
               ),
-            )
-            /* 
-      Container(
-        padding: const EdgeInsets.all(10),
-        child:
-            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          SizedBox(
-            height: 5,
-          ),
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              hintText: 'Search',
-              icon: Icon(
-                Icons.search,
-              ),
-            ),
-          ),
-        ]),
-      ),
-   */
-            ));
+            )));
   }
 }
 
@@ -87,16 +72,31 @@ class ProductsList extends StatelessWidget {
                 ),
               );
             },
-            child: Card(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                  Text('${products[index].name}',
-                      style: TextStyle(fontSize: 20, color: Colors.blue[900])),
-                  Text('${products[index].price} EGP',
-                      style: TextStyle(fontSize: 12, color: Colors.red[900]))
-                ])));
+            child: Container(
+                padding: EdgeInsets.all(2),
+                child: Card(
+                    elevation: 3,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    color: AppTheme.colors.primaryLight,
+                    child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18.0),
+                            border: Border.all(
+                                color: AppTheme.colors.secondry, width: 3)),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text('${products[index].name}',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: AppTheme.colors.primary)),
+                              Text('${products[index].price} EGP',
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.red[900]))
+                            ])))));
       },
     );
   }
@@ -110,13 +110,14 @@ class FullScreenDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue[800],
+          backgroundColor: AppTheme.colors.primary,
         ),
         body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
+                color: AppTheme.colors.primaryLight,
                 padding: EdgeInsets.all(5.00),
                 height: 300,
                 child: ListView(
@@ -130,6 +131,7 @@ class FullScreenDialog extends StatelessWidget {
                 ),
               ),
               Container(
+                color: AppTheme.colors.primaryLight,
                 padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:xshop_mobile/screens/customer/invoices.dart';
 import 'package:xshop_mobile/screens/customer/shops.dart';
+import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
 import 'package:xshop_mobile/screens/customer/products.dart';
 
@@ -55,12 +57,13 @@ class _CustomerState extends State<Customer> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: new ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: ThemeData(
+            primaryColor: AppTheme.colors.primary,
+            backgroundColor: AppTheme.colors.secondry),
         home: Scaffold(
+          backgroundColor: AppTheme.colors.primaryLight,
           appBar: AppBar(
-            title: Text("xshop", style: TextStyle(color: Colors.white)),
+            iconTheme: IconThemeData(color: AppTheme.colors.secondry),
             actions: <Widget>[
               FlatButton(
                 onPressed: () {
@@ -73,7 +76,8 @@ class _CustomerState extends State<Customer> {
                           builder: (BuildContext context) => Login()),
                       (Route<dynamic> route) => false);
                 },
-                child: Text("Log Out", style: TextStyle(color: Colors.white)),
+                child: Text("Log Out",
+                    style: TextStyle(color: AppTheme.colors.secondry)),
               ),
             ],
           ),
@@ -83,7 +87,10 @@ class _CustomerState extends State<Customer> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                 Text('Customer',
-                    style: TextStyle(fontSize: 30, color: Colors.blue)),
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: AppTheme.colors.primary,
+                        fontWeight: FontWeight.bold)),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -131,8 +138,10 @@ class _CustomerState extends State<Customer> {
                               )),
                           GestureDetector(
                               onTap: () {
-                                //Navigator.push(context,
-                                //  MaterialPageRoute(builder: (context) => About()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Invoices()));
                               },
                               child: CardBtn(
                                 icon: Icons.receipt,
@@ -156,10 +165,13 @@ class _CustomerState extends State<Customer> {
                           size: 60,
                           color: Colors.white,
                         ),
-                        Text('Mohamed Boyka'),
+                        Text(
+                          'Mohamed Boyka',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ]),
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: AppTheme.colors.primaryDark,
                   ),
                 ),
                 ListTile(
@@ -201,28 +213,24 @@ class CardBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: new BoxDecoration(boxShadow: [
-          new BoxShadow(color: Colors.blue[100], blurRadius: 5.0)
-        ]),
-        child: Card(
-          child: SizedBox(
-              width: 130,
-              height: 220,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(icon, size: 80, color: Colors.blue[700]),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(name,
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'Futura',
-                          color: Colors.blue[700],
-                        ))
-                  ])),
-        ));
+    return Card(
+      elevation: 5,
+      color: AppTheme.colors.primary,
+      child: SizedBox(
+          width: 130,
+          height: 220,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Icon(icon, size: 80, color: AppTheme.colors.secondry),
+            SizedBox(
+              height: 20,
+            ),
+            Text(name,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: 'Futura',
+                  color: AppTheme.colors.secondry,
+                ))
+          ])),
+    );
   }
 }
