@@ -96,7 +96,7 @@ class _DataEntryClerkState extends State<DataEntryClerk> {
                           colors: <Color>[
                             Colors.yellow,
                             Colors.yellow[200],
-                            Colors.yellow[100],
+                            Colors.yellow[100]
                           ],
                         ),
                       ),
