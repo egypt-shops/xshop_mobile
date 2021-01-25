@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xshop_mobile/screens/customer/shops.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
 import 'package:xshop_mobile/screens/customer/products.dart';
+import '../../../services/orders_list_api.dart';
 
 class Customer extends StatefulWidget {
   @override
@@ -122,8 +123,10 @@ class _CustomerState extends State<Customer> {
                         children: [
                           GestureDetector(
                               onTap: () {
-                                //Navigator.push(context,
-                                //   MaterialPageRoute(builder: (context) => Cosmetics()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => OrdersApi()));
                               },
                               child: CardBtn(
                                 icon: Icons.shopping_bag,
