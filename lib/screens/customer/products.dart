@@ -61,42 +61,44 @@ class ProductsList extends StatelessWidget {
       itemCount: products.length,
       itemBuilder: (context, index) {
         return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => FullScreenDialog(
-                    product: products[index],
-                  ),
-                  fullscreenDialog: true,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (BuildContext context) => FullScreenDialog(
+                  product: products[index],
                 ),
-              );
-            },
-            child: Container(
-                padding: EdgeInsets.all(2),
-                child: Card(
-                    elevation: 3,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    color: AppTheme.colors.primaryLight,
-                    child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18.0),
-                            border: Border.all(
-                                color: AppTheme.colors.secondry, width: 3)),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text('${products[index].name}',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: AppTheme.colors.primary)),
-                              Text('${products[index].price} EGP',
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.red[900]))
-                            ])))));
+                fullscreenDialog: true,
+              ),
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.all(2),
+            child: Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18),
+              ),
+              color: AppTheme.colors.primaryLight,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18.0),
+                      border: Border.all(
+                          color: AppTheme.colors.secondry, width: 3)),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text('${products[index].name}',
+                            style: TextStyle(
+                                fontSize: 20, color: AppTheme.colors.primary)),
+                        Text('${products[index].price} EGP',
+                            style:
+                                TextStyle(fontSize: 12, color: Colors.red[900]))
+                      ])),
+            ),
+          ),
+        );
       },
     );
   }
