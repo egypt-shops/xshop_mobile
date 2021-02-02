@@ -250,6 +250,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
 <<<<<<< HEAD
+<<<<<<< HEAD
     version: "0.6.3-nullsafety.2"
   json_rpc_2:
     dependency: transitive
@@ -258,6 +259,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.1"
+=======
+    version: "0.6.3-nullsafety.3"
+>>>>>>> 93df52bde6d77840bbaecab7e53e2bd5eb37630c
 =======
     version: "0.6.3-nullsafety.3"
 >>>>>>> 93df52bde6d77840bbaecab7e53e2bd5eb37630c
@@ -602,6 +606,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
 <<<<<<< HEAD
+<<<<<<< HEAD
     version: "1.1.0-nullsafety"
   sync_http:
     dependency: transitive
@@ -610,6 +615,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
+=======
+    version: "1.1.0-nullsafety.3"
+>>>>>>> 93df52bde6d77840bbaecab7e53e2bd5eb37630c
 =======
     version: "1.1.0-nullsafety.3"
 >>>>>>> 93df52bde6d77840bbaecab7e53e2bd5eb37630c
