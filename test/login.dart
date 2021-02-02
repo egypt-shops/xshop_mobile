@@ -9,17 +9,21 @@ void main() {
     await tester.pumpWidget(Login());
     final mobileFinder = find.widgetWithText(TextFormField, 'Mobile');
     final passwdFinder = find.widgetWithText(TextFormField, 'Password');
-    final btnFinder = find.byType(RaisedButton);
+    final loginFinder = find.widgetWithText(RaisedButton, 'LOGIN');
+    final signupFinder = find.widgetWithText(RaisedButton, 'SIGNUP');
 
     expect(mobileFinder, findsOneWidget);
     expect(passwdFinder, findsOneWidget);
-    expect(btnFinder, findsOneWidget);
+    expect(loginFinder, findsOneWidget);
+    expect(signupFinder, findsOneWidget);
+    expect(find.byKey(Key("Sign In indicator")), findsNothing);
 
     await tester.enterText(mobileFinder, 'num');
     await tester.enterText(passwdFinder, 'pass');
-    //await tester.tap(btnFinder);
-
-    //expect(mobileController.text, 'num');
-    //expect(passwordController.text, 'pass');
+    await tester.tap(loginFinder);
+    //expect(find.byKey(Key("Sign In indicator")), findsOneWidget);
+    expect(mobileController.text, 'num');
+    expect(passwordController.text, 'pass');
   });
+  testWidgets('login api test', (WidgetTester tester) async {});
 }
