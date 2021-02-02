@@ -4,7 +4,7 @@ import 'package:xshop_mobile/screens/customer/invoices.dart';
 import 'package:xshop_mobile/screens/customer/shops.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
-import 'package:xshop_mobile/screens/customer/products.dart';
+import 'package:xshop_mobile/screens/customer/products/products.dart';
 
 class Customer extends StatefulWidget {
   @override
