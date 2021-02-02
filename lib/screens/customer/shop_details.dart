@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
+import 'package:xshop_mobile/theme/apptheme.dart';
 
 class ShopDetails extends StatelessWidget {
   final Shop shop;
@@ -8,14 +9,13 @@ class ShopDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal,
       appBar: AppBar(
-        backgroundColor: Colors.teal,
+        backgroundColor: AppTheme.colors.primary,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
             size: 30,
-            color: Colors.white,
+            color: AppTheme.colors.secondry,
           ),
           onPressed: () {
             Navigator.pop(
@@ -26,7 +26,7 @@ class ShopDetails extends StatelessWidget {
         title: Text(
           shop.name,
           style: TextStyle(
-            color: Colors.white,
+            color: AppTheme.colors.textPrimary,
             fontWeight: FontWeight.bold,
           ),
         ),

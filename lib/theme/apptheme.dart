@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const colors = CompanyColors();
+  static const colors = AppColors();
   const AppTheme._();
 
   static ThemeData define() {
@@ -9,7 +9,7 @@ class AppTheme {
   }
 }
 
-class CompanyColors {
+class AppColors {
   final cancel = const Color(0xffe11444);
   final textPrimary = const Color(0xffeeeeee);
   final textSecondry = const Color(0xff455a64);
@@ -20,5 +20,5 @@ class CompanyColors {
   final secondryLight = const Color(0xfffff263);
   final secondry = const Color(0xfffbc02d);
 
-  const CompanyColors();
+  const AppColors();
 }

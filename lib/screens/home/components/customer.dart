@@ -4,8 +4,12 @@ import 'package:xshop_mobile/screens/customer/invoices.dart';
 import 'package:xshop_mobile/screens/customer/shops.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
+<<<<<<< HEAD
 import 'package:xshop_mobile/screens/customer/products.dart';
 import '../../../services/orders_list_api.dart';
+=======
+import 'package:xshop_mobile/screens/customer/products/products.dart';
+>>>>>>> f926cb4580b040ddcf793f5a68014ed0bf016881
 
 class Customer extends StatefulWidget {
   @override

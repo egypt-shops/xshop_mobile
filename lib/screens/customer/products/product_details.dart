@@ -1,113 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:provider/provider.dart';
 import 'package:xshop_mobile/services/products.dart';
+import 'package:transparent_image/transparent_image.dart';
+import 'package:xshop_mobile/models/cart.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
-import 'package:http/http.dart' as http;
 
-class Products extends StatefulWidget {
-  @override
-  _ProductsState createState() => _ProductsState();
-}
-
-class _ProductsState extends State<Products> {
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            appBar: AppBar(
-                backgroundColor: AppTheme.colors.primary,
-                iconTheme: IconThemeData(color: AppTheme.colors.secondry),
-                title: Text(
-                  "Products",
-                  style: TextStyle(color: AppTheme.colors.textPrimary),
-                ),
-                actions: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.search,
-                      size: 30,
-                      color: AppTheme.colors.secondry,
-                    ),
-                    tooltip: 'Search',
-                    onPressed: null,
-                  ),
-                ]),
-            body: Center(
-              child: FutureBuilder<List<Product>>(
-                future: fetchProducts(http.Client()),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) print(snapshot.error);
-
-                  return snapshot.hasData
-                      ? ProductsList(products: snapshot.data)
-                      : Center(child: CircularProgressIndicator());
-                },
-              ),
-            )));
-  }
-}
-
-class ProductsList extends StatelessWidget {
-  final List<Product> products;
-
-  ProductsList({Key key, this.products}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-      ),
-      itemCount: products.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (BuildContext context) => FullScreenDialog(
-                    product: products[index],
-                  ),
-                  fullscreenDialog: true,
-                ),
-              );
-            },
-            child: Container(
-                padding: EdgeInsets.all(2),
-                child: Card(
-                    elevation: 3,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    color: AppTheme.colors.primaryLight,
-                    child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18.0),
-                            border: Border.all(
-                                color: AppTheme.colors.secondry, width: 3)),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text('${products[index].name}',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: AppTheme.colors.primary)),
-                              Text('${products[index].price} EGP',
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.red[900]))
-                            ])))));
-      },
-    );
-  }
-}
-
-class FullScreenDialog extends StatelessWidget {
+class ProductDetails extends StatefulWidget {
   final Product product;
 
-  FullScreenDialog({Key key, this.product}) : super(key: key);
+  ProductDetails({Key key, this.product}) : super(key: key);
+  @override
+  _ProductDetailsState createState() => _ProductDetailsState();
+}
+
+class _ProductDetailsState extends State<ProductDetails> {
+  var cartList;
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      cartList = Provider.of<CartModel>(context);
+    });
     return Scaffold(
         appBar: AppBar(
           backgroundColor: AppTheme.colors.primary,
@@ -136,7 +48,7 @@ class FullScreenDialog extends StatelessWidget {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('${product.price} EGP',
+                      Text('${widget.product.price} EGP',
                           style:
                               TextStyle(fontSize: 18, color: Colors.red[900])),
                       Container(
@@ -155,7 +67,7 @@ class FullScreenDialog extends StatelessWidget {
               ),
               Container(
                   padding: EdgeInsets.fromLTRB(15, 0, 10, 0),
-                  child: Text('${product.name}',
+                  child: Text('${widget.product.name}',
                       style: TextStyle(fontSize: 25, color: Colors.black))),
               Container(
                   padding: EdgeInsets.fromLTRB(15, 5, 15, 0),
@@ -187,26 +99,53 @@ class FullScreenDialog extends StatelessWidget {
                             height: 80.0,
                             child: FlatButton(
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  side: BorderSide(color: Colors.green)),
-                              color: Colors.green,
+                                borderRadius: BorderRadius.circular(18.0),
+                              ),
+                              color: cartList.items.contains(widget.product)
+                                  ? Colors.red[700]
+                                  : Colors.green,
                               textColor: Colors.white,
                               padding: EdgeInsets.all(8.0),
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  cartList.items.contains(widget.product)
+                                      ? cartList.items.remove(widget.product)
+                                      : cartList.items.add(widget.product);
+                                  /*Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text(cartList.items.contains(product)
+                                      ? 'Added to favorites.'
+                                      : 'Removed from favorites.'),
+                                  duration: Duration(seconds: 1),
+                                ));*/
+                                });
+                              },
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text("Add to Cart".toUpperCase(),
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                        )),
-                                    Icon(
-                                      Icons.add_shopping_cart,
-                                      color: Colors.white,
-                                      size: 40,
-                                    )
-                                  ]),
+                                  children: cartList.items
+                                          .contains(widget.product)
+                                      ? [
+                                          Text("remove from Cart".toUpperCase(),
+                                              style: TextStyle(
+                                                fontSize: 25,
+                                              )),
+                                          Icon(
+                                            Icons.remove_shopping_cart,
+                                            color: Colors.white,
+                                            size: 40,
+                                          )
+                                        ]
+                                      : [
+                                          Text("Add to Cart".toUpperCase(),
+                                              style: TextStyle(
+                                                fontSize: 25,
+                                              )),
+                                          Icon(
+                                            Icons.add_shopping_cart,
+                                            color: Colors.white,
+                                            size: 40,
+                                          )
+                                        ]),
                             )))
                   ]))
             ]));
