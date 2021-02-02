@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:xshop_mobile/screens/customer/elmasry.dart';
-import 'package:xshop_mobile/screens/data_entry/main_of_data_entry.dart';
+import 'package:xshop_mobile/screens/customer/shop_details.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
+import 'package:xshop_mobile/theme/apptheme.dart';
 
 class ShopPage extends StatefulWidget {
   @override
@@ -14,14 +14,13 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.teal,
         appBar: AppBar(
-          backgroundColor: Colors.teal,
+          backgroundColor: AppTheme.colors.primary,
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
               size: 30,
-              color: Colors.white,
+              color: AppTheme.colors.secondry,
             ),
             onPressed: () {
               Navigator.pop(
@@ -32,7 +31,7 @@ class _ShopPageState extends State<ShopPage> {
           title: Text(
             'Shops',
             style: TextStyle(
-              color: Colors.white,
+              color: AppTheme.colors.textPrimary,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -41,7 +40,7 @@ class _ShopPageState extends State<ShopPage> {
                 icon: Icon(
                   Icons.search,
                   size: 30,
-                  color: Colors.white,
+                  color: AppTheme.colors.secondry,
                 ),
                 tooltip: 'search',
                 onPressed: null)
@@ -74,52 +73,73 @@ class ShopList extends StatelessWidget {
               );
             },
             child: Card(
+              color: AppTheme.colors.primaryLight,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+              ),
               margin: EdgeInsets.fromLTRB(4.0, 10.0, 4.0, 0.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    '${shops[index].name}',
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.teal,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.star,
-                        size: 20.0,
-                        color: Colors.teal.shade300,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 20.0,
-                        color: Colors.teal.shade300,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 20.0,
-                        color: Colors.teal.shade300,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 20.0,
-                        color: Colors.teal.shade300,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 20.0,
-                        color: Colors.teal.shade300,
-                      ),
-                    ],
-                  ),
-                ],
+              child: Container(
+                decoration: BoxDecoration(
+                  // be the same as radius of card
+                  borderRadius: BorderRadius.circular(18.0),
+                  border: Border.all(color: AppTheme.colors.secondry, width: 3),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      '${shops[index].name}',
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          color: AppTheme.colors.primary,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Text(
+                      '${shops[index].name}',
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          color: AppTheme.colors.primary,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.star,
+                          size: 20.0,
+                          color: Colors.teal.shade300,
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 20.0,
+                          color: Colors.teal.shade300,
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 20.0,
+                          color: Colors.teal.shade300,
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 20.0,
+                          color: Colors.teal.shade300,
+                        ),
+                        Icon(
+                          Icons.star,
+                          size: 20.0,
+                          color: Colors.teal.shade300,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           );
