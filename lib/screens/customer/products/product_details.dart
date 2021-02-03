@@ -4,6 +4,7 @@ import 'package:xshop_mobile/services/products.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:xshop_mobile/models/cart.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
+import 'package:xshop_mobile/models/product.dart';
 
 class ProductDetails extends StatefulWidget {
   final Product product;
@@ -156,7 +157,12 @@ Widget _imageloader(id) => Stack(children: <Widget>[
       SizedBox(
           height: 300,
           width: 300,
-          child: Center(child: CircularProgressIndicator())),
+          child: Center(
+              child: CircularProgressIndicator(
+            valueColor:
+                new AlwaysStoppedAnimation<Color>(AppTheme.colors.primaryLight),
+            backgroundColor: AppTheme.colors.primary,
+          ))),
       Center(
         child: FadeInImage.memoryNetwork(
             placeholder: kTransparentImage,

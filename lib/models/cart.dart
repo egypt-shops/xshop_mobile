@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xshop_mobile/services/products.dart';
+import 'package:xshop_mobile/models/product.dart';
 
 /// The [CartModel] class holds a list of cart items saved by the user.
 class CartModel extends ChangeNotifier {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xshop_mobile/models/cart.dart';
-import 'package:xshop_mobile/services/products.dart';
+import 'package:xshop_mobile/models/product.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 
 class CartPage extends StatelessWidget {

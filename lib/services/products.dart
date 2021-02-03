@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:xshop_mobile/models/product.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<Product>> fetchProducts(http.Client client) async {
@@ -18,20 +18,6 @@ List<Product> parseProducts(String responseBody) {
   final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
 
   return parsed.map<Product>((json) => Product.fromJson(json)).toList();
-}
-
-class Product {
-  final String name;
-  final String price;
-
-  Product({this.name, this.price});
-
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
-      name: json['name'] as String,
-      price: json['price'] as String,
-    );
-  }
 }
 
 /*
