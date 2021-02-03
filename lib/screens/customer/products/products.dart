@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xshop_mobile/screens/customer/products/cart.dart';
+import 'package:xshop_mobile/screens/customer/products/search.dart';
 import 'package:xshop_mobile/services/products.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/models/cart.dart';
 import 'package:xshop_mobile/screens/customer/products/product_details.dart';
 import 'package:http/http.dart' as http;
+import 'package:xshop_mobile/models/product.dart';
 
 class Products extends StatefulWidget {
   @override
@@ -32,27 +34,27 @@ class _ProductsState extends State<Products> {
                       color: AppTheme.colors.secondry,
                     ),
                     tooltip: 'Search',
-                    onPressed: null,
+                    onPressed: () {
+                      showSearch(context: context, delegate: Search());
+                    },
                   ),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CartPage(),
-                            fullscreenDialog: true,
-                          ),
-                        );
-                      },
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.shopping_cart,
-                          size: 30,
-                          color: AppTheme.colors.secondry,
+                  IconButton(
+                    icon: Icon(
+                      Icons.shopping_cart,
+                      size: 30,
+                      color: AppTheme.colors.secondry,
+                    ),
+                    tooltip: 'Cart',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CartPage(),
+                          fullscreenDialog: true,
                         ),
-                        tooltip: 'Cart',
-                        onPressed: null,
-                      ))
+                      );
+                    },
+                  )
                 ]),
             body: Center(
               child: FutureBuilder<List<Product>>(
@@ -62,7 +64,12 @@ class _ProductsState extends State<Products> {
 
                   return snapshot.hasData
                       ? ProductsList(products: snapshot.data)
-                      : Center(child: CircularProgressIndicator());
+                      : Center(
+                          child: CircularProgressIndicator(
+                          valueColor: new AlwaysStoppedAnimation<Color>(
+                              AppTheme.colors.primaryLight),
+                          backgroundColor: AppTheme.colors.primary,
+                        ));
                 },
               ),
             )));

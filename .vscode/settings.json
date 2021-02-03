@@ -1,4 +1,4 @@
 {
     "editor.formatOnSave": true,
-    "dart.flutterDaemonLogFile": null
+    "dart.flutterDaemonLogFile": null,
 }

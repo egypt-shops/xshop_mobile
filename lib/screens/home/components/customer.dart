@@ -5,6 +5,7 @@ import 'package:xshop_mobile/screens/customer/shops.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
+import 'package:xshop_mobile/screens/customer/orders.dart';
 
 class Customer extends StatefulWidget {
   @override
@@ -129,8 +130,10 @@ class _CustomerState extends State<Customer> {
                         children: [
                           GestureDetector(
                               onTap: () {
-                                //Navigator.push(context,
-                                //   MaterialPageRoute(builder: (context) => Cosmetics()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Orders()));
                               },
                               child: CardBtn(
                                 icon: Icons.shopping_bag,
