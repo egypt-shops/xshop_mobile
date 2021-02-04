@@ -1,7 +1,9 @@
 name: xshop continuous delivery
 
-on: push
-
+on:
+  push:
+    branches: [develop, master]
+    
 jobs:
   version:
     name: Create version number
