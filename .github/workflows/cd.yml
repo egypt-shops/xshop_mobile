@@ -1,8 +1,6 @@
 name: xshop continuous delivery
 
-on:
-  push:
-    branches: [develop, master]
+on: push
 
 jobs:
   version:
