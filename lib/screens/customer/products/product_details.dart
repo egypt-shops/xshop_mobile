@@ -32,7 +32,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               Container(
                 color: AppTheme.colors.primaryLight,
                 padding: EdgeInsets.all(5.00),
-                height: 300,
+                height: 250,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
@@ -93,11 +93,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                    SizedBox(),
                     Padding(
                         padding: EdgeInsets.all(15),
                         child: ButtonTheme(
-                            height: 80.0,
+                            height: 70.0,
                             child: FlatButton(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
@@ -155,8 +154,8 @@ class _ProductDetailsState extends State<ProductDetails> {
 
 Widget _imageloader(id) => Stack(children: <Widget>[
       SizedBox(
-          height: 300,
-          width: 300,
+          height: 250,
+          width: 250,
           child: Center(
               child: CircularProgressIndicator(
             valueColor:
