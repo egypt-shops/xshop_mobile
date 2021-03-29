@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'file:///C:/Users/ahmed/Downloads/Documents/mobile/xshop_mobile/lib/screens/customer/shop_search.dart';
 import 'package:xshop_mobile/screens/customer/shop_details.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
@@ -37,13 +38,16 @@ class _ShopPageState extends State<ShopPage> {
           ),
           actions: [
             IconButton(
-                icon: Icon(
-                  Icons.search,
-                  size: 30,
-                  color: AppTheme.colors.secondry,
-                ),
-                tooltip: 'search',
-                onPressed: null)
+              icon: Icon(
+                Icons.search,
+                size: 30,
+                color: AppTheme.colors.secondry,
+              ),
+              tooltip: 'search',
+              onPressed: () {
+                showSearch(context: context, delegate: ShopsSearch());
+              },
+            )
           ],
         ),
         body: ShopApi(),
