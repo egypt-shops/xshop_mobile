@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:async';
+import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:xshop_mobile/models/shop.dart';
 import 'package:xshop_mobile/screens/customer/shops.dart';
 
 class ShopApi extends StatelessWidget {
@@ -10,7 +12,7 @@ class ShopApi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
       child: FutureBuilder<List<Shop>>(
           future: fetchShops(http.Client()),
           builder: (context, snapshot) {
@@ -19,25 +21,19 @@ class ShopApi extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             } else {
-              return CircularProgressIndicator();
+              return SliverToBoxAdapter(
+                  child: Center(
+                      child: SizedBox(
+                          height: 200,
+                          width: 200,
+                          child: Center(child: CircularProgressIndicator()))));
             }
           }),
     );
   }
 }
 
-//make class
-class Shop {
-  final String name;
-
-  Shop({this.name});
-
-  factory Shop.fromJson(Map<String, dynamic> json) {
-    return Shop(
-      name: json['name'] as String,
-    );
-  }
-}
+//make clas
 
 // A function that converts a response body into a List<Product>.
 List<Shop> parseShop(String responseBody) {

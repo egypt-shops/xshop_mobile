@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:xshop_mobile/screens/customer/shop_details.dart';
-import 'package:xshop_mobile/screens/customer/shop_search.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
+import 'package:xshop_mobile/models/shop.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 
 class ShopPage extends StatefulWidget {
@@ -38,16 +38,13 @@ class _ShopPageState extends State<ShopPage> {
           ),
           actions: [
             IconButton(
-              icon: Icon(
-                Icons.search,
-                size: 30,
-                color: AppTheme.colors.secondry,
-              ),
-              tooltip: 'search',
-              onPressed: () {
-                showSearch(context: context, delegate: ShopsSearch());
-              },
-            )
+                icon: Icon(
+                  Icons.search,
+                  size: 30,
+                  color: AppTheme.colors.secondry,
+                ),
+                tooltip: 'search',
+                onPressed: null)
           ],
         ),
         body: ShopApi(),
@@ -63,90 +60,88 @@ class ShopList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemCount: shops.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ShopDetails(shop: shops[index])),
-              );
-            },
-            child: Card(
-              color: AppTheme.colors.primaryLight,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
-              ),
-              margin: EdgeInsets.fromLTRB(4.0, 10.0, 4.0, 0.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  // be the same as radius of card
-                  borderRadius: BorderRadius.circular(18.0),
-                  border: Border.all(color: AppTheme.colors.secondry, width: 3),
+    return SliverList(
+        delegate: SliverChildBuilderDelegate((context, index) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ShopDetails(shop: shops[index])),
+          );
+        },
+        child: Card(
+          color: AppTheme.colors.primaryLight,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+          margin: EdgeInsets.fromLTRB(4.0, 10.0, 4.0, 0.0),
+          child: Container(
+            height: 200,
+            decoration: BoxDecoration(
+              // be the same as radius of card
+              borderRadius: BorderRadius.circular(18.0),
+              border: Border.all(color: AppTheme.colors.secondry, width: 3),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  '${shops[index].name}',
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      color: AppTheme.colors.primary,
+                      fontWeight: FontWeight.bold),
                 ),
-                child: Column(
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  '${shops[index].name}',
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      color: AppTheme.colors.primary,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      '${shops[index].name}',
-                      style: TextStyle(
-                          fontSize: 20.0,
-                          color: AppTheme.colors.primary,
-                          fontWeight: FontWeight.bold),
+                    Icon(
+                      Icons.star,
+                      size: 20.0,
+                      color: Colors.teal.shade300,
                     ),
-                    SizedBox(
-                      height: 10.0,
+                    Icon(
+                      Icons.star,
+                      size: 20.0,
+                      color: Colors.teal.shade300,
                     ),
-                    Text(
-                      '${shops[index].name}',
-                      style: TextStyle(
-                          fontSize: 20.0,
-                          color: AppTheme.colors.primary,
-                          fontWeight: FontWeight.bold),
+                    Icon(
+                      Icons.star,
+                      size: 20.0,
+                      color: Colors.teal.shade300,
                     ),
-                    SizedBox(
-                      height: 10.0,
+                    Icon(
+                      Icons.star,
+                      size: 20.0,
+                      color: Colors.teal.shade300,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.star,
-                          size: 20.0,
-                          color: Colors.teal.shade300,
-                        ),
-                        Icon(
-                          Icons.star,
-                          size: 20.0,
-                          color: Colors.teal.shade300,
-                        ),
-                        Icon(
-                          Icons.star,
-                          size: 20.0,
-                          color: Colors.teal.shade300,
-                        ),
-                        Icon(
-                          Icons.star,
-                          size: 20.0,
-                          color: Colors.teal.shade300,
-                        ),
-                        Icon(
-                          Icons.star,
-                          size: 20.0,
-                          color: Colors.teal.shade300,
-                        ),
-                      ],
+                    Icon(
+                      Icons.star,
+                      size: 20.0,
+                      color: Colors.teal.shade300,
                     ),
                   ],
                 ),
-              ),
+              ],
             ),
-          );
-        });
+          ),
+        ),
+      );
+    }, childCount: shops.length));
   }
 }

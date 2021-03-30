@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:xshop_mobile/services/shop_api.dart';
+import 'package:xshop_mobile/models/shop.dart';
 
 Future<Shop> fetchShopByID(http.Client client, String id) async {
   final response = await http
