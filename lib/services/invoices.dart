@@ -1,15 +1,47 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:xshop_mobile/models/invoice.dart';
+import '../models/invoice.dart';
+import '../screens/customer/invoices/invoices.dart';
+
+class InvoiceApi extends StatelessWidget {
+  InvoiceApi({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: FutureBuilder<List<Invoice>>(
+          future: fetchInvoices(http.Client()),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return InvoicesList(invoices: snapshot.data);
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            } else {
+              return SliverToBoxAdapter(
+                  child: Center(
+                      child: SizedBox(
+                          height: 200,
+                          width: 200,
+                          child: Center(child: CircularProgressIndicator()))));
+            }
+          }),
+    );
+  }
+}
 
 Future<List<Invoice>> fetchInvoices(http.Client client) async {
   final response = await client
       .get('https://dev-egshops.herokuapp.com/api/invoices/?format=json');
-
-  // Use the compute function to run parseInvoices in a separate isolate.
-  return compute(parseInvoices, response.body);
+  if (response.statusCode == 200) {
+    // Use the compute function to run parsePhotos in a separate isolate.
+    return compute(parseInvoices, response.body);
+  } else {
+    throw Exception('failed to load shop');
+  }
 }
 
 // A function that converts a response body into a List<Invoice>.

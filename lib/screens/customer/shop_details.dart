@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:xshop_mobile/services/shop_api.dart';
+import 'package:xshop_mobile/models/shop.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 
 class ShopDetails extends StatelessWidget {

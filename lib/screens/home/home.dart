@@ -44,19 +44,19 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     switch (type) {
       case 'Customer':
-        return MaterialApp(home: Customer());
+        return Customer();
         break;
       case 'Cashier':
-        return MaterialApp(home: Cashier());
+        return Cashier();
         break;
       case 'General Manager':
-        return MaterialApp(home: GeneralManager());
+        return GeneralManager();
         break;
       case 'Data Entry Clerk':
-        return MaterialApp(home: DataEntryClerk());
+        return DataEntryClerk();
         break;
       default:
-        return MaterialApp(home: Customer());
+        return Customer();
     }
   }
 }
