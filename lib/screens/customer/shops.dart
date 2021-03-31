@@ -71,23 +71,24 @@ class ShopList extends StatelessWidget {
           );
         },
         child: Container(
+          padding: EdgeInsets.fromLTRB(5.0, 2.5, 5, 2.5),
           height: 200,
           child: Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            margin: EdgeInsets.fromLTRB(8.0, 10.0, 8.0, 0.0),
             child: Container(
-              padding: EdgeInsets.fromLTRB(5.0, 10, 5.0, 0.0),
+              padding: EdgeInsets.fromLTRB(5.0, 0, 5.0, 0.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        margin: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
-                        width: 100,
+                        margin: EdgeInsets.fromLTRB(5.0, 0, 0.0, 0.0),
+                        width: 120,
                         height: 140,
                         decoration: BoxDecoration(
                           image: const DecorationImage(
@@ -102,7 +103,7 @@ class ShopList extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(5.0, 5.0, 20.0, 0.0),
+                        margin: EdgeInsets.fromLTRB(0, 0, 10.0, 0.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +149,7 @@ class ShopList extends StatelessWidget {
                                 Icon(
                                   Icons.star,
                                   size: 20.0,
-                                  color: Colors.black,
+                                  color: Colors.grey,
                                 ),
                                 SizedBox(
                                   width: 20.0,
@@ -161,7 +162,8 @@ class ShopList extends StatelessWidget {
                       IconButton(
                           icon: Icon(
                             Icons.favorite_border_rounded,
-                            size: 30,
+                            color: Colors.grey,
+                            size: 25,
                           ),
                           onPressed: () {})
                     ],

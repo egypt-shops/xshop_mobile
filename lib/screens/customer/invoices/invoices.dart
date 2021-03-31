@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xshop_mobile/models/invoice.dart';
+import 'package:xshop_mobile/screens/customer/invoices/invoice_details.dart';
 import 'package:xshop_mobile/services/invoices.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 
@@ -42,7 +43,13 @@ class InvoicesList extends StatelessWidget {
     return SliverList(
         delegate: SliverChildBuilderDelegate((context, index) {
       return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        InvoiceDetails(invoice: invoices[index])));
+          },
           child: Container(
               height: 150,
               padding: EdgeInsets.all(3),

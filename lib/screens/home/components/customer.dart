@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:xshop_mobile/screens/customer/invoices/search.dart';
+import 'package:xshop_mobile/screens/customer/shop_search.dart';
 import 'package:xshop_mobile/screens/customer/shops.dart';
 import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
@@ -21,10 +23,15 @@ class _CustomerState extends State<Customer> {
   bool _snap = false;
   bool _floating = true;
 
-  static List<Widget> _listOptions = <Widget>[
+  static List<Widget> _bottomDrawerOptions = <Widget>[
     ShopApi(),
     OrderApi(),
     InvoiceApi()
+  ];
+  static List<SearchDelegate> _searchOptions = <SearchDelegate>[
+    ShopsSearch(),
+    null,
+    InvoicesSearch()
   ];
 
   @override
@@ -102,7 +109,11 @@ class _CustomerState extends State<Customer> {
                 icon: Icon(Icons.search,
                     color: Theme.of(context).secondaryHeaderColor),
                 tooltip: 'search for a shop',
-                onPressed: () {},
+                onPressed: () {
+                  showSearch(
+                      context: context,
+                      delegate: _searchOptions.elementAt(_selectedIndex));
+                },
               ),
             ],
             iconTheme: IconThemeData(color: Theme.of(context).accentColor),
@@ -112,7 +123,7 @@ class _CustomerState extends State<Customer> {
               onPressed: () => Scaffold.of(context).openDrawer(),
             ),
           ),
-          _listOptions.elementAt(_selectedIndex),
+          _bottomDrawerOptions.elementAt(_selectedIndex),
         ]);
       }),
       drawer: Drawer(

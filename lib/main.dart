@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xshop_mobile/screens/home/home.dart';
+import 'package:xshop_mobile/screens/login/components/login_screen.dart';
 import 'screens/login/login.dart';
 
 void main() {
@@ -22,7 +23,6 @@ class Xshop extends StatelessWidget {
         focusColor: Colors.white70,
         scaffoldBackgroundColor: Colors.grey[100],
         // Define the default font family.
-        fontFamily: 'Georgia',
 
         // Define the default TextTheme. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.
@@ -32,14 +32,14 @@ class Xshop extends StatelessWidget {
             bodyText2: TextStyle(
                 fontSize: 16, fontFamily: 'Raleway', color: Colors.grey[600]),
             bodyText1: TextStyle(
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Hind',
                 color: Colors.white70)),
       ),
       routes: {
         '/': (context) => Home(),
-        '/login': (context) => Login(),
+        '/login': (context) => LoginScreen(),
       },
     );
   }

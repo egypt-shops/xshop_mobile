@@ -5,7 +5,7 @@ import 'package:xshop_mobile/services/search_prduct.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/models/product.dart';
 
-class Search extends SearchDelegate {
+class ProductSearch extends SearchDelegate {
   @override
   List<Widget> buildActions(BuildContext context) {
     return <Widget>[

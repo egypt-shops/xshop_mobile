@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xshop_mobile/screens/customer/products/cart.dart';
-import 'package:xshop_mobile/screens/customer/products/search.dart';
+import 'package:xshop_mobile/screens/customer/products/product_search.dart';
 import 'package:xshop_mobile/services/products.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/models/cart.dart';
@@ -35,7 +35,7 @@ class _ProductsState extends State<Products> {
                     ),
                     tooltip: 'Search',
                     onPressed: () {
-                      showSearch(context: context, delegate: Search());
+                      showSearch(context: context, delegate: ProductSearch());
                     },
                   ),
                   IconButton(
