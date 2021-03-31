@@ -4,7 +4,7 @@ import 'package:xshop_mobile/models/invoice.dart';
 import 'package:xshop_mobile/services/search_invoice.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 
-class Search extends SearchDelegate {
+class InvoicesSearch extends SearchDelegate {
   @override
   List<Widget> buildActions(BuildContext context) {
     return <Widget>[
