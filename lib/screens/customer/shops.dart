@@ -70,13 +70,187 @@ class ShopList extends StatelessWidget {
                 builder: (context) => ShopDetails(shop: shops[index])),
           );
         },
-        child: Card(
-          color: AppTheme.colors.primaryLight,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18.0),
+        child: Container(
+          height: 200,
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            margin: EdgeInsets.fromLTRB(8.0, 10.0, 8.0, 0.0),
+            child: Container(
+              padding: EdgeInsets.fromLTRB(5.0, 10, 5.0, 0.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 0.0),
+                        width: 100,
+                        height: 140,
+                        decoration: BoxDecoration(
+                          image: const DecorationImage(
+                            image: AssetImage('images/try.jpg'),
+                            fit: BoxFit.fill,
+                          ),
+                          border: Border.all(
+                            color: Colors.teal[900],
+                            width: 0,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(5.0, 5.0, 20.0, 0.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '${shops[index].name}',
+                              style: TextStyle(
+                                  fontSize: 18.0,
+                                  color: AppTheme.colors.primary,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              'the shop is fantastic , ',
+                              style: TextStyle(fontSize: 12),
+                              softWrap: true,
+                            ),
+                            SizedBox(
+                              height: 70,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  size: 20.0,
+                                  color: Colors.orange,
+                                ),
+                                Icon(
+                                  Icons.star,
+                                  size: 20.0,
+                                  color: Colors.orange,
+                                ),
+                                Icon(
+                                  Icons.star,
+                                  size: 20.0,
+                                  color: Colors.orange,
+                                ),
+                                Icon(
+                                  Icons.star,
+                                  size: 20.0,
+                                  color: Colors.orange,
+                                ),
+                                Icon(
+                                  Icons.star,
+                                  size: 20.0,
+                                  color: Colors.black,
+                                ),
+                                SizedBox(
+                                  width: 20.0,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      IconButton(
+                          icon: Icon(
+                            Icons.favorite_border_rounded,
+                            size: 30,
+                          ),
+                          onPressed: () {})
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-          margin: EdgeInsets.fromLTRB(4.0, 10.0, 4.0, 0.0),
-          child: Container(
+        ),
+      );
+    }, childCount: shops.length));
+  }
+}
+/*
+ SizedBox(
+                    height: 15.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.star,
+                        size: 20.0,
+                        color: Colors.orange,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 20.0,
+                        color: Colors.orange,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 20.0,
+                        color: Colors.orange,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 20.0,
+                        color: Colors.orange,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 20.0,
+                        color: Colors.black,
+                      ),
+                      SizedBox(
+                        width: 20.0,
+                      ),
+                    ],
+                  )
+ */
+/*
+ListTile(
+                    trailing: Icon(
+                      Icons.shopping_cart_outlined,
+                      size: 35,
+                    ),
+                    leading: Container(
+                      width: 100,
+                      decoration: BoxDecoration(
+                        image: const DecorationImage(
+                          image: AssetImage('images/try.jpg'),
+                          fit: BoxFit.fill,
+                        ),
+                        border: Border.all(
+                          color: Colors.teal[900],
+                          width: 0,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    title: Text(
+                      '${shops[index].name}',
+                      style: TextStyle(
+                          fontSize: 15.0,
+                          color: AppTheme.colors.primary,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      'the shop is fantastic , you can buy in 24 hours a day. U will find '
+                      'all U need',
+                      style: TextStyle(fontSize: 10),
+                    ),
+                    isThreeLine: true,
+                  ),
+ */
+/*
+Container(
             height: 200,
             decoration: BoxDecoration(
               // be the same as radius of card
@@ -140,8 +314,30 @@ class ShopList extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      );
-    }, childCount: shops.length));
-  }
-}
+ */
+/*
+Container(
+                  width: MediaQuery.of(context).size.width * 0.94,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0.0),
+                    ),
+                    color: Colors.white70,
+                    elevation: 10,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxWidth: MediaQuery.of(context).size.width * 0.28,
+                              maxHeight: MediaQuery.of(context).size.width * 0.28,
+                            ),
+                            child: Image.asset(
+                                'lib/images/burger_texas_angus.jpg',
+                                fit: BoxFit.fill
+                            ),
+                          ),
+                        ),
+ */
