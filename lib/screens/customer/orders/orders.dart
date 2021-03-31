@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:xshop_mobile/models/order.dart';
 import 'package:xshop_mobile/services/orders_api.dart';
+import 'package:xshop_mobile/services/search_order.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:http/http.dart' as http;
+
+import 'order_search.dart';
 
 class Orders extends StatefulWidget {
   @override
@@ -25,7 +29,9 @@ class _OrdersState extends State<Orders> {
                       color: AppTheme.colors.secondry,
                     ),
                     tooltip: 'Search',
-                    onPressed: null,
+                    onPressed: () {
+                      showSearch(context: context, delegate: OrdersSearch());
+                    },
                   ),
                 ]),
             body: Center(

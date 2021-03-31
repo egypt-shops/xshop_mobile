@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:xshop_mobile/models/order.dart';
 
 Future<List<Order>> fetchOrders(http.Client client) async {
   final response = await client
@@ -16,22 +17,4 @@ List<Order> parseOrders(String responseBody) {
   final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
 
   return parsed.map<Order>((json) => Order.fromJson(json)).toList();
-}
-
-class Order {
-  final int id;
-  final int user;
-  final int shop;
-  final bool paid;
-
-  Order({this.id, this.user, this.shop, this.paid});
-
-  factory Order.fromJson(Map<String, dynamic> json) {
-    return Order(
-      user: json['user'] as int,
-      id: json['id'] as int,
-      shop: json['shop'] as int,
-      paid: json['paid'] as bool,
-    );
-  }
 }
