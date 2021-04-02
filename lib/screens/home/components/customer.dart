@@ -3,6 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xshop_mobile/screens/customer/invoices/search.dart';
 import 'package:xshop_mobile/screens/customer/shop_search.dart';
 import 'package:xshop_mobile/screens/customer/shops.dart';
+import 'package:xshop_mobile/theme/apptheme.dart';
+import 'package:xshop_mobile/screens/login/login.dart';
+import 'package:xshop_mobile/screens/customer/products/products.dart';
+import 'package:xshop_mobile/screens/customer/orders/order_search.dart';
 import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
 
@@ -30,7 +34,7 @@ class _CustomerState extends State<Customer> {
   ];
   static List<SearchDelegate> _searchOptions = <SearchDelegate>[
     ShopsSearch(),
-    null,
+    OrdersSearch(),
     InvoicesSearch()
   ];
 

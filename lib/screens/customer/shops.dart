@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:xshop_mobile/screens/customer/shop_search.dart';
 import 'package:xshop_mobile/screens/customer/shop_details.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
 import 'package:xshop_mobile/models/shop.dart';

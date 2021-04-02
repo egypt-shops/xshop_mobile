@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:xshop_mobile/models/order.dart';
-import 'package:xshop_mobile/screens/customer/orders.dart';
+import 'package:xshop_mobile/screens/customer/orders/orders.dart';
 
 class OrderApi extends StatelessWidget {
   OrderApi({Key key}) : super(key: key);

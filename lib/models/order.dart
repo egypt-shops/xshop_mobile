@@ -3,8 +3,9 @@ class Order {
   final int user;
   final int shop;
   final bool paid;
+  final String exist;
 
-  Order({this.id, this.user, this.shop, this.paid});
+  Order({this.id, this.user, this.shop, this.paid, this.exist});
 
   factory Order.fromJson(Map<String, dynamic> json) {
     return Order(
