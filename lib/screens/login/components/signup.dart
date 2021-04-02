@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:xshop_mobile/screens/home/components/General_manager.dart';
-import 'package:xshop_mobile/screens/home/components/customer.dart';
-import 'package:xshop_mobile/screens/home/home.dart';
 import 'package:xshop_mobile/services/signin.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 

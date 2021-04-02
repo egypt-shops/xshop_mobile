@@ -4,6 +4,7 @@ import 'package:xshop_mobile/screens/home/components/cashier.dart';
 import 'package:xshop_mobile/screens/home/components/customer.dart';
 import 'package:xshop_mobile/screens/home/components/General_manager.dart';
 import 'package:xshop_mobile/screens/home/components/data_entry_clerk.dart';
+import 'package:xshop_mobile/screens/login/components/login_screen.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
 import 'package:xshop_mobile/components/circular_indicator.dart';
 
@@ -29,7 +30,7 @@ class _HomeState extends State<Home> {
     sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) => Login()),
+          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
           (Route<dynamic> route) => false);
     } else {
       setState(() {
@@ -44,19 +45,19 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     switch (type) {
       case 'Customer':
-        return MaterialApp(home: Customer());
+        return Customer();
         break;
       case 'Cashier':
-        return MaterialApp(home: Cashier());
+        return Cashier();
         break;
       case 'General Manager':
-        return MaterialApp(home: GeneralManager());
+        return GeneralManager();
         break;
       case 'Data Entry Clerk':
-        return MaterialApp(home: DataEntryClerk());
+        return DataEntryClerk();
         break;
       default:
-        return MaterialApp(home: Customer());
+        return Customer();
     }
   }
 }

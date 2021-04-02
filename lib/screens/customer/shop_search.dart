@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xshop_mobile/screens/customer/shop_details.dart';
 import 'package:xshop_mobile/services/search_shop.dart';
-import 'package:xshop_mobile/services/shop_api.dart';
+import 'package:xshop_mobile/models/shop.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:http/http.dart' as http;
 
