@@ -76,77 +76,125 @@ class ShopsSearch extends SearchDelegate {
                                       ShopDetails(shop: snapshot.data)),
                             );
                           },
-                          child: Card(
-                            color: AppTheme.colors.primaryLight,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                            ),
-                            margin: EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 40.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                // be the same as radius of card
-                                borderRadius: BorderRadius.circular(18.0),
-                                border: Border.all(
-                                    color: AppTheme.colors.secondry, width: 3),
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(8.0, 20, 8, 2.5),
+                            height: 200,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '${snapshot.data.name}',
-                                    style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: AppTheme.colors.primary,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  Text(
-                                    '${snapshot.data.name}',
-                                    style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: AppTheme.colors.primary,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.star,
-                                        size: 20.0,
-                                        color: Colors.teal.shade300,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        size: 20.0,
-                                        color: Colors.teal.shade300,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        size: 20.0,
-                                        color: Colors.teal.shade300,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        size: 20.0,
-                                        color: Colors.teal.shade300,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        size: 20.0,
-                                        color: Colors.teal.shade300,
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(5.0, 0, 5.0, 0.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              5.0, 0, 0.0, 0.0),
+                                          width: 120,
+                                          height: 180,
+                                          decoration: BoxDecoration(
+                                            image: const DecorationImage(
+                                              image:
+                                                  AssetImage('images/try.jpg'),
+                                              fit: BoxFit.fill,
+                                            ),
+                                            border: Border.all(
+                                              color: Colors.teal[900],
+                                              width: 0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              0, 0, 10.0, 0.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                '${snapshot.data.name}',
+                                                style: TextStyle(
+                                                    fontSize: 18.0,
+                                                    color:
+                                                        AppTheme.colors.primary,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Text(
+                                                'the shop is fantastic , ',
+                                                style: TextStyle(fontSize: 12),
+                                                softWrap: true,
+                                              ),
+                                              SizedBox(
+                                                height: 70,
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.star,
+                                                    size: 20.0,
+                                                    color: Colors.orange,
+                                                  ),
+                                                  Icon(
+                                                    Icons.star,
+                                                    size: 20.0,
+                                                    color: Colors.orange,
+                                                  ),
+                                                  Icon(
+                                                    Icons.star,
+                                                    size: 20.0,
+                                                    color: Colors.orange,
+                                                  ),
+                                                  Icon(
+                                                    Icons.star,
+                                                    size: 20.0,
+                                                    color: Colors.orange,
+                                                  ),
+                                                  Icon(
+                                                    Icons.star,
+                                                    size: 20.0,
+                                                    color: Colors.grey,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 20.0,
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        IconButton(
+                                            icon: Icon(
+                                              Icons.favorite_border_rounded,
+                                              color: Colors.grey,
+                                              size: 25,
+                                            ),
+                                            onPressed: () {})
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
+                          /*
+
+
+
+                           */
                         );
                       });
             } else
