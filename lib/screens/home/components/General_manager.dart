@@ -90,41 +90,68 @@ class _GeneralManagerState extends State<GeneralManager> {
               padding: EdgeInsets.zero,
               children: <Widget>[
                 DrawerHeader(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Icon(
-                          Icons.account_circle,
-                          size: 60,
-                          color: Colors.white,
-                        ),
-                        Text('Mohamed Boyka'),
-                      ]),
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    image: DecorationImage(
+                        image: AssetImage('images/meeting.jpg'),
+                        fit: BoxFit.fill),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: AssetImage('images/an.jpg'),
+                        radius: 35,
+                      ),
+                      Text(
+                        'Mohamed Boyka',
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                      Text(
+                        email,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
                   ),
                 ),
                 ListTile(
-                    title: Text('Mobile: ' + mobile),
-                    trailing: Icon(Icons.create),
-                    onTap: () {
-                      createAlertDialog(context, 'mobile');
-                    }),
-                ListTile(
-                  title: Text('Email: ' + email),
-                  trailing: Icon(Icons.create),
-                  onTap: () {
-                    createAlertDialog(context, 'email');
-                  },
-                ),
-                ListTile(
-                  title: Text('Item 3'),
+                  title: Text('home'),
+                  leading: Icon(Icons.home),
                   onTap: () {
                     //Navigator.pop(context);
                   },
                 ),
                 ListTile(
-                  title: Text('Item 4'),
+                  title: Text('account user'),
+                  leading: Icon(Icons.account_circle),
+                  onTap: () {
+                    //Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                    title: Text(mobile),
+                    leading: Icon(Icons.phone_iphone_outlined),
+                    onTap: () {
+                      createAlertDialog(context, 'mobile');
+                    }),
+                ListTile(
+                  title: Text(email),
+                  leading: Icon(Icons.email),
+                  onTap: () {
+                    createAlertDialog(context, 'email');
+                  },
+                ),
+                Divider(),
+                ListTile(
+                  title: Text('about'),
+                  leading: Icon(Icons.info),
+                  onTap: () {
+                    //Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  title: Text('Log Out'),
+                  leading: Icon(Icons.logout),
                   onTap: () {
                     //Navigator.pop(context);
                   },
@@ -135,3 +162,21 @@ class _GeneralManagerState extends State<GeneralManager> {
         ));
   }
 }
+/*
+Container(
+                        margin: EdgeInsets.fromLTRB(5.0, 0, 0.0, 0.0),
+                        width: 120,
+                        height: 140,
+                        decoration: BoxDecoration(
+                          image: const DecorationImage(
+                            image: AssetImage('images/try.jpg'),
+                            fit: BoxFit.fill,
+                          ),
+                          border: Border.all(
+                            color: Colors.teal[900],
+                            width: 0,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+ */

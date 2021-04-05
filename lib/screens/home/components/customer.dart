@@ -131,14 +131,98 @@ class _CustomerState extends State<Customer> {
         ]);
       }),
       drawer: Drawer(
-          child: Container(
-        color: Theme.of(context).primaryColor,
         child: ListView(
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Row(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('images/meeting.jpg'), fit: BoxFit.fill),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage('images/an.jpg'),
+                    radius: 35,
+                  ),
+                  Text(
+                    'Mohamed Boyka',
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                  Text(
+                    email,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              title: Text(
+                'home',
+                style: TextStyle(color: Colors.black38),
+              ),
+              leading: Icon(Icons.home),
+              onTap: () {
+                //Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text(
+                'account user',
+                style: TextStyle(color: Colors.black38),
+              ),
+              leading: Icon(Icons.account_circle),
+              onTap: () {
+                //Navigator.pop(context);
+              },
+            ),
+            ListTile(
+                title: Text(
+                  mobile,
+                  style: TextStyle(color: Colors.black38),
+                ),
+                leading: Icon(Icons.phone_iphone_outlined),
+                onTap: () {
+                  createAlertDialog(context, 'mobile');
+                }),
+            ListTile(
+              title: Text(
+                email,
+                style: TextStyle(color: Colors.black38),
+              ),
+              leading: Icon(Icons.email),
+              onTap: () {
+                createAlertDialog(context, 'email');
+              },
+            ),
+            Divider(),
+            ListTile(
+              title: Text(
+                'about',
+                style: TextStyle(color: Colors.black38),
+              ),
+              leading: Icon(Icons.info),
+              onTap: () {
+                //Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text(
+                'Log Out',
+                style: TextStyle(color: Colors.black38),
+              ),
+              leading: Icon(Icons.logout),
+              onTap: () {
+                //Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+
+        /*Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Icon(
@@ -151,7 +235,7 @@ class _CustomerState extends State<Customer> {
                       style: TextStyle(color: Colors.white),
                     ),
                   ]),
-            ),
+
             ListTile(
                 title: Text('Mobile: $mobile'),
                 trailing: Icon(Icons.create),
@@ -184,6 +268,8 @@ class _CustomerState extends State<Customer> {
           ],
         ),
       )),
+      */
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
