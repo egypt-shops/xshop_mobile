@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:xshop_mobile/screens/customer/shop_details.dart';
+import 'package:xshop_mobile/screens/customer/shops/shop_details.dart';
 import 'package:xshop_mobile/services/search_shop.dart';
 import 'package:xshop_mobile/models/shop.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';

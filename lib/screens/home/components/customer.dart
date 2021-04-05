@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xshop_mobile/screens/customer/invoices/search.dart';
-import 'package:xshop_mobile/screens/customer/shop_search.dart';
-import 'package:xshop_mobile/screens/customer/shops.dart';
+import 'package:xshop_mobile/screens/customer/shops/shop_search.dart';
+import 'package:xshop_mobile/screens/customer/shops/shops.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';

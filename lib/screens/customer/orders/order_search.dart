@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xshop_mobile/models/order.dart';
-import 'package:xshop_mobile/screens/customer/shop_details.dart';
+import 'package:xshop_mobile/screens/customer/shops/shop_details.dart';
 import 'package:xshop_mobile/services/search_order.dart';
 import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
