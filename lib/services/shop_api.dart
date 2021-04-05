@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:xshop_mobile/models/shop.dart';
-import 'package:xshop_mobile/screens/customer/shops.dart';
+import 'package:xshop_mobile/screens/customer/shops/shops.dart';
 
 class ShopApi extends StatelessWidget {
   ShopApi({Key key}) : super(key: key);

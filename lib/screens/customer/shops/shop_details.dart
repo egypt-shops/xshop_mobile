@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:xshop_mobile/models/shop.dart';
+import 'package:xshop_mobile/screens/customer/products/products.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 
 class ShopDetails extends StatelessWidget {
@@ -31,16 +32,7 @@ class ShopDetails extends StatelessWidget {
           ),
         ),
       ),
-      body: Body(),
-    );
-  }
-}
-
-class Body extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: ListView(
+      body: ListView(
         children: [
           Container(
             height: 200,
@@ -119,7 +111,15 @@ class Body extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               ElevatedButton(
-                  onPressed: null,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Products(
+                                shopId: shop.id.toString(),
+                              )),
+                    );
+                  },
                   child: Text(
                     'Our Products',
                     style: TextStyle(

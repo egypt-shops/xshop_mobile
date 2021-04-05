@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:xshop_mobile/screens/customer/products/cart.dart';
 import 'package:xshop_mobile/screens/customer/products/product_search.dart';
 import 'package:xshop_mobile/services/products.dart';
+import 'package:xshop_mobile/services/shop_api.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
-import 'package:xshop_mobile/models/cart.dart';
 import 'package:xshop_mobile/screens/customer/products/product_details.dart';
 import 'package:http/http.dart' as http;
 import 'package:xshop_mobile/models/product.dart';
 
 class Products extends StatefulWidget {
+  final String shopId;
+
+  Products({Key key, this.shopId}) : super(key: key);
   @override
   _ProductsState createState() => _ProductsState();
 }
@@ -57,22 +59,9 @@ class _ProductsState extends State<Products> {
                   )
                 ]),
             body: Center(
-              child: FutureBuilder<List<Product>>(
-                future: fetchProducts(http.Client()),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) print(snapshot.error);
-
-                  return snapshot.hasData
-                      ? ProductsList(products: snapshot.data)
-                      : Center(
-                          child: CircularProgressIndicator(
-                          valueColor: new AlwaysStoppedAnimation<Color>(
-                              AppTheme.colors.primaryLight),
-                          backgroundColor: AppTheme.colors.primary,
-                        ));
-                },
-              ),
-            )));
+                child: ProductApi(
+              id: widget.shopId.toString(),
+            ))));
   }
 }
 
@@ -83,7 +72,7 @@ class ProductsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cartList = Provider.of<CartModel>(context);
+    //var cartList = Provider.of<CartModel>(context);
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
