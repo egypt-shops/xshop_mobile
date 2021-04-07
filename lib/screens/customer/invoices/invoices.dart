@@ -54,8 +54,8 @@ class InvoicesList extends StatelessWidget {
               height: 150,
               padding: EdgeInsets.all(3),
               child: Card(
-                  elevation: 5,
-                  color: AppTheme.colors.primaryLight,
+                  elevation: 1,
+                  color: Theme.of(context).secondaryHeaderColor,
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,

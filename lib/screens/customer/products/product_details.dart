@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xshop_mobile/services/products.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:xshop_mobile/models/cart.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/models/product.dart';
 
@@ -15,16 +14,10 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  var cartList;
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      cartList = Provider.of<CartModel>(context);
-    });
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppTheme.colors.primary,
-        ),
+        appBar: AppBar(),
         body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -101,28 +94,30 @@ class _ProductDetailsState extends State<ProductDetails> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
                               ),
-                              color: cartList.items.contains(widget.product)
+                              color:
+                                  /*cartList.items.contains(widget.product)
                                   ? Colors.red[700]
-                                  : Colors.green,
+                                  :*/
+                                  Colors.green,
                               textColor: Colors.white,
                               padding: EdgeInsets.all(8.0),
                               onPressed: () {
-                                setState(() {
+                                /*setState(() {
                                   cartList.items.contains(widget.product)
                                       ? cartList.items.remove(widget.product)
                                       : cartList.items.add(widget.product);
-                                  /*Scaffold.of(context).showSnackBar(SnackBar(
+                                  Scaffold.of(context).showSnackBar(SnackBar(
                                   content: Text(cartList.items.contains(product)
                                       ? 'Added to favorites.'
                                       : 'Removed from favorites.'),
                                   duration: Duration(seconds: 1),
-                                ));*/
-                                });
+                                ));
+                                })*/
                               },
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
-                                  children: cartList.items
+                                  children: /* cartList.items
                                           .contains(widget.product)
                                       ? [
                                           Text("remove from Cart".toUpperCase(),
@@ -135,17 +130,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                                             size: 40,
                                           )
                                         ]
-                                      : [
-                                          Text("Add to Cart".toUpperCase(),
-                                              style: TextStyle(
-                                                fontSize: 25,
-                                              )),
-                                          Icon(
-                                            Icons.add_shopping_cart,
-                                            color: Colors.white,
-                                            size: 40,
-                                          )
-                                        ]),
+                                      : */
+                                      [
+                                    Text("Add to Cart".toUpperCase(),
+                                        style: TextStyle(
+                                          fontSize: 25,
+                                        )),
+                                    Icon(
+                                      Icons.add_shopping_cart,
+                                      color: Colors.white,
+                                      size: 40,
+                                    )
+                                  ]),
                             )))
                   ]))
             ]));

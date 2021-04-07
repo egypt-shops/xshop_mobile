@@ -17,11 +17,13 @@ class Xshop extends StatelessWidget {
       theme: ThemeData(
         // Define the default brightness and colors.
         brightness: Brightness.light,
+        iconTheme: IconThemeData(color: Colors.white),
         primaryColor: Colors.amber[800],
         secondaryHeaderColor: Colors.white,
         accentColor: Colors.amber[800],
         focusColor: Colors.white70,
         scaffoldBackgroundColor: Colors.grey[100],
+        backgroundColor: Colors.grey[700],
         // Define the default font family.
 
         // Define the default TextTheme. Use this to specify the default
@@ -30,7 +32,7 @@ class Xshop extends StatelessWidget {
             headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
             headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
             bodyText2: TextStyle(
-                fontSize: 16, fontFamily: 'Raleway', color: Colors.grey[600]),
+                fontSize: 14, fontFamily: 'Raleway', color: Colors.grey[600]),
             bodyText1: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
