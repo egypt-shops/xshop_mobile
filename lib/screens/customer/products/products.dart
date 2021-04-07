@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xshop_mobile/screens/customer/products/cart.dart';
 import 'package:xshop_mobile/screens/customer/products/product_search.dart';
@@ -22,18 +23,20 @@ class _ProductsState extends State<Products> {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
-                backgroundColor: AppTheme.colors.primary,
-                iconTheme: IconThemeData(color: AppTheme.colors.secondry),
+                iconTheme: IconThemeData(
+                  color: Theme.of(context)
+                      .secondaryHeaderColor, //change your color here
+                ),
                 title: Text(
                   "Products",
-                  style: TextStyle(color: AppTheme.colors.textPrimary),
+                  style:
+                      TextStyle(color: Theme.of(context).secondaryHeaderColor),
                 ),
                 actions: <Widget>[
                   IconButton(
                     icon: Icon(
                       Icons.search,
                       size: 30,
-                      color: AppTheme.colors.secondry,
                     ),
                     tooltip: 'Search',
                     onPressed: () {
@@ -44,7 +47,6 @@ class _ProductsState extends State<Products> {
                     icon: Icon(
                       Icons.shopping_cart,
                       size: 30,
-                      color: AppTheme.colors.secondry,
                     ),
                     tooltip: 'Cart',
                     onPressed: () {
@@ -76,6 +78,8 @@ class ProductsList extends StatelessWidget {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
+        childAspectRatio: MediaQuery.of(context).size.width /
+            (MediaQuery.of(context).size.height / 1.6),
       ),
       itemCount: products.length,
       itemBuilder: (context, index) {
@@ -92,29 +96,60 @@ class ProductsList extends StatelessWidget {
               );
             },
             child: Container(
-                padding: EdgeInsets.all(2),
+                padding: EdgeInsets.all(3),
                 child: Card(
                     elevation: 3,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    color: AppTheme.colors.primaryLight,
+                    color: Theme.of(context).secondaryHeaderColor,
                     child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18.0),
-                            border: Border.all(
-                                color: AppTheme.colors.secondry, width: 3)),
+                        padding: EdgeInsets.all(5),
                         child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text('${products[index].name}',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: AppTheme.colors.primary)),
-                              Text('${products[index].price} EGP',
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.red[900]))
+                              Container(
+                                  width: MediaQuery.of(context).size.width / 2,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(5),
+                                      child: Image(
+                                          image: NetworkImage(
+                                              'https://picsum.photos/300?image=${products[index].id.toString()}')))),
+                              Expanded(
+                                  child: Container(
+                                      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                      '${products[index].name}',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText2),
+                                                  Text(
+                                                      '${products[index].price} EGP',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 10,
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .backgroundColor))
+                                                ]),
+                                            Icon(
+                                              Icons.favorite_border,
+                                              color: Theme.of(context)
+                                                  .backgroundColor,
+                                            )
+                                          ])))
                             ])))));
       },
     );
