@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xshop_mobile/models/order.dart';
+import 'package:xshop_mobile/screens/customer/orders/order_detail.dart';
 import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/services/search_order.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
@@ -48,7 +49,14 @@ class OrdersList extends StatelessWidget {
     return SliverList(
         delegate: SliverChildBuilderDelegate((context, index) {
       return GestureDetector(
-          onTap: () {},
+          onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OrderDetails(
+                    orderData: orders[index],
+                  ),
+                ),
+              ),
           child: Container(
               height: 200,
               padding: EdgeInsets.all(3),
