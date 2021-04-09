@@ -6,6 +6,8 @@ import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:http/http.dart' as http;
 
+import 'order_detail.dart';
+
 class OrdersSearch extends SearchDelegate {
   Order orderById;
   @override
@@ -70,12 +72,14 @@ class OrdersSearch extends SearchDelegate {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) =>
-                            //           ShopDetails(shop: snapshot.data)),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OrderDetails(
+                                  orderData: snapshot.data,
+                                ),
+                              ),
+                            );
                           },
                           child: Card(
                             color: AppTheme.colors.primaryLight,
