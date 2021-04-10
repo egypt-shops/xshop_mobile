@@ -11,12 +11,11 @@ class ShopDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppTheme.colors.primary,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
             size: 30,
-            color: AppTheme.colors.secondry,
+            color: Colors.white,
           ),
           onPressed: () {
             Navigator.pop(
@@ -32,104 +31,165 @@ class ShopDetails extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView(
+      body: Column(
         children: [
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-              image: const DecorationImage(
-                image: AssetImage('images/try.jpg'),
-                fit: BoxFit.cover,
+          Expanded(
+            flex: 5,
+            child: Container(
+              height: 200,
+              decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: AssetImage('images/meeting.jpg'),
+                  fit: BoxFit.cover,
+                ),
               ),
-              border: Border.all(
-                color: Colors.teal[900],
-                width: 8,
-              ),
-              borderRadius: BorderRadius.circular(10),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'this is shop that provides a lot of products'
-              'this is shop that provides a lot of products'
-              'this is shop that provides a lot of products'
-              'this is shop that provides a lot of products'
-              'this is shop that provides a lot of products'
-              'this is shop that provides a lot of products'
-              'this is shop that provides a lot of products',
-              textAlign: TextAlign.start,
-              style: TextStyle(fontSize: 15.0, color: Colors.teal.shade900),
-            ),
-          ),
-          Card(
-            margin: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 10.0),
-            color: Colors.teal[100],
-            child: Column(children: [
-              Text(
-                'our rate'.toUpperCase(),
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.teal),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(30.0, 20.0, 15.0, 0),
+              child: Row(
                 children: [
-                  Icon(
-                    Icons.star,
-                    size: 20.0,
-                    color: Colors.white,
+                  Expanded(
+                    flex: 4,
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Text(
+                            shop.name,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          Text(
+                            'Egypt,  Cairo',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w200),
+                          ),
+                        ],
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                      ),
+                    ),
                   ),
-                  Icon(
-                    Icons.star,
-                    size: 20.0,
-                    color: Colors.white,
-                  ),
-                  Icon(
-                    Icons.star,
-                    size: 20.0,
-                    color: Colors.white,
-                  ),
-                  Icon(
-                    Icons.star,
-                    size: 20.0,
-                    color: Colors.black,
-                  ),
-                  Icon(
-                    Icons.star,
-                    size: 20.0,
-                    color: Colors.black,
+                  Container(
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          size: 30,
+                          color: Colors.orange,
+                        ),
+                        Text('88'),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ]),
+            ),
+            flex: 2,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Products(
-                                shopId: shop.id.toString(),
-                              )),
-                    );
-                  },
-                  child: Text(
-                    'Our Products',
-                    style: TextStyle(
-                      color: Colors.teal[100],
-                    ),
-                  )),
-              SizedBox(
-                width: 15.0,
+          Expanded(
+            flex: 1,
+            child: Container(
+              padding: EdgeInsets.fromLTRB(20.0, 0, 20, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.call,
+                        color: AppTheme.colors.primary,
+                      ),
+                      Text(
+                        'CALL',
+                        style: TextStyle(
+                          color: AppTheme.colors.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.transit_enterexit_outlined,
+                        color: AppTheme.colors.primary,
+                      ),
+                      Text(
+                        'ROUTE',
+                        style: TextStyle(
+                          color: AppTheme.colors.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.share_outlined,
+                        color: AppTheme.colors.primary,
+                      ),
+                      Text(
+                        'SHARE',
+                        style: TextStyle(
+                          color: AppTheme.colors.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 30, 20.0, 0),
+              child: Text(
+                shop.name +
+                    '  '
+                        ' is shop that provides a lot of products '
+                        'this is shop that provides a lot of products '
+                        'this is shop that provides a lot of products '
+                        'this is shop that provides a lot of products '
+                        'this is shop that provides a lot of products '
+                        'this is shop that provides a lot of products '
+                        'this is shop that provides a lot of products '
+                        'this is shop that provides a lot of products '
+                        'this is shop that provides a lot of products ',
+                textAlign: TextAlign.start,
+                style: TextStyle(fontSize: 12.0, color: Colors.black),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Products(
+                                  shopId: shop.id.toString(),
+                                )),
+                      );
+                    },
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.orange)),
+                    child: Text(
+                      'Our Products',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    )),
+                SizedBox(
+                  width: 15.0,
+                ),
+              ],
+            ),
           ),
         ],
       ),
