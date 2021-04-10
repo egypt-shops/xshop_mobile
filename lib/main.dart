@@ -30,7 +30,10 @@ class Xshop extends StatelessWidget {
         // text styling for headlines, titles, bodies of text, and more.
         textTheme: TextTheme(
             headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-            headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+            headline6: TextStyle(
+              fontSize: 20,
+              fontStyle: FontStyle.italic,
+            ),
             bodyText2: TextStyle(
                 fontSize: 14, fontFamily: 'Raleway', color: Colors.grey[600]),
             bodyText1: TextStyle(

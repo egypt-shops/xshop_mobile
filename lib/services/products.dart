@@ -18,6 +18,7 @@ class ProductApi extends StatelessWidget {
         future: fetchProducts(http.Client(), id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            products = snapshot.data;
             return ProductsList(products: snapshot.data);
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');

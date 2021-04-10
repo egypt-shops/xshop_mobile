@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:xshop_mobile/models/shop.dart';
 import 'package:xshop_mobile/screens/customer/shops/shops.dart';
+import 'package:xshop_mobile/screens/home/components/customer.dart';
 
 class ShopApi extends StatelessWidget {
   ShopApi({Key key}) : super(key: key);
@@ -17,6 +18,7 @@ class ShopApi extends StatelessWidget {
           future: fetchShops(http.Client()),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+              shops = snapshot.data;
               return ShopList(shops: snapshot.data);
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
