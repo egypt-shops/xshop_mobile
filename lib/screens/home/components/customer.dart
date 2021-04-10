@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:xshop_mobile/models/invoice.dart';
+import 'package:xshop_mobile/models/order.dart';
+import 'package:xshop_mobile/models/shop.dart';
 import 'package:xshop_mobile/screens/customer/invoices/search.dart';
 import 'package:xshop_mobile/screens/customer/shops/shop_search.dart';
 import 'package:xshop_mobile/screens/customer/shops/shops.dart';
@@ -11,6 +14,10 @@ import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
 
 import '../../../services/invoices.dart';
+
+List<Shop> shops = [];
+List<Order> orders = [];
+List<Invoice> invoices = [];
 
 class Customer extends StatefulWidget {
   @override
@@ -37,7 +44,6 @@ class _CustomerState extends State<Customer> {
     OrdersSearch(),
     InvoicesSearch()
   ];
-
   @override
   void initState() {
     super.initState();
@@ -153,7 +159,7 @@ class _CustomerState extends State<Customer> {
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                   Text(
-                    email,
+                    '$email',
                     style: TextStyle(color: Colors.white),
                   ),
                 ],
@@ -181,7 +187,7 @@ class _CustomerState extends State<Customer> {
             ),
             ListTile(
                 title: Text(
-                  mobile,
+                  '$mobile',
                   style: TextStyle(color: Colors.black38),
                 ),
                 leading: Icon(Icons.phone_iphone_outlined),
@@ -190,7 +196,7 @@ class _CustomerState extends State<Customer> {
                 }),
             ListTile(
               title: Text(
-                email,
+                '$email',
                 style: TextStyle(color: Colors.black38),
               ),
               leading: Icon(Icons.email),

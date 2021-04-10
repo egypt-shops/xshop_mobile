@@ -9,10 +9,12 @@ import 'package:xshop_mobile/screens/customer/products/product_details.dart';
 import 'package:http/http.dart' as http;
 import 'package:xshop_mobile/models/product.dart';
 
+List<Product> products = [];
+
 class Products extends StatefulWidget {
   final String shopId;
 
-  Products({Key key, this.shopId}) : super(key: key);
+  Products({Key products, this.shopId}) : super(key: products);
   @override
   _ProductsState createState() => _ProductsState();
 }
@@ -40,7 +42,8 @@ class _ProductsState extends State<Products> {
                     ),
                     tooltip: 'Search',
                     onPressed: () {
-                      showSearch(context: context, delegate: ProductSearch());
+                      showSearch(
+                          context: context, delegate: ProductSearch(products));
                     },
                   ),
                   IconButton(
@@ -62,7 +65,7 @@ class _ProductsState extends State<Products> {
                 ]),
             body: Center(
                 child: ProductApi(
-              id: widget.shopId.toString(),
+              id: widget.shopId,
             ))));
   }
 }
