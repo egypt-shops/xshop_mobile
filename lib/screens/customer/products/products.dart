@@ -91,9 +91,7 @@ class ProductsList extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProductDetails(
-                    product: products[index],
-                  ),
+                  builder: (context) => GetProduct(products[index].id),
                   fullscreenDialog: true,
                 ),
               );
