@@ -52,8 +52,8 @@ class OrdersList extends StatelessWidget {
           onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => OrderDetails(
-                    orderData: orders[index],
+                  builder: (context) => GetOrder(
+                    orders[index].id,
                   ),
                 ),
               ),

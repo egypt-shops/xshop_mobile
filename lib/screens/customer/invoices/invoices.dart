@@ -47,8 +47,7 @@ class InvoicesList extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        InvoiceDetails(invoice: invoices[index])));
+                    builder: (context) => GetInvoice(invoices[index].id)));
           },
           child: Container(
               height: 150,
