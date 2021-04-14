@@ -329,12 +329,12 @@ class _ProductCreatingPageState extends State<ProductCreatingPage> {
       // Find the ScaffoldMessenger in the widget tree
       // and use it to show a SnackBar.
       if (response == null) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        Scaffold.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.red,
           content: Text('product not added'),
         ));
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        Scaffold.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.green,
           content: Text('product added successfully'),
           /*action: SnackBarAction(
