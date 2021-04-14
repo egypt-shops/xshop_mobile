@@ -6,7 +6,6 @@ import 'package:xshop_mobile/screens/home/components/General_manager.dart';
 import 'package:xshop_mobile/screens/home/components/data_entry_clerk.dart';
 import 'package:xshop_mobile/screens/login/components/login_screen.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
-import 'package:xshop_mobile/components/circular_indicator.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);

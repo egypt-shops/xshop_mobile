@@ -23,12 +23,37 @@ class ProductApi extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           } else {
-            return SizedBox(
-                height: 200,
-                width: 200,
-                child: Center(child: CircularProgressIndicator()));
+            return SliverToBoxAdapter(
+                child: SizedBox(
+                    height: 200,
+                    width: 200,
+                    child: Center(child: CircularProgressIndicator())));
           }
         });
+  }
+}
+
+Future<Product> postProducts(http.Client client, String name, String price,
+    String stock, int addedBy) async {
+  final response = await client.post(
+      "https://dev-egshops.herokuapp.com/api/products/",
+      headers: <String, String>{
+        "accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: jsonEncode(<String, dynamic>{
+        "name": name,
+        "price": price,
+        "stock": int.parse(stock),
+        "added_by": addedBy
+      }));
+
+  // Use the compute function to run parseProducts in a separate isolate.
+  if (response.statusCode == 200) {
+    print('doneeeeeeeeeeeeeeee============================');
+    return Product.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('failed to add product for shop $addedBy');
   }
 }
 

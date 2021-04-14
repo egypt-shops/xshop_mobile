@@ -24,7 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppTheme.colors.primary,
         body: Center(
             child: Container(
                 padding: EdgeInsets.all(20.0),
@@ -33,23 +32,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text('xshop',
                         style: TextStyle(
-                            fontSize: 70, color: AppTheme.colors.secondry)),
+                            fontSize: 70,
+                            color: Theme.of(context).primaryColor)),
                     isloading
                         ? SizedBox(
                             key: Key("Sign In indicator"),
                             height: 300,
                             width: 300,
-                            child: Center(
-                                child: CircularProgressIndicator(
-                              valueColor: new AlwaysStoppedAnimation<Color>(
-                                  AppTheme.colors.primary),
-                              backgroundColor: AppTheme.colors.secondry,
-                            )))
+                            child: Center(child: CircularProgressIndicator()))
                         : Card(
-                            elevation: 5,
+                            elevation: 3,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18)),
-                            color: AppTheme.colors.primaryLight,
+                            color: Theme.of(context).secondaryHeaderColor,
                             child: Padding(
                                 padding: const EdgeInsets.all(40),
                                 child: SizedBox(
@@ -64,14 +59,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   enabledBorder:
                                                       UnderlineInputBorder(
                                                     borderSide: BorderSide(
-                                                        color: AppTheme
-                                                            .colors.primary),
+                                                        color: Theme.of(context)
+                                                            .backgroundColor),
                                                   ),
                                                   focusedBorder:
                                                       UnderlineInputBorder(
                                                     borderSide: BorderSide(
-                                                        color: AppTheme
-                                                            .colors.secondry),
+                                                        color: Theme.of(context)
+                                                            .primaryColor),
                                                   ),
                                                   hintText: 'Mobile'),
                                               controller: mobileController),
@@ -79,15 +74,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                               decoration: InputDecoration(
                                                 enabledBorder:
                                                     UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: AppTheme
-                                                          .colors.primary),
-                                                ),
+                                                        borderSide: BorderSide(
+                                                  color: Theme.of(context)
+                                                      .backgroundColor,
+                                                )),
                                                 focusedBorder:
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
-                                                      color: AppTheme
-                                                          .colors.secondry),
+                                                      color: Theme.of(context)
+                                                          .primaryColor),
                                                 ),
                                                 hintText: 'Password',
                                               ),
@@ -101,13 +96,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           18.0)),
-                                              color: AppTheme.colors.secondry,
-                                              child: Text(
-                                                'LOGIN',
-                                                style: TextStyle(
-                                                    color: AppTheme
-                                                        .colors.textSecondry),
-                                              ),
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              child: Text('LOGIN',
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .secondaryHeaderColor,
+                                                  )),
                                               onPressed: //(mobileController.text == "" || passwordController.text == "") ? (){print('error ${mobileController.text}'); }:
                                                   () async {
                                                 setState(() {
@@ -148,11 +143,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: RaisedButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0)),
-                            color: AppTheme.colors.secondry,
+                            color: Theme.of(context).primaryColor,
                             child: Text(
                               'SIGNUP',
                               style: TextStyle(
-                                  color: AppTheme.colors.textSecondry),
+                                  color:
+                                      Theme.of(context).secondaryHeaderColor),
                             ),
                             onPressed: () {
                               Navigator.push(
