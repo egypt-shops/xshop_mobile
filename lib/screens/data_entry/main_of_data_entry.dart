@@ -7,13 +7,6 @@ import 'search.dart';
 class DataEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MaindataEntryPage());
-  }
-}
-
-class MaindataEntryPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
     // make search widget
     Widget search() => Container(
             child: Column(
@@ -60,7 +53,7 @@ class MaindataEntryPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (c) => PrductCreatingPage()),
+                                builder: (c) => ProductCreatingPage()),
                           );
                         },
                         child: Container(
@@ -83,7 +76,7 @@ class MaindataEntryPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (c) => PrductCreatingPage()),
+                                builder: (c) => ProductCreatingPage()),
                           );
                         },
                         child: Container(
@@ -106,54 +99,12 @@ class MaindataEntryPage extends StatelessWidget {
           ],
         ));
 
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.blue[50],
-        appBar: AppBar(
-          title: Row(
-            children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (c) => Home()),
-                    );
-                  },
-                ),
-              ),
-              Container(
-                child: Text(
-                  'home',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                padding: EdgeInsets.only(right: 20),
-              ),
-              Container(
-                child: Text(
-                  'shop',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                padding: EdgeInsets.only(right: 20),
-              ),
-              Container(
-                child: Text(
-                  'help',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                padding: EdgeInsets.only(right: 20),
-              ),
-            ],
-          ),
-          actions: [IconButton(icon: Icon(Icons.account_box), onPressed: null)],
-        ),
-        body: ListView(
-          children: [
-            search(),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(),
+      body: ListView(
+        children: [
+          search(),
+        ],
       ),
     );
   }

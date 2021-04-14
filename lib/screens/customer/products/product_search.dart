@@ -1,10 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:xshop_mobile/screens/customer/products/product_details.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
-import 'package:xshop_mobile/services/products.dart';
-import 'package:xshop_mobile/services/search_prduct.dart';
-import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/models/product.dart';
 
 class ProductSearch extends SearchDelegate {

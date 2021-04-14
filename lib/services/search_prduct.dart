@@ -10,9 +10,9 @@ Future<Product> fetchProductsID(http.Client client, String id) async {
 
   // Use the compute function to run parseProducts in a separate isolate.
   if (response.statusCode == 200)
-    return Product(name: 'notfound', price: '');
-  else
     return compute(parseProduct, response.body);
+  else
+    return Product(name: 'notfound', price: '');
 }
 
 Product parseProduct(String responseBody) {

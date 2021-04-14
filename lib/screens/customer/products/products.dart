@@ -24,49 +24,48 @@ class _ProductsState extends State<Products> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            appBar: AppBar(
-                iconTheme: IconThemeData(
-                  color: Theme.of(context)
-                      .secondaryHeaderColor, //change your color here
-                ),
-                title: Text(
-                  "Products",
-                  style:
-                      TextStyle(color: Theme.of(context).secondaryHeaderColor),
-                ),
-                actions: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.search,
-                      size: 30,
-                    ),
-                    tooltip: 'Search',
-                    onPressed: () {
-                      showSearch(
-                          context: context, delegate: ProductSearch(products));
-                    },
+            body: CustomScrollView(slivers: <Widget>[
+      SliverAppBar(
+          iconTheme: IconThemeData(
+            color:
+                Theme.of(context).secondaryHeaderColor, //change your color here
+          ),
+          title: Text(
+            "Products",
+            style: TextStyle(color: Theme.of(context).secondaryHeaderColor),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.search,
+                size: 30,
+              ),
+              tooltip: 'Search',
+              onPressed: () {
+                showSearch(context: context, delegate: ProductSearch(products));
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.shopping_cart,
+                size: 30,
+              ),
+              tooltip: 'Cart',
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CartPage(),
+                    fullscreenDialog: true,
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.shopping_cart,
-                      size: 30,
-                    ),
-                    tooltip: 'Cart',
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CartPage(),
-                          fullscreenDialog: true,
-                        ),
-                      );
-                    },
-                  )
-                ]),
-            body: Center(
-                child: ProductApi(
-              id: widget.shopId,
-            ))));
+                );
+              },
+            )
+          ]),
+      ProductApi(
+        id: widget.shopId,
+      )
+    ])));
   }
 }
 
@@ -78,83 +77,81 @@ class ProductsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //var cartList = Provider.of<CartModel>(context);
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: MediaQuery.of(context).size.width /
-            (MediaQuery.of(context).size.height / 1.6),
-      ),
-      itemCount: products.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProductDetails(
-                    product: products[index],
+    return SliverGrid(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: MediaQuery.of(context).size.width /
+              (MediaQuery.of(context).size.height / 1.6),
+        ),
+        delegate: SliverChildBuilderDelegate((context, index) {
+          return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GetProduct(products[index].id),
+                    fullscreenDialog: true,
                   ),
-                  fullscreenDialog: true,
-                ),
-              );
-            },
-            child: Container(
-                padding: EdgeInsets.all(3),
-                child: Card(
-                    elevation: 3,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    color: Theme.of(context).secondaryHeaderColor,
-                    child: Container(
-                        padding: EdgeInsets.all(5),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: Image(
-                                          image: NetworkImage(
-                                              'https://picsum.photos/300?image=${products[index].id.toString()}')))),
-                              Expanded(
-                                  child: Container(
-                                      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                      '${products[index].name}',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText2),
-                                                  Text(
-                                                      '${products[index].price} EGP',
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 10,
-                                                          color: Theme.of(
-                                                                  context)
-                                                              .backgroundColor))
-                                                ]),
-                                            Icon(
-                                              Icons.favorite_border,
-                                              color: Theme.of(context)
-                                                  .backgroundColor,
-                                            )
-                                          ])))
-                            ])))));
-      },
-    );
+                );
+              },
+              child: Container(
+                  padding: EdgeInsets.all(3),
+                  child: Card(
+                      elevation: 3,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      color: Theme.of(context).secondaryHeaderColor,
+                      child: Container(
+                          padding: EdgeInsets.all(5),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(5),
+                                        child: Image(
+                                            image: NetworkImage(
+                                                'https://picsum.photos/300?image=${products[index].id.toString()}')))),
+                                Expanded(
+                                    child: Container(
+                                        padding:
+                                            EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                        child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                        '${products[index].name}',
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText2),
+                                                    Text(
+                                                        '${products[index].price} EGP',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 10,
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .backgroundColor))
+                                                  ]),
+                                              Icon(
+                                                Icons.favorite_border,
+                                                color: Theme.of(context)
+                                                    .backgroundColor,
+                                              )
+                                            ])))
+                              ])))));
+        }, childCount: products.length));
   }
 }

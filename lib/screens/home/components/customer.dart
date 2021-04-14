@@ -222,6 +222,7 @@ class _CustomerState extends State<Customer> {
               ),
               leading: Icon(Icons.logout),
               onTap: () {
+                logout();
                 //Navigator.pop(context);
               },
             ),
