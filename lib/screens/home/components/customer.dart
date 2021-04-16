@@ -4,6 +4,7 @@ import 'package:xshop_mobile/models/invoice.dart';
 import 'package:xshop_mobile/models/order.dart';
 import 'package:xshop_mobile/models/shop.dart';
 import 'package:xshop_mobile/screens/customer/invoices/search.dart';
+import 'package:xshop_mobile/screens/customer/orders/create_order.dart';
 import 'package:xshop_mobile/screens/customer/shops/shop_search.dart';
 import 'package:xshop_mobile/screens/customer/shops/shops.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
@@ -95,6 +96,12 @@ class _CustomerState extends State<Customer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(child: Icon(Icons.shopping_cart_outlined),onPressed: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CreateOrderScreen()),
+        );
+      },),
       body: Builder(
           // Create an inner BuildContext so that the onPressed methods
           // can refer to the Scaffold with Scaffold.of().
