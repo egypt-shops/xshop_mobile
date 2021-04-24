@@ -96,12 +96,6 @@ class _CustomerState extends State<Customer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.shopping_cart_outlined),onPressed: (){
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => CreateOrderScreen()),
-        );
-      },),
       body: Builder(
           // Create an inner BuildContext so that the onPressed methods
           // can refer to the Scaffold with Scaffold.of().
