@@ -42,6 +42,7 @@ dependencies:
   progress_dialog: ^1.2.0
   modal_progress_hud: ^0.1.2
   transparent_image: ^1.0.0
+  material_design_icons_flutter: ^4.0.5955
 
 dev_dependencies:
   flutter_test:

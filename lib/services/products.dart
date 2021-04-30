@@ -75,3 +75,45 @@ List<Product> parseProducts(String responseBody) {
 
   return parsed.map<Product>((json) => Product.fromJson(json)).toList();
 }
+
+Future<Product> fetchProductsID(http.Client client, String id) async {
+  final response = await client
+      .get('https://dev-egshops.herokuapp.com/api/products/$id/?format=json');
+
+  // Use the compute function to run parseProducts in a separate isolate.
+  if (response.statusCode == 200)
+    return compute(parseProduct, response.body);
+  else
+    return Product(name: 'notfound', price: '');
+}
+
+Product parseProduct(String responseBody) {
+  final parsed = jsonDecode(responseBody).cast<String, dynamic>();
+
+  return Product.fromJson(parsed);
+}
+
+Future<http.Response> updateProduct(
+    String id, String name, String price, int stock, int addedby) async {
+  final http.Response response = await http.patch(
+      Uri.parse('https://dev-egshops.herokuapp.com/api/products/$id/'),
+      headers: <String, String>{
+        "accept": " */*",
+        "Content-Type": "application/json"
+      },
+      body: jsonEncode(<String, dynamic>{
+        "name": name,
+        "price": price,
+        "stock": stock,
+        "added_by": addedby
+      }));
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+    print(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load cart');
+  }
+  return response;
+}

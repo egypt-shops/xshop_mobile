@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:xshop_mobile/screens/customer/products/cart.dart';
 import 'package:xshop_mobile/screens/customer/products/product_search.dart';
+import 'package:xshop_mobile/screens/data_entry/edit_product.dart';
+import 'package:xshop_mobile/screens/home/home.dart';
 import 'package:xshop_mobile/services/products.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
@@ -89,8 +91,7 @@ class ProductsList extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => GetProduct(products[index].id),
-                    fullscreenDialog: true,
+                    builder: (context) => GetProduct(products[index]),
                   ),
                 );
               },
@@ -145,11 +146,35 @@ class ProductsList extends StatelessWidget {
                                                                     context)
                                                                 .backgroundColor))
                                                   ]),
-                                              Icon(
-                                                Icons.favorite_border,
-                                                color: Theme.of(context)
-                                                    .backgroundColor,
-                                              )
+                                              usertype == 'Data Entry Clerk'
+                                                  ? IconButton(
+                                                      icon: Icon(
+                                                        Icons.edit,
+                                                        color: Theme.of(context)
+                                                            .backgroundColor,
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                EditProduct(
+                                                                    product:
+                                                                        products[
+                                                                            index]),
+                                                            fullscreenDialog:
+                                                                true,
+                                                          ),
+                                                        );
+                                                      })
+                                                  : IconButton(
+                                                      icon: Icon(
+                                                        Icons.favorite_border,
+                                                        color: Theme.of(context)
+                                                            .backgroundColor,
+                                                      ),
+                                                      onPressed: () {},
+                                                    )
                                             ])))
                               ])))));
         }, childCount: products.length));

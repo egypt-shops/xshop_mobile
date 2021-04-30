@@ -13,6 +13,7 @@ class Xshop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'xshop',
       theme: ThemeData(
         // Define the default brightness and colors.
