@@ -7,6 +7,8 @@ import 'package:xshop_mobile/screens/home/components/data_entry_clerk.dart';
 import 'package:xshop_mobile/screens/login/components/login_screen.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
 
+String usertype = 'empty';
+
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
   @override
@@ -15,7 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   SharedPreferences sharedPreferences;
-  String type = 'empty';
+
   String mobile = 'empty';
   String email = 'empty';
 
@@ -33,7 +35,7 @@ class _HomeState extends State<Home> {
           (Route<dynamic> route) => false);
     } else {
       setState(() {
-        type = sharedPreferences.getString('type');
+        usertype = sharedPreferences.getString('type');
         mobile = sharedPreferences.getString('mobile');
         email = sharedPreferences.getString('email');
       });
@@ -42,7 +44,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    switch (type) {
+    switch (usertype) {
       case 'Customer':
         return Customer();
         break;
