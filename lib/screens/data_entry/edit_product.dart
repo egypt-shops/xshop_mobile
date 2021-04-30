@@ -54,7 +54,7 @@ class _EditProductState extends State<EditProduct> {
                     setState(() {
                       _saving = false;
                     });
-                    if (response.statusCode == 200) {
+                    /*if (response.statusCode == 200) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor: Colors.green,
                           content: Text('updated successfully')));
@@ -63,7 +63,7 @@ class _EditProductState extends State<EditProduct> {
                           backgroundColor: Colors.red,
                           content:
                               Text('err: ' + response.statusCode.toString())));
-                    }
+                    }*/
                     Navigator.pop(context);
                   }
                   setState(() {
