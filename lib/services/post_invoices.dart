@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 Future<Invoice> createInvoices(String user, String order) async {
   final response = await http.post(
-      'https://dev-egshops.herokuapp.com/api/invoices/',
+      Uri.parse('https://dev-egshops.herokuapp.com/api/invoices/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

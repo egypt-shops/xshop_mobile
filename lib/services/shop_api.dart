@@ -45,8 +45,8 @@ List<Shop> parseShop(String responseBody) {
 
 // fetch shops
 Future<List<Shop>> fetchShops(http.Client client) async {
-  final response = await client
-      .get('https://dev-egshops.herokuapp.com/api/shops/?format=json');
+  final response = await client.get(
+      Uri.parse('https://dev-egshops.herokuapp.com/api/shops/?format=json'));
   if (response.statusCode == 200) {
     // Use the compute function to run parsePhotos in a separate isolate.
     return compute(parseShop, response.body);

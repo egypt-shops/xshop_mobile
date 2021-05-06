@@ -1,19 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:xshop_mobile/models/product.dart';
+import 'product.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-/// The [CartModel] class holds a list of cart items saved by the user.
-class CartModel extends ChangeNotifier {
-  final List<Product> _cartItems = [];
+part 'cart.g.dart';
 
-  List<Product> get items => _cartItems;
+@JsonSerializable(explicitToJson: true)
+class Cart {
+  final int quantity;
+  final String price;
+  final Product product;
+  final String totalprice;
 
-  void add(Product product) {
-    _cartItems.add(product);
-    notifyListeners();
-  }
+  Cart({this.quantity, this.price, this.product, this.totalprice});
 
-  void remove(Product product) {
-    _cartItems.remove(product);
-    notifyListeners();
-  }
+  factory Cart.fromJson(Map<String, dynamic> json) => _$CartFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CartToJson(this);
 }
