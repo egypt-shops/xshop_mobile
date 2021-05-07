@@ -7,8 +7,9 @@ class SignIn {
   Future<User> signIn(mobile, pass) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map data = {'mobile': mobile, 'password': pass};
-    var response = await http
-        .post("https://dev-egshops.herokuapp.com/api/users/token/", body: data);
+    var response = await http.post(
+        Uri.parse("https://dev-egshops.herokuapp.com/api/users/token/"),
+        body: data);
     print(response.statusCode);
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);

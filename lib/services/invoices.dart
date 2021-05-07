@@ -34,8 +34,8 @@ class InvoiceApi extends StatelessWidget {
 }
 
 Future<List<Invoice>> fetchInvoices(http.Client client) async {
-  final response = await client
-      .get('https://dev-egshops.herokuapp.com/api/invoices/?format=json');
+  final response = await client.get(
+      Uri.parse('https://dev-egshops.herokuapp.com/api/invoices/?format=json'));
   if (response.statusCode == 200) {
     // Use the compute function to run parsePhotos in a separate isolate.
     return compute(parseInvoices, response.body);

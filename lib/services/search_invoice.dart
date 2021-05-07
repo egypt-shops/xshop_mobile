@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:xshop_mobile/models/invoice.dart';
 
 Future<Invoice> fetchInvoicesID(http.Client client, String id) async {
-  final response = await client
-      .get('https://dev-egshops.herokuapp.com/api/invoices/$id/?format=json');
+  final response = await client.get(Uri.parse(
+      'https://dev-egshops.herokuapp.com/api/invoices/$id/?format=json'));
 
   // Use the compute function to run parseInvoices in a separate isolate.
   if (response.statusCode != 200)

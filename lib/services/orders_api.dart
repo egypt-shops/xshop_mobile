@@ -33,8 +33,8 @@ class OrderApi extends StatelessWidget {
 }
 
 Future<List<Order>> fetchOrders(http.Client client) async {
-  final response = await client
-      .get('https://dev-egshops.herokuapp.com/api/orders/?format=json');
+  final response = await client.get(
+      Uri.parse('https://dev-egshops.herokuapp.com/api/orders/?format=json'));
 
   // Use the compute function to run parseOrders in a separate isolate.
   return compute(parseOrders, response.body);

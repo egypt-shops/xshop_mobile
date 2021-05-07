@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:xshop_mobile/models/order.dart';
 
 Future<Order> fetchOrderByID(http.Client client, String id) async {
-  final response = await http
-      .get('https://dev-egshops.herokuapp.com/api/orders/$id/?format=json');
+  final response = await http.get(Uri.parse(
+      'https://dev-egshops.herokuapp.com/api/orders/$id/?format=json'));
   if (response.statusCode == 200) {
     return compute(parsedOrder, response.body);
   } else {

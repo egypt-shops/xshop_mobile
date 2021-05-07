@@ -36,7 +36,7 @@ class ProductApi extends StatelessWidget {
 Future<Product> postProducts(http.Client client, String name, String price,
     String stock, int addedBy) async {
   final response = await client.post(
-      "https://dev-egshops.herokuapp.com/api/products/",
+      Uri.parse("https://dev-egshops.herokuapp.com/api/products/"),
       headers: <String, String>{
         "accept": "application/json",
         "Content-Type": "application/json"
@@ -58,8 +58,8 @@ Future<Product> postProducts(http.Client client, String name, String price,
 }
 
 Future<List<Product>> fetchProducts(http.Client client, String id) async {
-  final response = await client
-      .get('https://dev-egshops.herokuapp.com/api/products/shop/$id/');
+  final response = await client.get(
+      Uri.parse('https://dev-egshops.herokuapp.com/api/products/shop/$id/'));
 
   // Use the compute function to run parseProducts in a separate isolate.
   if (response.statusCode == 200)
@@ -77,14 +77,12 @@ List<Product> parseProducts(String responseBody) {
 }
 
 Future<Product> fetchProductsID(http.Client client, String id) async {
-  final response = await client
-      .get('https://dev-egshops.herokuapp.com/api/products/$id/?format=json');
+  final response = await client.get(Uri.parse(
+      'https://dev-egshops.herokuapp.com/api/products/$id/?format=json'));
 
   // Use the compute function to run parseProducts in a separate isolate.
-  if (response.statusCode == 200)
-    return compute(parseProduct, response.body);
-  else
-    return Product(name: 'notfound', price: '');
+  if (response.statusCode == 200) return compute(parseProduct, response.body);
+  else return Product(name: 'notfound', price: '');
 }
 
 Product parseProduct(String responseBody) {

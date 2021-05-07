@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xshop_mobile/models/cart.dart';
 import 'package:xshop_mobile/models/product.dart';
+import 'package:xshop_mobile/services/cart.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 
 class CartPage extends StatelessWidget {
@@ -10,26 +11,39 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Cart'),
-        backgroundColor: AppTheme.colors.primary,
-      ),
-      body: Consumer<CartModel>(
-        builder: (context, value, child) => ListView.builder(
-          itemCount: value.items.length,
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          itemBuilder: (context, index) => CartItemTile(value.items[index]),
+        appBar: AppBar(
+          title: Text('Cart'),
         ),
-      ),
-    );
+        body: FutureBuilder<List<Cart>>(
+            future: getCart(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                var cart = snapshot.data;
+
+                return cart.length == 0
+                    ? Center(
+                        child: Text('Cart is empty'),
+                      )
+                    : ListView.builder(
+                        itemCount: cart.length,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        itemBuilder: (context, index) =>
+                            CartItemTile(cart[index]),
+                      );
+              } else if (snapshot.hasError) {
+                return Center(child: Text('${snapshot.error}'));
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            }));
   }
 }
 
 class CartItemTile extends StatelessWidget {
-  final Product product;
+  final Cart cartItem;
 
   const CartItemTile(
-    this.product,
+    this.cartItem,
   );
 
   @override
@@ -46,18 +60,16 @@ class CartItemTile extends StatelessWidget {
                   backgroundColor: AppTheme.colors.secondryLight,
                 ),
                 title: Text(
-                  'Item ${product.name}',
-                  key: Key('Cart_text_${product.name}'),
+                  'Item ${cartItem.product.name}',
+                  key: Key('Cart_text_${cartItem.product.name}'),
                 ),
                 trailing: IconButton(
-                  key: Key('remove_icon_$product'),
+                  key: Key('remove_icon_${cartItem.product}'),
                   icon: Icon(
                     Icons.remove_shopping_cart,
                     color: Colors.red[800],
                   ),
                   onPressed: () {
-                    Provider.of<CartModel>(context, listen: false)
-                        .remove(product);
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Removed from Cart.'),

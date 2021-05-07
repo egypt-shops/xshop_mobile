@@ -8,6 +8,7 @@ import 'package:xshop_mobile/screens/login/components/login_screen.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
 
 String usertype = 'empty';
+SharedPreferences sharedPreferences;
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -16,8 +17,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  SharedPreferences sharedPreferences;
-
   String mobile = 'empty';
   String email = 'empty';
 
