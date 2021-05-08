@@ -18,7 +18,7 @@ class _CashierState extends State<Cashier> {
   int _selectedIndex = 0;
 
   static List<Widget> _bottomDrawerOptions = <Widget>[
-    ProductsDEC(),
+    ProductCashier(),
     NewOrder()
   ];
   @override
@@ -193,7 +193,7 @@ class _CashierState extends State<Cashier> {
   }
 }
 
-class ProductsDEC extends StatelessWidget {
+class ProductCashier extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool _pinned = false;
@@ -209,7 +209,7 @@ class ProductsDEC extends StatelessWidget {
           title: Text('          Cashier ',
               style: Theme.of(context).textTheme.bodyText1),
           background: Icon(
-            Icons.shopping_cart,
+            Icons.attach_money,
             size: 50,
             color: Theme.of(context).focusColor,
           ),

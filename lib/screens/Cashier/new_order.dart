@@ -1,5 +1,6 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
+import 'package:xshop_mobile/screens/Cashier/search.dart';
 
 class NewOrder extends StatefulWidget {
   @override
@@ -24,9 +25,23 @@ class _NewOrderState extends State<NewOrder> {
                 onPressed: () {})
           ]),
       stickyFrontLayer: false,
-      frontLayer: Center(
-        child: Text("implement barcode scanner & add by id"),
-      ),
+      frontLayer: DefaultTabController(
+          length: 2,
+          child: Scaffold(
+            appBar: TabBar(
+              indicatorColor: Theme.of(context).primaryColor,
+              tabs: [
+                Tab(icon: Icon(Icons.qr_code)),
+                Tab(icon: Icon(Icons.label_outline)),
+              ],
+            ),
+            body: TabBarView(
+              children: [
+                Center(child: Text("implement qrscanner hereeee ++++")),
+                SearchList(),
+              ],
+            ),
+          )),
       backLayer: Center(
         child: Text("list of added products"),
       ),
