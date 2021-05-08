@@ -70,7 +70,7 @@ class CartItemTile extends StatelessWidget {
                     color: Colors.red[800],
                   ),
                   onPressed: () {
-                    Scaffold.of(context).showSnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Removed from Cart.'),
                         duration: Duration(seconds: 1),
