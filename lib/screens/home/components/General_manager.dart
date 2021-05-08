@@ -53,113 +53,107 @@ class _GeneralManagerState extends State<GeneralManager> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: new ThemeData(
-          primarySwatch: Colors.red,
-        ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text("xshop", style: TextStyle(color: Colors.white)),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  if (sharedPreferences != null) {
-                    sharedPreferences.clear();
-                    sharedPreferences.commit();
-                  }
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => Login()),
-                      (Route<dynamic> route) => false);
-                },
-                child: Text("Log Out", style: TextStyle(color: Colors.white)),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("xshop", style: TextStyle(color: Colors.white)),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              if (sharedPreferences != null) {
+                sharedPreferences.clear();
+                sharedPreferences.commit();
+              }
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (BuildContext context) => Login()),
+                  (Route<dynamic> route) => false);
+            },
+            child: Text("Log Out", style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+      body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+            Text('General Manager',
+                style: TextStyle(fontSize: 30, color: Colors.red)),
+          ])),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('images/meeting.jpg'), fit: BoxFit.fill),
               ),
-            ],
-          ),
-          body: Center(
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                Text('General Manager',
-                    style: TextStyle(fontSize: 30, color: Colors.red)),
-              ])),
-          drawer: Drawer(
-            child: ListView(
-              // Important: Remove any padding from the ListView.
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                DrawerHeader(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('images/meeting.jpg'),
-                        fit: BoxFit.fill),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage('images/an.jpg'),
+                    radius: 35,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage('images/an.jpg'),
-                        radius: 35,
-                      ),
-                      Text(
-                        'Mohamed Boyka',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
-                      ),
-                      Text(
-                        email,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
+                  Text(
+                    'Mohamed Boyka',
+                    style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
-                ),
-                ListTile(
-                  title: Text('home'),
-                  leading: Icon(Icons.home),
-                  onTap: () {
-                    //Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title: Text('account user'),
-                  leading: Icon(Icons.account_circle),
-                  onTap: () {
-                    //Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                    title: Text(mobile),
-                    leading: Icon(Icons.phone_iphone_outlined),
-                    onTap: () {
-                      createAlertDialog(context, 'mobile');
-                    }),
-                ListTile(
-                  title: Text(email),
-                  leading: Icon(Icons.email),
-                  onTap: () {
-                    createAlertDialog(context, 'email');
-                  },
-                ),
-                Divider(),
-                ListTile(
-                  title: Text('about'),
-                  leading: Icon(Icons.info),
-                  onTap: () {
-                    //Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title: Text('Log Out'),
-                  leading: Icon(Icons.logout),
-                  onTap: () {
-                    //Navigator.pop(context);
-                  },
-                ),
-              ],
+                  Text(
+                    email,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ));
+            ListTile(
+              title: Text('home'),
+              leading: Icon(Icons.home),
+              onTap: () {
+                //Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('account user'),
+              leading: Icon(Icons.account_circle),
+              onTap: () {
+                //Navigator.pop(context);
+              },
+            ),
+            ListTile(
+                title: Text(mobile),
+                leading: Icon(Icons.phone_iphone_outlined),
+                onTap: () {
+                  createAlertDialog(context, 'mobile');
+                }),
+            ListTile(
+              title: Text(email),
+              leading: Icon(Icons.email),
+              onTap: () {
+                createAlertDialog(context, 'email');
+              },
+            ),
+            Divider(),
+            ListTile(
+              title: Text('about'),
+              leading: Icon(Icons.info),
+              onTap: () {
+                //Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Log Out'),
+              leading: Icon(Icons.logout),
+              onTap: () {
+                //Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 /*

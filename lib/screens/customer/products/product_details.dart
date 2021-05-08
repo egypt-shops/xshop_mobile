@@ -161,7 +161,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             setState(() {
                               _saving = false;
                             });
-                            Scaffold.of(context).showSnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 backgroundColor: Colors.green,
                                 content: Text(
@@ -173,7 +173,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             setState(() {
                               _saving = false;
                             });
-                            Scaffold.of(context).showSnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 backgroundColor: Colors.red,
                                 content: Text(
