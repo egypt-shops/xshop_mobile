@@ -1,5 +1,6 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
+import 'package:xshop_mobile/screens/Cashier/qrscanner.dart';
 import 'package:xshop_mobile/screens/Cashier/search.dart';
 
 class NewOrder extends StatefulWidget {
@@ -8,6 +9,8 @@ class NewOrder extends StatefulWidget {
 }
 
 class _NewOrderState extends State<NewOrder> {
+  // make object from scanner
+  QRViewScanner _qrViewScanner = QRViewScanner();
   @override
   Widget build(BuildContext context) {
     return BackdropScaffold(
@@ -37,7 +40,7 @@ class _NewOrderState extends State<NewOrder> {
             ),
             body: TabBarView(
               children: [
-                Center(child: Text("implement qrscanner hereeee ++++")),
+                Center(child: _qrViewScanner),
                 SearchList(),
               ],
             ),
