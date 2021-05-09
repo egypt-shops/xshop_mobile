@@ -1,7 +1,5 @@
 # xshop_mobile
 
-A new Flutter project.
-
 ## lib SubFolders
 
 - [The theme folder:](./lib/theme)
@@ -20,3 +18,25 @@ A new Flutter project.
   - a primary screen file which serves to organize each component
   - a “components” folder which holds each component in its own separate file.
   Any piece of a screen more complicated then a few widgets should be its own component.
+
+## login credentials
+* Manager:
+```txt
+01066869348
+qbRsyJgqa57kzsz
+```
+* Cashier:
+```txt
+01010092133
+bcjTYM2HprSX3Cp
+```
+* Customer:
+```txt
+01010092182
+hEVFzCK8r3gpm5h
+```
+* Data entry clerk:
+```txt
+01550100970
+9uMV6t7FKKEcE9X
+```
