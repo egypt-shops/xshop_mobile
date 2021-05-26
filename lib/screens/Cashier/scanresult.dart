@@ -13,7 +13,7 @@ class ScanResult extends StatelessWidget {
         title: Text('RESULT'),
       ),
       body: Center(
-        child: Text('Data is ${result.code.codeUnits}'),
+        child: Text('Data is ${result.code}'),
       ),
     );
   }
