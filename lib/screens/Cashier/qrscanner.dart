@@ -32,11 +32,14 @@ class _QRViewScannerState extends State<QRViewScanner> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                TextButton(
-                  child: Text('Scan Barcode again'),
-                  onPressed: () {
-                    controller.resumeCamera();
-                  },
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextButton(
+                    child: Text('Scan Barcode again'),
+                    onPressed: () {
+                      controller.resumeCamera();
+                    },
+                  ),
                 ),
               ],
             ),
@@ -84,10 +87,10 @@ class _QRViewScannerState extends State<QRViewScanner> {
       setState(() {});
     });
   }
-  //
-  // @override
-  // void dispose() {
-  //   controller.dispose();
-  //   super.dispose();
-  // }
+//
+// @override
+// void dispose() {
+//   controller.dispose();
+//   super.dispose();
+// }
 }
