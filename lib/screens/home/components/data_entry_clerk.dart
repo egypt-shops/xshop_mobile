@@ -76,6 +76,7 @@ class _DataEntryClerkState extends State<DataEntryClerk> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //key: Key('DataEntry_Scaffold'),
       appBar: _selectedIndex == 0
           ? null
           : AppBar(
@@ -115,6 +116,7 @@ class _DataEntryClerkState extends State<DataEntryClerk> {
         return _bottomDrawerOptions.elementAt(_selectedIndex);
       }),
       drawer: Drawer(
+        //key: Key('DataEntry_Drawer'),
         child: ListView(
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
