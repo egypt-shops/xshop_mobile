@@ -12,6 +12,7 @@ class ShopsSearch extends SearchDelegate {
   List<Widget> buildActions(BuildContext context) {
     return <Widget>[
       IconButton(
+        key: Key("clear shop search"),
         icon: Icon(
           Icons.close,
         ),

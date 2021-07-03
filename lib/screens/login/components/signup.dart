@@ -18,7 +18,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppTheme.colors.primary,
         body: Center(
             child: Container(
                 padding: EdgeInsets.all(20.0),
@@ -34,11 +33,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               Text('welcome to ',
                                   style: TextStyle(
                                       fontSize: 20,
-                                      color: AppTheme.colors.secondry)),
+                                      color: Theme.of(context).primaryColor)),
                               Text('xshop',
                                   style: TextStyle(
                                       fontSize: 70,
-                                      color: AppTheme.colors.secondry)),
+                                      color: Theme.of(context).primaryColor)),
                             ])),
                     isloading
                         ? SizedBox(
@@ -48,17 +47,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: CircularProgressIndicator(
                               valueColor: new AlwaysStoppedAnimation<Color>(
                                   AppTheme.colors.primary),
-                              backgroundColor: AppTheme.colors.secondry,
+                              backgroundColor: Theme.of(context).primaryColor,
                             )))
                         : Card(
                             elevation: 5,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18)),
-                            color: AppTheme.colors.primaryLight,
+                            color: Theme.of(context).secondaryHeaderColor,
                             child: Padding(
                                 padding: const EdgeInsets.all(20),
                                 child: SizedBox(
-                                    height: 570,
+                                    height: 470,
                                     child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.stretch,
@@ -77,15 +76,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               decoration: InputDecoration(
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: AppTheme.colors.secondry,
+                                                color: Theme.of(context)
+                                                    .primaryColor,
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                             ),
                                             focusedBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color:
-                                                      AppTheme.colors.secondry),
+                                                  color: Theme.of(context)
+                                                      .primaryColor),
                                             ),
                                             hintText: "your name",
                                           )),
@@ -103,15 +103,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               decoration: InputDecoration(
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: AppTheme.colors.secondry,
+                                                color: Theme.of(context)
+                                                    .primaryColor,
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                             ),
                                             focusedBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color:
-                                                      AppTheme.colors.secondry),
+                                                  color: Theme.of(context)
+                                                      .primaryColor),
                                             ),
                                             hintText: "+20xxxxxxxxxx",
                                           )),
@@ -129,15 +130,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               decoration: InputDecoration(
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: AppTheme.colors.secondry,
+                                                color: Theme.of(context)
+                                                    .primaryColor,
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                             ),
                                             focusedBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color:
-                                                      AppTheme.colors.secondry),
+                                                  color: Theme.of(context)
+                                                      .primaryColor),
                                             ),
                                             hintText: "yourmail@example.com",
                                           )),
@@ -209,13 +211,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               18.0)),
-                                                  color:
-                                                      AppTheme.colors.secondry,
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
                                                   child: Text(
                                                     'SIGN ME UP',
                                                     style: TextStyle(
-                                                        color: AppTheme.colors
-                                                            .textSecondry),
+                                                        color: Theme.of(context)
+                                                            .secondaryHeaderColor),
                                                   ),
                                                   onPressed: //(mobileController.text == "" || passwordController.text == "") ? (){print('error ${mobileController.text}'); }:
                                                       () {
@@ -284,7 +286,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: RaisedButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0)),
-                            color: AppTheme.colors.secondry,
+                            color: Theme.of(context).primaryColor,
                             child: SizedBox(
                                 width: 100,
                                 child: Row(
@@ -293,13 +295,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     children: [
                                       Icon(
                                         Icons.arrow_left,
-                                        color: AppTheme.colors.textSecondry,
+                                        color: Theme.of(context)
+                                            .secondaryHeaderColor,
                                       ),
                                       Text(
                                         'LOGIN',
                                         style: TextStyle(
-                                            color:
-                                                AppTheme.colors.textSecondry),
+                                            color: Theme.of(context)
+                                                .secondaryHeaderColor),
                                       )
                                     ])),
                             onPressed: () {

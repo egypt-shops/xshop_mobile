@@ -19,8 +19,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool isloading = false;
   bool issignup = false;
-  final signin = SignIn();
 
+  final signin = SignIn();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,94 +51,125 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: SizedBox(
                                     height: 230,
                                     width: 230,
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        children: [
-                                          TextFormField(
-                                              decoration: InputDecoration(
-                                                  enabledBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Theme.of(context)
-                                                            .backgroundColor),
-                                                  ),
-                                                  focusedBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Theme.of(context)
-                                                            .primaryColor),
-                                                  ),
-                                                  hintText: 'Mobile'),
-                                              controller: mobileController),
-                                          TextFormField(
-                                              decoration: InputDecoration(
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                  color: Theme.of(context)
-                                                      .backgroundColor,
-                                                )),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color: Theme.of(context)
-                                                          .primaryColor),
-                                                ),
-                                                hintText: 'Password',
-                                              ),
-                                              obscureText: true,
-                                              controller: passwordController),
-                                          SizedBox(
-                                            height: 50,
-                                          ),
-                                          RaisedButton(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          18.0)),
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              child: Text('LOGIN',
-                                                  style: TextStyle(
-                                                    color: Theme.of(context)
-                                                        .secondaryHeaderColor,
-                                                  )),
-                                              onPressed: //(mobileController.text == "" || passwordController.text == "") ? (){print('error ${mobileController.text}'); }:
-                                                  () async {
-                                                setState(() {
-                                                  isloading = true;
-                                                });
-                                                User user_data =
-                                                    await signin.signIn(
-                                                        mobileController.text,
-                                                        passwordController
-                                                            .text);
-                                                if (user_data != null) {
-                                                  Navigator.of(context)
-                                                      .pushAndRemoveUntil(
-                                                          MaterialPageRoute(
-                                                              builder: (BuildContext
-                                                                      context) =>
-                                                                  Home()),
-                                                          (Route<dynamic>
-                                                                  route) =>
-                                                              false);
-                                                } else {
-                                                  setState(() {
-                                                    isloading = false;
-                                                  });
-                                                  /*Scaffold.of(context)
-                                                          .showSnackBar(
-                                                              SnackBar(
-                                                        content: Text(
-                                                            'Incorrect mobile or password!'),*
-                                                      ));*/
-                                                }
+                                    child: Form(
+                                        key: _formKey,
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              TextFormField(
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Enter mobile number';
+                                                    }
 
-                                                //Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => LoginAPI(mobile: mobileController.text,password: passwordController.text,)), (Route<dynamic> route) => false);
-                                              })
-                                        ])))),
+                                                    return null;
+                                                  },
+                                                  decoration: InputDecoration(
+                                                      enabledBorder:
+                                                          UnderlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .backgroundColor),
+                                                      ),
+                                                      focusedBorder:
+                                                          UnderlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .primaryColor),
+                                                      ),
+                                                      hintText: 'Mobile'),
+                                                  controller: mobileController),
+                                              TextFormField(
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Enter your password';
+                                                    }
+
+                                                    return null;
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    enabledBorder:
+                                                        UnderlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                      color: Theme.of(context)
+                                                          .backgroundColor,
+                                                    )),
+                                                    focusedBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Theme.of(
+                                                                  context)
+                                                              .primaryColor),
+                                                    ),
+                                                    hintText: 'Password',
+                                                  ),
+                                                  obscureText: true,
+                                                  controller:
+                                                      passwordController),
+                                              SizedBox(
+                                                height: 50,
+                                              ),
+                                              RaisedButton(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              18.0)),
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                  child: Text('LOGIN',
+                                                      style: TextStyle(
+                                                        color: Theme.of(context)
+                                                            .secondaryHeaderColor,
+                                                      )),
+                                                  onPressed: //(mobileController.text == "" || passwordController.text == "") ? (){print('error ${mobileController.text}'); }:
+                                                      () async {
+                                                    if (_formKey.currentState
+                                                        .validate()) {
+                                                      setState(() {
+                                                        isloading = true;
+                                                      });
+                                                      User user_data =
+                                                          await signin.signIn(
+                                                              mobileController
+                                                                  .text,
+                                                              passwordController
+                                                                  .text);
+                                                      if (user_data != null) {
+                                                        Navigator.of(context)
+                                                            .pushAndRemoveUntil(
+                                                                MaterialPageRoute(
+                                                                    builder: (BuildContext
+                                                                            context) =>
+                                                                        Home()),
+                                                                (Route<dynamic>
+                                                                        route) =>
+                                                                    false);
+                                                      } else {
+                                                        setState(() {
+                                                          isloading = false;
+                                                        });
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                                SnackBar(
+                                                          backgroundColor:
+                                                              Colors.red,
+                                                          content: Text(
+                                                            'Incorrect mobile or password!',
+                                                          ),
+                                                        ));
+                                                      }
+                                                    }
+
+                                                    //Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => LoginAPI(mobile: mobileController.text,password: passwordController.text,)), (Route<dynamic> route) => false);
+                                                  })
+                                            ]))))),
                     Visibility(
                         visible: isloading ? false : true,
                         child: RaisedButton(
