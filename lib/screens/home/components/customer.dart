@@ -7,6 +7,7 @@ import 'package:xshop_mobile/screens/customer/invoices/search.dart';
 import 'package:xshop_mobile/screens/customer/orders/create_order.dart';
 import 'package:xshop_mobile/screens/customer/shops/shop_search.dart';
 import 'package:xshop_mobile/screens/customer/shops/shops.dart';
+import 'package:xshop_mobile/screens/login/components/login_screen.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
@@ -69,7 +70,9 @@ class _CustomerState extends State<Customer> {
 
   logout() {
     sharedPreferences.clear();
-    Navigator.pushNamed(context, "/login");
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+        (Route<dynamic> route) => false);
   }
 
   createAlertDialog(BuildContext context, String userInfo) {
@@ -107,8 +110,12 @@ class _CustomerState extends State<Customer> {
             floating: _floating,
             expandedHeight: 160.0,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text('welcome to Xshop',
-                  style: Theme.of(context).textTheme.bodyText1),
+              title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('welcome to Xshop        ',
+                        style: Theme.of(context).textTheme.bodyText1)
+                  ]),
               background: Icon(
                 Icons.shopping_cart,
                 size: 50,
@@ -117,9 +124,10 @@ class _CustomerState extends State<Customer> {
             ),
             actions: <Widget>[
               IconButton(
+                key: Key("search for shop"),
                 icon: Icon(Icons.search,
                     color: Theme.of(context).secondaryHeaderColor),
-                tooltip: 'search for a shop',
+                tooltip: 'search for shop',
                 onPressed: () {
                   showSearch(
                       context: context,
