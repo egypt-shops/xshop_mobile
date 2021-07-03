@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xshop_mobile/screens/customer/products/product_search.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
+import 'package:xshop_mobile/screens/data_entry/new_order.dart';
 import 'package:xshop_mobile/screens/data_entry/product_creating.dart';
 import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/services/products.dart';
@@ -23,7 +24,7 @@ class _DataEntryClerkState extends State<DataEntryClerk> {
 
   static List<Widget> _bottomDrawerOptions = <Widget>[
     ProductsDEC(),
-    ProductCreatingPage(),
+    NewOrder(),
   ];
   @override
   void initState() {
@@ -77,38 +78,7 @@ class _DataEntryClerkState extends State<DataEntryClerk> {
   Widget build(BuildContext context) {
     return Scaffold(
       //key: Key('DataEntry_Scaffold'),
-      appBar: _selectedIndex == 0
-          ? null
-          : AppBar(
-              leading: IconButton(
-                icon: Icon(Icons.person,
-                    color: Theme.of(context).secondaryHeaderColor),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              ),
-              iconTheme:
-                  IconThemeData(color: Theme.of(context).secondaryHeaderColor),
-              title: const Text('Add Product',
-                  style: TextStyle(color: Colors.white)),
-              actions: <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.more_vert),
-                    tooltip: 'actions menu',
-                    onPressed: () {
-                      return PopupMenuButton(
-                        child: Center(child: Text('click here')),
-                        itemBuilder: (context) {
-                          return List.generate(5, (index) {
-                            return PopupMenuItem(
-                              child: Text('button no $index'),
-                            );
-                          });
-                        },
-                      );
-                      /*ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('This is a snackbar')));*/
-                    },
-                  )
-                ]),
+
       body: Builder(
           // Create an inner BuildContext so that the onPressed methods
           // can refer to the Scaffold with Scaffold.of().
