@@ -12,9 +12,6 @@ void main() {
 class Xshop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // test session
-    var session = Session();
-    session.post();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'xshop',

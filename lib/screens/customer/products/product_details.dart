@@ -163,9 +163,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                             });
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                backgroundColor: Colors.green,
+                                backgroundColor: Colors.green[300],
                                 content: Text(
-                                    '${widget.product.name} added to Cart.'),
+                                    '${widget.product.name} added to Cart, you can increase the quantity there'),
                                 duration: Duration(seconds: 1),
                               ),
                             );
