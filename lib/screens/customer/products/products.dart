@@ -26,48 +26,10 @@ class _ProductsState extends State<Products> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            body: CustomScrollView(slivers: <Widget>[
-      SliverAppBar(
-          iconTheme: IconThemeData(
-            color:
-                Theme.of(context).secondaryHeaderColor, //change your color here
-          ),
-          title: Text(
-            "Products",
-            style: TextStyle(color: Theme.of(context).secondaryHeaderColor),
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.search,
-                size: 30,
-              ),
-              tooltip: 'Search',
-              onPressed: () {
-                showSearch(context: context, delegate: ProductSearch(products));
-              },
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                size: 30,
-              ),
-              tooltip: 'Cart',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CartPage(),
-                    fullscreenDialog: true,
-                  ),
-                );
-              },
-            )
-          ]),
-      ProductApi(
-        id: widget.shopId,
-      )
-    ])));
+            backgroundColor: Theme.of(context).primaryColor,
+            body: ProductApi(
+              id: widget.shopId,
+            )));
   }
 }
 
@@ -79,13 +41,13 @@ class ProductsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //var cartList = Provider.of<CartModel>(context);
-    return SliverGrid(
+    return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: MediaQuery.of(context).size.width /
               (MediaQuery.of(context).size.height / 1.6),
         ),
-        delegate: SliverChildBuilderDelegate((context, index) {
+        itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -177,6 +139,7 @@ class ProductsList extends StatelessWidget {
                                                     )
                                             ])))
                               ])))));
-        }, childCount: products.length));
+        },
+        itemCount: products.length);
   }
 }

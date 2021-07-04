@@ -1,10 +1,86 @@
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:xshop_mobile/models/shop.dart';
+import 'package:xshop_mobile/screens/customer/products/cart.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
+import 'package:xshop_mobile/screens/customer/products/product_search.dart';
+import 'package:xshop_mobile/services/products.dart';
 import 'package:xshop_mobile/services/search_shop.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:http/http.dart' as http;
+
+class ShopDetails extends StatefulWidget {
+  ShopDetails(this.id, this.shopname);
+  final int id;
+  final String shopname;
+  @override
+  _ShopDetailsState createState() => _ShopDetailsState();
+}
+
+class _ShopDetailsState extends State<ShopDetails> {
+  // make object from scanner
+
+  @override
+  Widget build(BuildContext context) {
+    return BackdropScaffold(
+        appBar: BackdropAppBar(
+            title: Text(
+              "${widget.shopname}",
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            actions: <Widget>[
+              Builder(
+                  builder: (context) => (Container(
+                      child: Backdrop.of(context).isBackLayerConcealed
+                          ? null
+                          : IconButton(
+                              icon: Icon(
+                                Icons.search,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                showSearch(
+                                    context: context,
+                                    delegate: ProductSearch(products));
+                              })))),
+              BackdropToggleButton(icon: AnimatedIcons.view_list),
+              IconButton(
+                  icon: Icon(
+                    Icons.payment,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {}),
+            ]),
+        stickyFrontLayer: false,
+        frontLayer: DefaultTabController(
+            length: 2,
+            child: Scaffold(
+              appBar: TabBar(
+                indicatorColor: Theme.of(context).primaryColor,
+                tabs: [
+                  Tab(icon: Icon(Icons.store)),
+                  Tab(icon: Icon(Icons.shopping_cart)),
+                ],
+              ),
+              body: TabBarView(
+                children: [
+                  GetShop(widget.id),
+                  CartPage(),
+                ],
+              ),
+            )),
+        backLayer: Products(
+          shopId: widget.id.toString(),
+        ));
+  }
+}
 
 class GetShop extends StatelessWidget {
   GetShop(this.id);
@@ -12,12 +88,11 @@ class GetShop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
         body: FutureBuilder<Shop>(
             future: fetchShopByID(http.Client(), id.toString()),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return ShopDetails(shop: snapshot.data);
+                return ShopHome(shop: snapshot.data);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               } else {
@@ -31,9 +106,9 @@ class GetShop extends StatelessWidget {
   }
 }
 
-class ShopDetails extends StatelessWidget {
+class ShopHome extends StatelessWidget {
   final Shop shop;
-  ShopDetails({key, this.shop}) : super(key: key);
+  ShopHome({key, this.shop}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -173,19 +248,13 @@ class ShopDetails extends StatelessWidget {
             children: [
               ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Products(
-                                shopId: shop.id.toString(),
-                              )),
-                    );
+                    Backdrop.of(context).fling();
                   },
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all(Colors.orange)),
                   child: Text(
-                    'Our Products',
+                    'Products',
                     style: TextStyle(
                       color: Colors.white,
                     ),

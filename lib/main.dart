@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xshop_mobile/screens/home/home.dart';
 import 'package:xshop_mobile/screens/login/components/login_screen.dart';
+import 'package:xshop_mobile/services/cart.dart';
 import 'screens/login/login.dart';
 
 void main() {
@@ -9,9 +10,11 @@ void main() {
 }
 
 class Xshop extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // test session
+    var session = Session();
+    session.post();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'xshop',

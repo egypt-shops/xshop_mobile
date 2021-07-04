@@ -80,7 +80,7 @@ class ShopSearchList extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        ShopDetails(shop: suggestions[index])),
+                        ShopDetails(shops[index].id, shops[index].name)),
               );
             },
             child: Container(
