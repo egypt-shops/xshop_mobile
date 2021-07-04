@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:xshop_mobile/models/product.dart';
 import 'package:xshop_mobile/screens/customer/products/product_search.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
 import 'package:xshop_mobile/screens/data_entry/new_order.dart';
@@ -7,6 +8,7 @@ import 'package:xshop_mobile/screens/data_entry/product_creating.dart';
 import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/services/products.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
+import 'package:http/http.dart' as http;
 
 import '../../../services/invoices.dart';
 
@@ -246,9 +248,30 @@ class ProductsDEC extends StatelessWidget {
           onPressed: () => Scaffold.of(context).openDrawer(),
         ),
       ),
-      ProductApi(
-        id: '2',
-      ),
+      FutureBuilder<List<Product>>(
+          future: fetchProducts(http.Client(), '2'),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              products = snapshot.data;
+              return SliverGrid(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: MediaQuery.of(context).size.width /
+                        (MediaQuery.of(context).size.height / 1.6),
+                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    return ProductListItem(index: index);
+                  }, childCount: products.length));
+            } else if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            } else {
+              return SliverToBoxAdapter(
+                  child: SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: Center(child: CircularProgressIndicator())));
+            }
+          })
     ]);
   }
 }

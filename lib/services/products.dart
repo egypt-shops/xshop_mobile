@@ -8,30 +8,6 @@ import 'package:xshop_mobile/models/product.dart';
 import 'package:http/http.dart' as http;
 import 'package:xshop_mobile/screens/customer/products/products.dart';
 
-class ProductApi extends StatelessWidget {
-  final String id;
-  ProductApi({Key key, this.id}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<List<Product>>(
-        future: fetchProducts(http.Client(), id),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            products = snapshot.data;
-            return ProductsList(products: snapshot.data);
-          } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
-          } else {
-            return SizedBox(
-                height: 200,
-                width: 200,
-                child: Center(child: CircularProgressIndicator()));
-          }
-        });
-  }
-}
-
 Future<Product> postProducts(http.Client client, String name, String price,
     String stock, int addedBy) async {
   final response = await client.post(
