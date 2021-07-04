@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xshop_mobile/models/invoice.dart';
 import '../models/invoice.dart';
 import '../screens/customer/invoices/invoices.dart';
@@ -34,8 +35,14 @@ class InvoiceApi extends StatelessWidget {
 }
 
 Future<List<Invoice>> fetchInvoices(http.Client client) async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   final response = await client.get(
-      Uri.parse('https://dev-egshops.herokuapp.com/api/invoices/?format=json'));
+      Uri.parse('https://dev-egshops.herokuapp.com/api/invoices/'),
+      headers: <String, String>{
+        "accept": " */*",
+        "Content-Type": "application/json",
+        "Authorization": "Token ${sharedPreferences.getString("token")}",
+      });
   if (response.statusCode == 200) {
     // Use the compute function to run parsePhotos in a separate isolate.
     return compute(parseInvoices, response.body);

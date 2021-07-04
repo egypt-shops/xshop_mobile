@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:xshop_mobile/models/shop.dart';
 import 'package:xshop_mobile/screens/customer/products/cart.dart';
+import 'package:xshop_mobile/screens/customer/products/payment.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
 import 'package:xshop_mobile/screens/customer/products/product_search.dart';
 import 'package:xshop_mobile/services/products.dart';
@@ -56,7 +57,32 @@ class _ShopDetailsState extends State<ShopDetails> {
                     Icons.payment,
                     color: Colors.white,
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return  AlertDialog(
+                                elevation: 5,
+                                backgroundColor: AppTheme.colors.primary,
+                                title: Text('test webview for payment',
+                                    style: TextStyle(
+                                        color: AppTheme.colors.textPrimary)),
+                                content: WebViewExample(),
+                                actions: <Widget>[
+                                  FlatButton(
+                                      child: new Text(
+                                        "Cancel",
+                                        style: TextStyle(
+                                            color: AppTheme.colors.secondry,
+                                            fontSize: 15),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      })
+                                ],
+                              );
+                        });
+                  }),
             ]),
         stickyFrontLayer: false,
         frontLayer: DefaultTabController(
