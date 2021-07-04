@@ -11,9 +11,6 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Cart'),
-        ),
         body: FutureBuilder<List<Cart>>(
             future: getCart(),
             builder: (context, snapshot) {
@@ -49,36 +46,104 @@ class CartItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-            color: AppTheme.colors.primaryLight,
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: AppTheme.colors.secondryLight,
-                ),
-                title: Text(
-                  'Item ${cartItem.product.name}',
-                  key: Key('Cart_text_${cartItem.product.name}'),
-                ),
-                trailing: IconButton(
-                  key: Key('remove_icon_${cartItem.product}'),
-                  icon: Icon(
-                    Icons.remove_shopping_cart,
-                    color: Colors.red[800],
-                  ),
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Removed from Cart.'),
-                        duration: Duration(seconds: 1),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            )));
+        padding: const EdgeInsets.fromLTRB(6, 3, 6, 3),
+        child: SizedBox(
+            height: 130,
+            child: Card(
+                elevation: 3,
+                child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Center(
+                              child: SizedBox(
+                            height: 100,
+                            width: 110,
+                            child: Image.network(
+                                "https://images.unsplash.com/photo-1416339306562-f3d12fefd36f"),
+                          )),
+                          Expanded(
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('${cartItem.product.name}'),
+                              Text('${cartItem.product.price}')
+                            ],
+                          )),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  IconButton(
+                                      icon: const Icon(Icons.remove,
+                                          color: Colors.amber),
+                                      tooltip: 'decrease quantity by 1',
+                                      onPressed: () async {
+                                        var removecart = await removeCart(
+                                            cartItem.product.id,
+                                            cartItem.quantity - 1,
+                                            'patch');
+                                        if (removecart == null) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                                  backgroundColor: Colors.red,
+                                                  content: Text(
+                                                      'an error happend try again')));
+                                        }
+                                      }),
+                                  Text("${cartItem.quantity}"),
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.add,
+                                      color: Colors.amber,
+                                    ),
+                                    tooltip: 'increase quantity by 1',
+                                    onPressed: () async {
+                                      var removecart = await removeCart(
+                                          cartItem.product.id,
+                                          cartItem.quantity + 1,
+                                          'patch');
+                                      if (removecart == null) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                backgroundColor: Colors.red,
+                                                content: Text(
+                                                    'an error happend try again')));
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                              TextButton(
+                                  onPressed: () async {
+                                    var removecart = await removeCart(
+                                        cartItem.product.id,
+                                        cartItem.quantity,
+                                        'remove');
+                                    if (removecart != null) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                              backgroundColor: Colors.green,
+                                              content: Text(
+                                                  'prduct has been removed from cart')));
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                              backgroundColor: Colors.red,
+                                              content: Text(
+                                                  'an error happend try again')));
+                                    }
+                                  },
+                                  child: Text(
+                                    "Remove",
+                                    style: Theme.of(context).textTheme.button,
+                                  ))
+                            ],
+                          )
+                        ])))));
   }
 }

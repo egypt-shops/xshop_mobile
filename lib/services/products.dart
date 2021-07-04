@@ -23,11 +23,10 @@ class ProductApi extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           } else {
-            return SliverToBoxAdapter(
-                child: SizedBox(
-                    height: 200,
-                    width: 200,
-                    child: Center(child: CircularProgressIndicator())));
+            return SizedBox(
+                height: 200,
+                width: 200,
+                child: Center(child: CircularProgressIndicator()));
           }
         });
   }
@@ -81,8 +80,10 @@ Future<Product> fetchProductsID(http.Client client, String id) async {
       'https://dev-egshops.herokuapp.com/api/products/$id/?format=json'));
 
   // Use the compute function to run parseProducts in a separate isolate.
-  if (response.statusCode == 200) return compute(parseProduct, response.body);
-  else return Product(name: 'notfound', price: '');
+  if (response.statusCode == 200)
+    return compute(parseProduct, response.body);
+  else
+    return Product(name: 'notfound', price: '');
 }
 
 Product parseProduct(String responseBody) {

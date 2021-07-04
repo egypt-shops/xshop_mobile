@@ -57,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             child: Padding(
                                 padding: const EdgeInsets.all(20),
                                 child: SizedBox(
-                                    height: 470,
+                                    height: 550,
                                     child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.stretch,

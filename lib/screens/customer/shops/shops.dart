@@ -67,7 +67,9 @@ class ShopList extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => GetShop(shops[index].id)),
+            MaterialPageRoute(
+                builder: (context) =>
+                    ShopDetails(shops[index].id, shops[index].name)),
           );
         },
         child: Container(

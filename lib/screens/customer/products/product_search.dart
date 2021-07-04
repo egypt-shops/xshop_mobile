@@ -55,9 +55,7 @@ class ProductSearch extends SearchDelegate {
                 element.name.toLowerCase().contains(query.toLowerCase()))
             .toList();
     if (suggestions != null)
-      return Scaffold(
-          body:
-              CustomScrollView(slivers: [ProductsList(products: suggestions)]));
+      return Scaffold(body: ProductsList(products: suggestions));
     else {
       return Center(
         child: Text('no products'),
