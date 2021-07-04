@@ -76,6 +76,7 @@ Future<List<Cart>> postCart(int id, int quantity, String action) async {
   );
   if (response.statusCode == 200) {
     print(jsonDecode(response.body));
+    updateCookie(response);
     final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
 
     return parsed.map<Cart>((json) => Cart.fromJson(json)).toList();

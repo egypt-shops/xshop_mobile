@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Padding(
                                 padding: const EdgeInsets.all(40),
                                 child: SizedBox(
-                                    height: 230,
+                                    height: 240,
                                     width: 230,
                                     child: Form(
                                         key: _formKey,
