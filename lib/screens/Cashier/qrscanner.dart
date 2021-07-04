@@ -1,11 +1,8 @@
-import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:http/http.dart' as http;
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:flutter/material.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:xshop_mobile/screens/Cashier/scanresult.dart';
+import 'package:xshop_mobile/services/post_product_by_scanning.dart';
 
 class QRViewScanner extends StatefulWidget {
   @override
@@ -13,7 +10,12 @@ class QRViewScanner extends StatefulWidget {
 }
 
 class _QRViewScannerState extends State<QRViewScanner> {
+  // response of post request
+  String resultresponse;
+  // make object from postproductqrscanner
+  PostProductQrScanner _postProductQrScanner = PostProductQrScanner();
   Barcode result;
+  int check = 0;
   QRViewController controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -22,30 +24,80 @@ class _QRViewScannerState extends State<QRViewScanner> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(flex: 4, child: _buildQrView(context)),
-        Expanded(
-          flex: 1,
-          child: FittedBox(
-            fit: BoxFit.contain,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TextButton(
-                    child: Text('Scan Barcode again'),
-                    onPressed: () {
-                      controller.resumeCamera();
-                    },
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          Expanded(
+              flex: 4,
+              child: (check == 0)
+                  ? _buildQrView(context)
+                  : (resultresponse == 'done')
+                      ? Center(
+                          child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'Adding Product'
+                                        ' is ' +
+                                    resultresponse,
+                                style: TextStyle(fontSize: 25.0),
+                              ),
+                            ),
+                            Icon(
+                              Icons.done_outline_sharp,
+                              size: 50,
+                              color: Colors.blue,
+                            )
+                          ],
+                        ))
+                      : Center(
+                          child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Adding Product'
+                                      ' is\n' +
+                                  resultresponse,
+                              style: TextStyle(fontSize: 25.0),
+                            ),
+                            Icon(
+                              Icons.error_outline,
+                              size: 50,
+                              color: Colors.red,
+                            )
+                          ],
+                        ))),
+          Expanded(
+            flex: 1,
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextButton(
+                      child: Text(
+                        'Scan Barcode again',
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          controller.resumeCamera();
+                          check = 0;
+                        });
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 
@@ -76,14 +128,24 @@ class _QRViewScannerState extends State<QRViewScanner> {
 
     controller.scannedDataStream.listen((scanData) async {
       result = scanData;
+      check = 1;
       await controller.pauseCamera();
 
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ScanResult(
-                    result: result,
-                  )));
+      resultresponse =
+          await _postProductQrScanner.postProducts(http.Client(), result.code);
+      final snackBar = SnackBar(
+        content: Text('Adding product is $resultresponse'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            // Some code to undo the change.
+          },
+        ),
+      );
+
+      // Find the ScaffoldMessenger in the widget tree
+      // and use it to show a SnackBar.
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
       setState(() {});
     });
   }
