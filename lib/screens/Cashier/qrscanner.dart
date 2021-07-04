@@ -15,7 +15,6 @@ class _QRViewScannerState extends State<QRViewScanner> {
   // make object from postproductqrscanner
   PostProductQrScanner _postProductQrScanner = PostProductQrScanner();
   Barcode result;
-  int check = 0;
   QRViewController controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -27,75 +26,7 @@ class _QRViewScannerState extends State<QRViewScanner> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Expanded(
-              flex: 4,
-              child: (check == 0)
-                  ? _buildQrView(context)
-                  : (resultresponse == 'done')
-                      ? Center(
-                          child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Text(
-                                'Adding Product'
-                                        ' is ' +
-                                    resultresponse,
-                                style: TextStyle(fontSize: 25.0),
-                              ),
-                            ),
-                            Icon(
-                              Icons.done_outline_sharp,
-                              size: 50,
-                              color: Colors.blue,
-                            )
-                          ],
-                        ))
-                      : Center(
-                          child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Adding Product'
-                                      ' is\n' +
-                                  resultresponse,
-                              style: TextStyle(fontSize: 25.0),
-                            ),
-                            Icon(
-                              Icons.error_outline,
-                              size: 50,
-                              color: Colors.red,
-                            )
-                          ],
-                        ))),
-          Expanded(
-            flex: 1,
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: TextButton(
-                      child: Text(
-                        'Scan Barcode again',
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          controller.resumeCamera();
-                          check = 0;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
+          Expanded(flex: 4, child: _buildQrView(context)),
         ],
       ),
     );
@@ -128,11 +59,13 @@ class _QRViewScannerState extends State<QRViewScanner> {
 
     controller.scannedDataStream.listen((scanData) async {
       result = scanData;
-      check = 1;
       await controller.pauseCamera();
-
       resultresponse =
           await _postProductQrScanner.postProducts(http.Client(), result.code);
+      Future.delayed(Duration(milliseconds: 300), () async {
+        await controller.resumeCamera();
+      });
+
       final snackBar = SnackBar(
         content: Text('Adding product is $resultresponse'),
         action: SnackBarAction(
@@ -142,10 +75,10 @@ class _QRViewScannerState extends State<QRViewScanner> {
           },
         ),
       );
-
       // Find the ScaffoldMessenger in the widget tree
       // and use it to show a SnackBar.
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
       setState(() {});
     });
   }
