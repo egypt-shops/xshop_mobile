@@ -4,6 +4,10 @@ import 'package:http/http.dart' as http;
 
 import 'package:xshop_mobile/services/post_product_by_scanning.dart';
 
+// list of added products
+Barcode result;
+List addedProduct = [];
+
 class QRViewScanner extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _QRViewScannerState();
@@ -59,12 +63,27 @@ class _QRViewScannerState extends State<QRViewScanner> {
 
     controller.scannedDataStream.listen((scanData) async {
       result = scanData;
+      List<String> barResult = result.code.split(",");
       await controller.pauseCamera();
-      resultresponse =
-          await _postProductQrScanner.postProducts(http.Client(), result.code);
+      resultresponse = await _postProductQrScanner.postProductsBYBarCode(
+          http.Client(),
+          barResult[0],
+          barResult[1],
+          barResult[2],
+          barResult[3]);
+      if (resultresponse == 'done') {
+        addedProduct
+            .add(barResult[0] + ' is added ' + '& its price ' + barResult[1]);
+      }
+
       Future.delayed(Duration(milliseconds: 300), () async {
         await controller.resumeCamera();
       });
+      // resultresponse =
+      //     await _postProductQrScanner.postProducts(http.Client(), result.code);
+      // Future.delayed(Duration(milliseconds: 300), () async {
+      //   await controller.resumeCamera();
+      // });
 
       final snackBar = SnackBar(
         content: Text('Adding product is $resultresponse'),
