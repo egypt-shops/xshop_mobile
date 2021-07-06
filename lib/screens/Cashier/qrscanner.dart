@@ -1,12 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:http/http.dart' as http;
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'package:xshop_mobile/services/post_product_by_scanning.dart';
 
 // list of added products
 Barcode result;
 List addedProduct = [];
+List quantity = [];
+TextEditingController _controllerQuatity = TextEditingController();
 
 class QRViewScanner extends StatefulWidget {
   @override
@@ -63,40 +67,70 @@ class _QRViewScannerState extends State<QRViewScanner> {
 
     controller.scannedDataStream.listen((scanData) async {
       result = scanData;
-      List<String> barResult = result.code.split(",");
       await controller.pauseCamera();
-      resultresponse = await _postProductQrScanner.postProductsBYBarCode(
-          http.Client(),
-          barResult[0],
-          barResult[1],
-          barResult[2],
-          barResult[3]);
-      if (resultresponse == 'done') {
-        addedProduct
-            .add(barResult[0] + ' is added ' + '& its price ' + barResult[1]);
-      }
+      List<String> barResult = result.code.split(",");
 
-      Future.delayed(Duration(milliseconds: 300), () async {
-        await controller.resumeCamera();
-      });
+      Alert(
+          context: context,
+          title: "Enter Quantity",
+          content: Column(
+            children: <Widget>[
+              TextField(
+                controller: _controllerQuatity,
+                decoration: InputDecoration(
+                  icon: Icon(
+                    Icons.add_box,
+                    size: 30,
+                  ),
+                  labelText: 'Quantity',
+                ),
+              ),
+            ],
+          ),
+          buttons: [
+            DialogButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                resultresponse =
+                    await _postProductQrScanner.postProductsBYBarCode(
+                        http.Client(),
+                        barResult[0],
+                        barResult[1],
+                        _controllerQuatity.text.toString(),
+                        barResult[2]);
+                setState(() {});
+                if (resultresponse == 'done') {
+                  addedProduct.add(result.code);
+                  quantity.add(_controllerQuatity.text.toString());
+                }
+                await controller.resumeCamera();
+                final snackBar = SnackBar(
+                  content: Text('Adding product is $resultresponse'),
+                  action: SnackBarAction(
+                    label: 'Undo',
+                    onPressed: () {
+                      // Some code to undo the change.
+                    },
+                  ),
+                );
+                // Find the ScaffoldMessenger in the widget tree
+                // and use it to show a SnackBar.
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+              child: Text(
+                "OK",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            )
+          ]).show();
+
+      // Future.delayed(Duration(milliseconds: 50), () async {
+      // });
       // resultresponse =
       //     await _postProductQrScanner.postProducts(http.Client(), result.code);
       // Future.delayed(Duration(milliseconds: 300), () async {
       //   await controller.resumeCamera();
       // });
-
-      final snackBar = SnackBar(
-        content: Text('Adding product is $resultresponse'),
-        action: SnackBarAction(
-          label: 'Undo',
-          onPressed: () {
-            // Some code to undo the change.
-          },
-        ),
-      );
-      // Find the ScaffoldMessenger in the widget tree
-      // and use it to show a SnackBar.
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
       setState(() {});
     });

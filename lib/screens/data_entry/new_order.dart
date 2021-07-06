@@ -55,12 +55,12 @@ class _NewOrderState extends State<NewOrder> {
                       Text(
                         "U don't add any product yet",
                         softWrap: true,
-                        style: TextStyle(fontSize: 25.0, color: Colors.white),
+                        style: TextStyle(fontSize: 15.0, color: Colors.white),
                       ),
-                      Padding(padding: EdgeInsets.only(top: 30.0)),
+                      Padding(padding: EdgeInsets.only(top: 15.0)),
                       Icon(
                         Icons.warning_rounded,
-                        size: 50.0,
+                        size: 35.0,
                       )
                     ],
                   )
@@ -68,9 +68,71 @@ class _NewOrderState extends State<NewOrder> {
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(),
                     itemCount: addedProduct.length,
-                    padding: EdgeInsets.all(10.0),
+                    padding: EdgeInsets.all(5.0),
                     itemBuilder: (BuildContext context, int index) {
-                      return Container(
+                      return Card(
+                        child: ListTile(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${addedProduct[index].split(',')[0]}'
+                                        .toUpperCase(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 17),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 3.0),
+                                  ),
+                                  Text(
+                                    'QUANTITY IS   : ${quantity[index]}',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 15),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 4.0),
+                                  ),
+                                  Text(
+                                    'TOTAL PRICE IS ${addedProduct[index].split(',')[1]}' +
+                                        ' \$',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 15),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                alignment: Alignment.topCenter,
+                                child: Icon(
+                                  Icons.done,
+                                  color: Colors.black,
+                                  size: 25,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    })));
+  }
+
+  Card listProduct(String product, String price) {
+    return Card(
+      child: ListTile(
+        title: Text('${addedProduct[0][0]}'),
+        subtitle: Text('${addedProduct[0][1]}' + '\$'),
+      ),
+    );
+  }
+}
+/*
+Container(
                         height: 50,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -81,24 +143,5 @@ class _NewOrderState extends State<NewOrder> {
                           ' ${addedProduct[index]}',
                           style: TextStyle(color: Colors.black),
                         )),
-                      );
-                    })));
-  }
-}
-/*
-ListView.builder(
-                    padding: EdgeInsets.all(20.0),
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        height: 50,
-                        color: Colors.amber,
-                        child: Row(
-                          children: [
-                            Text(' ${addedProduct[0]}'),
-                            Text(' ${addedProduct[1]}'),
-                            Text(' ${addedProduct[2]}'),
-                          ],
-                        ),
-                      );
-                    })
- */
+                      )
+*/
