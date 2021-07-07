@@ -1,10 +1,13 @@
+import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:http/http.dart' as http;
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 import 'package:xshop_mobile/services/post_product_by_scanning.dart';
+import 'package:xshop_mobile/sound_manager.dart';
 
 // list of added products
 Barcode result;
@@ -67,14 +70,30 @@ class _QRViewScannerState extends State<QRViewScanner> {
 
     controller.scannedDataStream.listen((scanData) async {
       result = scanData;
-      await controller.pauseCamera();
+
+      await controller.stopCamera();
+
+      SoundManager soundManager = new SoundManager();
+      soundManager.playLocal("sou.mp3").then((onValue) {});
+
       List<String> barResult = result.code.split(",");
 
       Alert(
           context: context,
-          title: "Enter Quantity",
+          title: '${barResult[0].toUpperCase()}',
           content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 3.0),
+              ),
+              Text(
+                'PRICE IS ${barResult[1]}' + ' \$',
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 15,
+                    fontStyle: FontStyle.normal),
+              ),
               TextField(
                 controller: _controllerQuatity,
                 decoration: InputDecoration(
@@ -82,7 +101,7 @@ class _QRViewScannerState extends State<QRViewScanner> {
                     Icons.add_box,
                     size: 30,
                   ),
-                  labelText: 'Quantity',
+                  labelText: 'Enter Quantity',
                 ),
               ),
             ],
@@ -98,7 +117,6 @@ class _QRViewScannerState extends State<QRViewScanner> {
                         barResult[1],
                         _controllerQuatity.text.toString(),
                         barResult[2]);
-                setState(() {});
                 if (resultresponse == 'done') {
                   addedProduct.add(result.code);
                   quantity.add(_controllerQuatity.text.toString());
