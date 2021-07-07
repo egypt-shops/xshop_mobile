@@ -49,6 +49,12 @@ dependencies:
   qr_code_scanner: ^0.3.5
   web_socket_channel: ^1.2.0
   webview_flutter: ^2.0.9
+  ping_discover_network: ^0.2.0+1
+  wifi: ^0.1.5
+  esc_pos_bluetooth: ^0.2.8
+  esc_pos_printer: ^3.1.6
+  esc_pos_utils: ^0.3.6
+  path_provider: ^1.6.28
 
 
 dev_dependencies:
