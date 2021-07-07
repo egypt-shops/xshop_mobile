@@ -8,13 +8,15 @@ import 'package:xshop_mobile/screens/customer/orders/create_order.dart';
 import 'package:xshop_mobile/screens/customer/shops/shop_search.dart';
 import 'package:xshop_mobile/screens/customer/shops/shops.dart';
 import 'package:xshop_mobile/screens/login/components/login_screen.dart';
+
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
 import 'package:xshop_mobile/screens/customer/orders/order_search.dart';
 import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
-
+import 'package:wifi/wifi.dart';
+import 'package:ping_discover_network/ping_discover_network.dart';
 import '../../../services/invoices.dart';
 
 List<Shop> shops = [];
@@ -60,7 +62,7 @@ class _CustomerState extends State<Customer> {
 
   getLoginStatus() async {
     sharedPreferences = await SharedPreferences.getInstance();
-
+    //await discoverWifiPrinter();
     setState(() {
       name = sharedPreferences.getString('name');
       mobile = sharedPreferences.getString('mobile');
