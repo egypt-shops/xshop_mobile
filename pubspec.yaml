@@ -55,7 +55,12 @@ dependencies:
   esc_pos_printer: ^3.1.6
   esc_pos_utils: ^0.3.6
   path_provider: ^1.6.28
+  flutter_launcher_icons: ^0.7.0
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "images/icon/icon.png"
 
 dev_dependencies:
   flutter_test:
