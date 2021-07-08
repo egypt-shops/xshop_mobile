@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:xshop_mobile/screens/home/components/General_manager.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:xshop_mobile/screens/home/components/customer.dart';
 import 'package:xshop_mobile/screens/login/components/signup.dart';
 import 'package:xshop_mobile/screens/home/home.dart';
@@ -128,7 +128,52 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 style: TextStyle(fontSize: 12),
                                               ),
                                               TextButton(
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    showDialog(
+                                                        barrierDismissible:
+                                                            false,
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return AlertDialog(
+                                                            elevation: 5,
+                                                            backgroundColor:
+                                                                Theme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                            title: Text(
+                                                                'Reset Password',
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .bodyText1),
+                                                            content: Container(
+                                                                width: 400,
+                                                                height: 400,
+                                                                child: WebView(
+                                                                  initialUrl:
+                                                                      'https://dev-egshops.herokuapp.com/users/password_reset/',
+                                                                )),
+                                                            actions: <Widget>[
+                                                              OutlinedButton(
+                                                                  child:
+                                                                      new Text(
+                                                                    "Cancel",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            15),
+                                                                  ),
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                  })
+                                                            ],
+                                                          );
+                                                        });
+                                                  },
                                                   child: Text('Reset',
                                                       style: TextStyle(
                                                           fontSize: 12)))

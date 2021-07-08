@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:xshop_mobile/models/favorites.dart';
 import 'package:xshop_mobile/screens/customer/products/cart.dart';
 import 'package:xshop_mobile/screens/customer/products/product_search.dart';
 import 'package:xshop_mobile/screens/data_entry/edit_product.dart';
@@ -72,6 +74,7 @@ class ProductListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var favoritesList = Provider.of<FavoritesProducts>(context);
     return GestureDetector(
         onTap: () {
           Navigator.push(
@@ -147,13 +150,39 @@ class ProductListItem extends StatelessWidget {
                                                   );
                                                 })
                                             : IconButton(
-                                                icon: Icon(
-                                                  Icons.favorite_border,
-                                                  color: Theme.of(context)
-                                                      .backgroundColor,
-                                                ),
-                                                onPressed: () {},
-                                              )
+                                                icon: favoritesList.items
+                                                        .contains(
+                                                            products[index])
+                                                    ? Icon(
+                                                        Icons.favorite,
+                                                        color: Colors.red[600],
+                                                      )
+                                                    : Icon(
+                                                        Icons.favorite_border,
+                                                        color: Colors.grey,
+                                                      ),
+                                                onPressed: () {
+                                                  !favoritesList.items.contains(
+                                                          products[index])
+                                                      ? favoritesList
+                                                          .add(products[index])
+                                                      : favoritesList.remove(
+                                                          products[index]);
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(favoritesList
+                                                              .items
+                                                              .contains(
+                                                                  products[
+                                                                      index])
+                                                          ? 'Added to favorites.'
+                                                          : 'Removed from favorites.'),
+                                                      duration:
+                                                          Duration(seconds: 1),
+                                                    ),
+                                                  );
+                                                })
                                       ])))
                         ])))));
   }

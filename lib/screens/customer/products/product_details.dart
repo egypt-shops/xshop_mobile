@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:xshop_mobile/models/favorites.dart';
 import 'package:xshop_mobile/screens/data_entry/edit_product.dart';
 import 'package:xshop_mobile/screens/home/home.dart';
 import 'package:xshop_mobile/services/cart.dart';
@@ -14,6 +16,7 @@ class GetProduct extends StatelessWidget {
   final Product product;
   @override
   Widget build(BuildContext context) {
+    var favoritesList = Provider.of<FavoritesProducts>(context);
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.transparent,
@@ -45,12 +48,28 @@ class GetProduct extends StatelessWidget {
                         );
                       })
                   : IconButton(
-                      icon: Icon(
-                        Icons.favorite_border,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      onPressed: () {},
-                    )
+                      icon: favoritesList.items.contains(product)
+                          ? Icon(
+                              Icons.favorite,
+                              color: Colors.red[600],
+                            )
+                          : Icon(
+                              Icons.favorite_border,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                      onPressed: () {
+                        !favoritesList.items.contains(product)
+                            ? favoritesList.add(product)
+                            : favoritesList.remove(product);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(favoritesList.items.contains(product)
+                                ? 'Added to favorites.'
+                                : 'Removed from favorites.'),
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
+                      })
             ]),
         body: FutureBuilder<Product>(
             future: fetchProductsID(http.Client(), product.id.toString()),

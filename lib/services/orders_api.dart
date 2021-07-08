@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xshop_mobile/models/order.dart';
 import 'package:xshop_mobile/screens/customer/orders/orders.dart';
 
@@ -33,8 +34,14 @@ class OrderApi extends StatelessWidget {
 }
 
 Future<List<Order>> fetchOrders(http.Client client) async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   final response = await client.get(
-      Uri.parse('https://dev-egshops.herokuapp.com/api/orders/?format=json'));
+      Uri.parse('https://dev-egshops.herokuapp.com/api/orders/?format=json'),
+      headers: <String, String>{
+        "accept": " */*",
+        "Content-Type": "application/json",
+        "Authorization": "Token ${sharedPreferences.getString("token")}",
+      });
 
   // Use the compute function to run parseOrders in a separate isolate.
   return compute(parseOrders, response.body);

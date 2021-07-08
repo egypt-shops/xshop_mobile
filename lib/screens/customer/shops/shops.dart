@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:xshop_mobile/models/favorites.dart';
 import 'package:xshop_mobile/screens/customer/shops/shop_search.dart';
 import 'package:xshop_mobile/screens/customer/shops/shop_details.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
@@ -57,10 +59,12 @@ class _ShopPageState extends State<ShopPage> {
 //
 class ShopList extends StatelessWidget {
   final List<Shop> shops;
+
   ShopList({Key key, this.shops}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var favoritesList = Provider.of<FavoritesShops>(context);
     return SliverList(
         delegate: SliverChildBuilderDelegate((context, index) {
       return GestureDetector(
@@ -162,12 +166,29 @@ class ShopList extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                          icon: Icon(
-                            Icons.favorite_border_rounded,
-                            color: Colors.grey,
-                            size: 25,
-                          ),
-                          onPressed: () {})
+                          icon: favoritesList.items.contains(shops[index])
+                              ? Icon(
+                                  Icons.favorite,
+                                  color: Colors.red[600],
+                                )
+                              : Icon(
+                                  Icons.favorite_border,
+                                  color: Colors.grey,
+                                ),
+                          onPressed: () {
+                            !favoritesList.items.contains(shops[index])
+                                ? favoritesList.add(shops[index])
+                                : favoritesList.remove(shops[index]);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                    favoritesList.items.contains(shops[index])
+                                        ? 'Added to favorites.'
+                                        : 'Removed from favorites.'),
+                                duration: Duration(seconds: 1),
+                              ),
+                            );
+                          })
                     ],
                   ),
                 ],
