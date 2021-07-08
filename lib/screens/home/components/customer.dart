@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:xshop_mobile/models/favorites.dart';
 import 'package:xshop_mobile/models/invoice.dart';
 import 'package:xshop_mobile/models/order.dart';
 import 'package:xshop_mobile/models/shop.dart';
+import 'package:xshop_mobile/screens/customer/favorites/components/fav_products.dart';
+import 'package:xshop_mobile/screens/customer/favorites/components/fav_shops.dart';
+import 'package:xshop_mobile/screens/customer/favorites/favorites.dart';
 import 'package:xshop_mobile/screens/customer/invoices/search.dart';
 import 'package:xshop_mobile/screens/customer/orders/create_order.dart';
 import 'package:xshop_mobile/screens/customer/shops/shop_search.dart';
@@ -114,17 +118,25 @@ class _CustomerState extends State<Customer> {
             snap: _snap,
             floating: _floating,
             expandedHeight: 160.0,
+
             flexibleSpace: FlexibleSpaceBar(
+                title: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('welcome to Xshop        ',
+                          style: Theme.of(context).textTheme.bodyText1)
+                    ]),
                 background: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  colorFilter: new ColorFilter.mode(
-                      Colors.black.withOpacity(0.3), BlendMode.darken),
-                  image: AssetImage("images/Cashier-Area.jpg"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            )),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      colorFilter: new ColorFilter.mode(
+                          Colors.black.withOpacity(0.3), BlendMode.darken),
+                      image: AssetImage("images/Cashier-Area.jpg"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )),
+
             actions: <Widget>[
               IconButton(
                 key: Key("search for shop"),
@@ -180,7 +192,18 @@ class _CustomerState extends State<Customer> {
               ),
               leading: Icon(Icons.home),
               onTap: () {
-                //Navigator.pop(context);
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text(
+                'favorites',
+                style: TextStyle(color: Colors.black38),
+              ),
+              leading: Icon(Icons.favorite),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => FavoritesPage()));
               },
             ),
             ListTile(

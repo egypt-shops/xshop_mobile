@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xshop_mobile/screens/home/components/cashier.dart';
 import 'package:xshop_mobile/screens/home/components/customer.dart';
-import 'package:xshop_mobile/screens/home/components/General_manager.dart';
 import 'package:xshop_mobile/screens/home/components/data_entry_clerk.dart';
 import 'package:xshop_mobile/screens/login/components/login_screen.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
@@ -49,9 +48,6 @@ class _HomeState extends State<Home> {
         break;
       case 'Cashier':
         return Cashier();
-        break;
-      case 'General Manager':
-        return GeneralManager();
         break;
       case 'Data Entry Clerk':
         return DataEntryClerk();
