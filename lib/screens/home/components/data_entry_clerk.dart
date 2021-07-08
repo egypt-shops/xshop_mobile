@@ -5,6 +5,7 @@ import 'package:xshop_mobile/screens/customer/products/product_search.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
 import 'package:xshop_mobile/screens/data_entry/new_order.dart';
 import 'package:xshop_mobile/screens/data_entry/product_creating.dart';
+import 'package:xshop_mobile/screens/profile.dart';
 import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/services/products.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
@@ -135,25 +136,14 @@ class _DataEntryClerkState extends State<DataEntryClerk> {
               leading: Icon(Icons.account_circle),
               onTap: () {
                 //Navigator.pop(context);
-              },
-            ),
-            ListTile(
-                title: Text(
-                  '$mobile',
-                  style: TextStyle(color: Colors.black38),
-                ),
-                leading: Icon(Icons.phone_iphone_outlined),
-                onTap: () {
-                  createAlertDialog(context, 'mobile');
-                }),
-            ListTile(
-              title: Text(
-                '$email',
-                style: TextStyle(color: Colors.black38),
-              ),
-              leading: Icon(Icons.email),
-              onTap: () {
-                createAlertDialog(context, 'email');
+                Navigator.push(context, MaterialPageRoute(builder: (builder) {
+                  return Profile(
+                    name: name,
+                    email: email,
+                    phone: mobile,
+                    type: 'Data Entry Clerk',
+                  );
+                }));
               },
             ),
             Divider(),

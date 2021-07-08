@@ -12,6 +12,7 @@ import 'package:xshop_mobile/screens/customer/orders/create_order.dart';
 import 'package:xshop_mobile/screens/customer/shops/shop_search.dart';
 import 'package:xshop_mobile/screens/customer/shops/shops.dart';
 import 'package:xshop_mobile/screens/login/components/login_screen.dart';
+import 'package:xshop_mobile/screens/profile.dart';
 
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
@@ -214,25 +215,15 @@ class _CustomerState extends State<Customer> {
               leading: Icon(Icons.account_circle),
               onTap: () {
                 //Navigator.pop(context);
-              },
-            ),
-            ListTile(
-                title: Text(
-                  '$mobile',
-                  style: TextStyle(color: Colors.black38),
-                ),
-                leading: Icon(Icons.phone_iphone_outlined),
-                onTap: () {
-                  createAlertDialog(context, 'mobile');
-                }),
-            ListTile(
-              title: Text(
-                '$email',
-                style: TextStyle(color: Colors.black38),
-              ),
-              leading: Icon(Icons.email),
-              onTap: () {
-                createAlertDialog(context, 'email');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => Profile(
+                              name: name,
+                              email: email,
+                              phone: mobile,
+                              type: 'Customer',
+                            )));
               },
             ),
             Divider(),
