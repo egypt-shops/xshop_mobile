@@ -20,21 +20,17 @@
   Any piece of a screen more complicated then a few widgets should be its own component.
 
 ## login credentials
-* Manager:
+* Customer:
 ```txt
-01066869348
-qbRsyJgqa57kzsz
+01010092182
+hEVFzCK8r3gpm5h
 ```
 * Cashier:
 ```txt
 01010092133
 bcjTYM2HprSX3Cp
 ```
-* Customer:
-```txt
-01010092182
-hEVFzCK8r3gpm5h
-```
+
 * Data entry clerk:
 ```txt
 01550100970
