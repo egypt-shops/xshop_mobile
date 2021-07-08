@@ -58,6 +58,7 @@ dependencies:
   esc_pos_utils: ^0.3.6
   path_provider: ^1.6.28
   flutter_launcher_icons: ^0.7.0
+  
 
 flutter_icons:
   android: "launcher_icon"
@@ -71,6 +72,8 @@ dev_dependencies:
 
   json_serializable: ^3.5.1
   build_runner: ^1.10.9
+  flutter_native_splash: ^0.3.2
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -124,3 +127,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_native_splash: 
+    color: "#f5f5f5"
+    image: "images/icon/icon.png"
+    android: true
+    ios: true
+
