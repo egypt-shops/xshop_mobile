@@ -18,7 +18,8 @@ class WebViewExampleState extends State<WebViewExample> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: 350,
+        width: 400,
+        height: 550,
         child: WebView(
           initialUrl: 'https://flutter.dev',
         ));

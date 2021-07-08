@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences sharedPreferences;
-Future<int> register(http.Client client, String address) async {
+Future<CheckoutData> checkoutAPI(http.Client client, String address) async {
   sharedPreferences = await SharedPreferences.getInstance();
   final response = await client.post(
       Uri.parse("https://dev-egshops.herokuapp.com/api/orders/checkout/"),
@@ -21,8 +21,29 @@ Future<int> register(http.Client client, String address) async {
       }));
   if (response.statusCode == 200) {
     print('====================== checked out ============================');
-    return response.statusCode;
+    print(response.body);
+    return CheckoutData.fromJson(jsonDecode(response.body));
   } else {
     throw Exception('failed to checkout to $address');
+  }
+}
+
+class CheckoutData {
+  final int shoppk;
+  final int userpk;
+  final int itemcount;
+  final String fullprice;
+  final String address;
+
+  CheckoutData(
+      {this.shoppk, this.userpk, this.itemcount, this.fullprice, this.address});
+
+  factory CheckoutData.fromJson(Map<String, dynamic> json) {
+    return CheckoutData(
+        shoppk: json['order_data']['shop_pk'],
+        userpk: json['order_data']['user_pk'],
+        itemcount: json['order_data']['item_count'],
+        fullprice: json['order_data']['full_price'],
+        address: json['address']);
   }
 }

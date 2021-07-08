@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
         body: Center(
             child: Container(
-                padding: EdgeInsets.all(30.0),
+                padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -64,6 +64,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                                 return null;
                                               },
+                                              keyboardType:
+                                                  TextInputType.number,
                                               decoration: InputDecoration(
                                                   enabledBorder:
                                                       UnderlineInputBorder(

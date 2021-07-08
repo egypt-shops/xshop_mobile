@@ -101,34 +101,34 @@ class _CustomerState extends State<Customer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
       body: Builder(
           // Create an inner BuildContext so that the onPressed methods
           // can refer to the Scaffold with Scaffold.of().
           builder: (BuildContext context) {
         return CustomScrollView(slivers: <Widget>[
           SliverAppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0, // 1
             pinned: _pinned,
             snap: _snap,
             floating: _floating,
             expandedHeight: 160.0,
             flexibleSpace: FlexibleSpaceBar(
-              title: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('welcome to Xshop        ',
-                        style: Theme.of(context).textTheme.bodyText1)
-                  ]),
-              background: Icon(
-                Icons.shopping_cart,
-                size: 50,
-                color: Theme.of(context).focusColor,
+                background: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  colorFilter: new ColorFilter.mode(
+                      Colors.black.withOpacity(0.3), BlendMode.darken),
+                  image: AssetImage("images/Cashier-Area.jpg"),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
+            )),
             actions: <Widget>[
               IconButton(
                 key: Key("search for shop"),
-                icon: Icon(Icons.search,
-                    color: Theme.of(context).secondaryHeaderColor),
+                icon: Icon(Icons.search, color: Theme.of(context).primaryColor),
                 tooltip: 'search for shop',
                 onPressed: () {
                   showSearch(
@@ -139,8 +139,7 @@ class _CustomerState extends State<Customer> {
             ],
             iconTheme: IconThemeData(color: Theme.of(context).accentColor),
             leading: IconButton(
-              icon: Icon(Icons.person,
-                  color: Theme.of(context).secondaryHeaderColor),
+              icon: Icon(Icons.person, color: Theme.of(context).primaryColor),
               onPressed: () => Scaffold.of(context).openDrawer(),
             ),
           ),
@@ -167,11 +166,9 @@ class _CustomerState extends State<Customer> {
                   ),
                   Text(
                     'Mohamed Boyka',
-                    style: TextStyle(color: Colors.white, fontSize: 12),
-                  ),
-                  Text(
-                    '$email',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),
@@ -239,54 +236,6 @@ class _CustomerState extends State<Customer> {
             ),
           ],
         ),
-
-        /*Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      Icons.account_circle,
-                      size: 60,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Mohamed Boyka',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ]),
-
-            ListTile(
-                title: Text('Mobile: $mobile'),
-                trailing: Icon(Icons.create),
-                onTap: () {
-                  createAlertDialog(context, 'mobile');
-                }),
-            ListTile(
-              title: Text('Email: $email'),
-              trailing: Icon(Icons.create),
-              onTap: () {
-                createAlertDialog(context, 'email');
-              },
-            ),
-            ListTile(
-              title: Text('Item 3'),
-              onTap: () {
-                //Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text(
-                'Logout',
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              onTap: () {
-                logout();
-                //Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      )),
-      */
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[

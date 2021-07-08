@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:xshop_mobile/screens/home/home.dart';
 import 'package:xshop_mobile/screens/login/components/login_screen.dart';
-import 'package:xshop_mobile/services/cart.dart';
-import 'screens/login/login.dart';
 
 void main() {
   runApp(Xshop());

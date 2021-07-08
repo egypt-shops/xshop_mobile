@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:xshop_mobile/models/shop.dart';
 import 'package:xshop_mobile/screens/customer/products/cart.dart';
+import 'package:xshop_mobile/screens/customer/products/checkout.dart';
 import 'package:xshop_mobile/screens/customer/products/payment.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
 import 'package:xshop_mobile/screens/customer/products/product_search.dart';
@@ -58,30 +59,12 @@ class _ShopDetailsState extends State<ShopDetails> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return  AlertDialog(
-                                elevation: 5,
-                                backgroundColor: AppTheme.colors.primary,
-                                title: Text('test webview for payment',
-                                    style: TextStyle(
-                                        color: AppTheme.colors.textPrimary)),
-                                content: WebViewExample(),
-                                actions: <Widget>[
-                                  FlatButton(
-                                      child: new Text(
-                                        "Cancel",
-                                        style: TextStyle(
-                                            color: AppTheme.colors.secondry,
-                                            fontSize: 15),
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      })
-                                ],
-                              );
-                        });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Checkout(),
+                      ),
+                    );
                   }),
             ]),
         stickyFrontLayer: false,
