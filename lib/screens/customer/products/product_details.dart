@@ -15,32 +15,43 @@ class GetProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(actions: [
-          usertype == 'Data Entry Clerk'
-              ? IconButton(
-                  icon: Icon(
-                    Icons.edit,
-                    color: Theme.of(context).backgroundColor,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditProduct(
-                          product: product,
-                        ),
-                        fullscreenDialog: true,
+        appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0, // 1
+
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios,
+                  color: Theme.of(context).primaryColor),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            actions: [
+              usertype == 'Data Entry Clerk'
+                  ? IconButton(
+                      icon: Icon(
+                        Icons.edit,
+                        color: Theme.of(context).primaryColor,
                       ),
-                    );
-                  })
-              : IconButton(
-                  icon: Icon(
-                    Icons.favorite_border,
-                    color: Theme.of(context).backgroundColor,
-                  ),
-                  onPressed: () {},
-                )
-        ]),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditProduct(
+                              product: product,
+                            ),
+                            fullscreenDialog: true,
+                          ),
+                        );
+                      })
+                  : IconButton(
+                      icon: Icon(
+                        Icons.favorite_border,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      onPressed: () {},
+                    )
+            ]),
         body: FutureBuilder<Product>(
             future: fetchProductsID(http.Client(), product.id.toString()),
             builder: (context, snapshot) {
@@ -185,21 +196,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         },
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: /* cartList.items
-                                          .contains(widget.product)
-                                      ? [
-                                          Text("remove from Cart".toUpperCase(),
-                                              style: TextStyle(
-                                                fontSize: 25,
-                                              )),
-                                          Icon(
-                                            Icons.remove_shopping_cart,
-                                            color: Colors.white,
-                                            size: 40,
-                                          )
-                                        ]
-                                      : */
-                                [
+                            children: [
                               Text("Add to Cart".toUpperCase(),
                                   style: TextStyle(
                                     fontSize: 25,
