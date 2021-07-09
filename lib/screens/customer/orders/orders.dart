@@ -5,6 +5,7 @@ import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/services/search_order.dart';
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:http/http.dart' as http;
+import 'package:xshop_mobile/tmp/patch_orders.dart';
 
 import 'order_search.dart';
 
@@ -49,35 +50,78 @@ class OrdersList extends StatelessWidget {
     return SliverList(
         delegate: SliverChildBuilderDelegate((context, index) {
       return GestureDetector(
-          onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => GetOrder(
-                    orders[index].id,
-                  ),
-                ),
-              ),
+          // onTap: () => Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => GetOrder(
+          //           orders[index].id,
+          //         ),
+          //       ),
+          //     ),
           child: Container(
-              height: 200,
               padding: EdgeInsets.all(3),
               child: Card(
-                  elevation: 5,
+                  elevation: 2,
                   color: AppTheme.colors.primaryLight,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text('user: ${orders[index].user}',
-                            style: TextStyle(
-                                fontSize: 20, color: AppTheme.colors.primary)),
-                        Text('shop: ${orders[index].shop} ',
-                            style: TextStyle(
-                                fontSize: 15, color: Colors.teal[400])),
-                        Text('paid: ${orders[index].paid}',
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: AppTheme.colors.secondryDark)),
-                      ]))));
+                  child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 4),
+                      child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.blueGrey,
+                            child: Text('${orders[index].user}'),
+                          ),
+                          title: Text('user: ${orders[index].user}'),
+                          subtitle: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('shop: ${orders[index].shop}'),
+                              Padding(padding: EdgeInsets.only(left: 10)),
+                              Text("Paid:"),
+                              Icon(
+                                orders[index].paid.toString() == 'true'
+                                    ? Icons.done
+                                    : Icons.close,
+                                size: 16,
+                                color: AppTheme.colors.secondryDark,
+                              )
+                            ],
+                          ),
+                          trailing: CircleAvatar(
+                              backgroundColor: Colors.grey.shade300,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.edit,
+                                  size: 18,
+                                  color: AppTheme.colors.primaryDark,
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            UpdateOrders(id: orders[index].id)),
+                                  );
+                                },
+                              ))))
+
+                  // Column(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //     crossAxisAlignment: CrossAxisAlignment.center,
+                  //     children: [
+                  //       Text('user: ${orders[index].user}',
+                  //           style: TextStyle(
+                  //               fontSize: 20, color: AppTheme.colors.primary)),
+                  //       Text('shop: ${orders[index].shop} ',
+                  //           style: TextStyle(
+                  //               fontSize: 15, color: Colors.teal[400])),
+                  //       Text('paid: ${orders[index].paid}',
+                  //           style: TextStyle(
+                  //               fontSize: 20,
+                  //               color: AppTheme.colors.secondryDark)),
+                  //     ])
+
+                  )));
     }, childCount: orders.length));
   }
 }
