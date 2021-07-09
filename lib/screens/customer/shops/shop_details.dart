@@ -129,7 +129,7 @@ class ShopHome extends StatelessWidget {
             height: 200,
             decoration: BoxDecoration(
               image: const DecorationImage(
-                image: AssetImage('images/meeting.jpg'),
+                image: AssetImage('images/store.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -231,23 +231,24 @@ class ShopHome extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 4,
+          flex: 3,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20.0, 30, 20.0, 0),
-            child: Text(
-              shop.name +
-                  '  '
-                      ' is shop that provides a lot of products '
-                      'this is shop that provides a lot of products '
-                      'this is shop that provides a lot of products '
-                      'this is shop that provides a lot of products '
-                      'this is shop that provides a lot of products '
-                      'this is shop that provides a lot of products '
-                      'this is shop that provides a lot of products '
-                      'this is shop that provides a lot of products '
-                      'this is shop that provides a lot of products ',
-              textAlign: TextAlign.start,
-              style: TextStyle(fontSize: 12.0, color: Colors.black),
+            child: Opacity(
+              opacity: 0.5,
+              child: Text(
+                shop.name +
+                    '  '
+                        ' is shop that provides a lot of products '
+                        'this is shop that provides a lot of products '
+                        'this is shop that provides a lot of products '
+                        'this is shop that provides a lot of products '
+                        'this is shop that provides a lot of products '
+                        'this is shop that provides a lot of products '
+                        'this is shop that provides a lot of products ',
+                textAlign: TextAlign.start,
+                style: TextStyle(fontSize: 13.0, color: Colors.black),
+              ),
             ),
           ),
         ),
