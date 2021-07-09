@@ -16,20 +16,26 @@ SharedPreferences sharedPreferences;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory appDocDirectory = await getApplicationDocumentsDirectory();
+  bool loggedin;
   var path = appDocDirectory.path;
   Hive
     ..init(path)
-    ..registerAdapter(ShopAdapter());
+    ..registerAdapter(ShopAdapter())
+    ..registerAdapter(ProductAdapter());
 
   var box = await Hive.openBox('shopBox');
 
   sharedPreferences = await SharedPreferences.getInstance();
-  runApp(Xshop(box));
+  loggedin = sharedPreferences.getString("token") == null ? false : true;
+
+  runApp(Xshop(box, loggedin));
 }
 
 class Xshop extends StatelessWidget {
   final Box box;
-  Xshop(this.box);
+  final bool loggedin;
+
+  Xshop(this.box, this.loggedin);
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -71,10 +77,7 @@ class Xshop extends StatelessWidget {
                     fontFamily: 'Hind',
                     color: Colors.white70)),
           ),
-          routes: {
-            '/': (context) => Home(),
-            '/login': (context) => LoginScreen(),
-          },
+          home: loggedin ? Home() : LoginScreen(),
         ));
   }
 }

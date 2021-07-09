@@ -15,6 +15,7 @@ class Checkout extends StatefulWidget {
 class _CheckoutState extends State<Checkout> {
   bool ischeckedout = false;
   bool isloading = false;
+  String dropdownValue = 'CREDIT_CARD';
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,8 @@ class _CheckoutState extends State<Checkout> {
             )),
         body: ischeckedout
             ? FutureBuilder<CheckoutData>(
-                future: checkoutAPI(http.Client(), addressController.text),
+                future: checkoutAPI(
+                    http.Client(), addressController.text, dropdownValue),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Cheked(checkoutdata: snapshot.data);
@@ -78,6 +80,42 @@ class _CheckoutState extends State<Checkout> {
                                   style: TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder())),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(children: [
+                                Text('Payment Method:    ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                DropdownButton<String>(
+                                  value: dropdownValue,
+                                  icon: const Icon(Icons.arrow_downward),
+                                  iconSize: 24,
+                                  elevation: 16,
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor),
+                                  underline: Container(
+                                    height: 2,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      dropdownValue = newValue;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'CREDIT_CARD',
+                                    'CASH_ON_DELIVERY',
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                )
+                              ])
                             ]),
                         Center(
                             child: OutlinedButton(
@@ -130,13 +168,14 @@ class Cheked extends StatelessWidget {
                               return AlertDialog(
                                 elevation: 5,
                                 backgroundColor: Theme.of(context).primaryColor,
-                                title: Text('test webview for payment',
+                                title: Text(
+                                    '${checkoutdata.payingMethod} payment',
                                     style:
                                         Theme.of(context).textTheme.bodyText1),
-                                content: WebViewExample(),
+                                content:
+                                    PaymentWebView(checkoutdata.paymentUrl),
                                 actions: <Widget>[
                                   OutlinedButton(
-                                    
                                       child: new Text(
                                         "Cancel",
                                         style: TextStyle(

@@ -7,7 +7,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 import 'package:xshop_mobile/services/post_product_by_scanning.dart';
-import 'package:xshop_mobile/sound_manager.dart';
+import 'package:xshop_mobile/models/sound_manager.dart';
 
 // list of added products
 Barcode result;

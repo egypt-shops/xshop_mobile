@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences sharedPreferences;
-Future<CheckoutData> checkoutAPI(http.Client client, String address) async {
+Future<CheckoutData> checkoutAPI(
+    http.Client client, String address, String paymentMethod) async {
   sharedPreferences = await SharedPreferences.getInstance();
   final response = await client.post(
       Uri.parse("https://dev-egshops.herokuapp.com/api/orders/checkout/"),
@@ -18,6 +19,7 @@ Future<CheckoutData> checkoutAPI(http.Client client, String address) async {
       },
       body: jsonEncode(<String, dynamic>{
         "address": address,
+        "paying_method": paymentMethod
       }));
   if (response.statusCode == 200) {
     print('====================== checked out ============================');
@@ -34,9 +36,17 @@ class CheckoutData {
   final int itemcount;
   final String fullprice;
   final String address;
+  final String payingMethod;
+  final String paymentUrl;
 
   CheckoutData(
-      {this.shoppk, this.userpk, this.itemcount, this.fullprice, this.address});
+      {this.shoppk,
+      this.userpk,
+      this.itemcount,
+      this.fullprice,
+      this.address,
+      this.payingMethod,
+      this.paymentUrl});
 
   factory CheckoutData.fromJson(Map<String, dynamic> json) {
     return CheckoutData(
@@ -44,6 +54,8 @@ class CheckoutData {
         userpk: json['order_data']['user_pk'],
         itemcount: json['order_data']['item_count'],
         fullprice: json['order_data']['full_price'],
-        address: json['address']);
+        address: json['address'],
+        payingMethod: json["CREDIT_CARD"],
+        paymentUrl: json['payment_url']);
   }
 }
