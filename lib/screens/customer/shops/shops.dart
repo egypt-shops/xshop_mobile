@@ -179,18 +179,20 @@ class ShopList extends StatelessWidget {
                                   color: Colors.grey,
                                 ),
                           onPressed: () {
-                            !favoritesList.items
+                            favoritesList.items
                                     .where((element) =>
                                         element.name == (shops[index].name))
-                                    .isNotEmpty
+                                    .isEmpty
                                 ? favoritesList.add(shops[index])
                                 : favoritesList.remove(shops[index]);
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text(
-                                    favoritesList.items.contains(shops[index])
-                                        ? 'Added to favorites.'
-                                        : 'Removed from favorites.'),
+                                content: Text(favoritesList.items
+                                        .where((element) =>
+                                            element.name == (shops[index].name))
+                                        .isNotEmpty
+                                    ? 'Added to favorites.'
+                                    : 'Removed from favorites.'),
                                 duration: Duration(seconds: 1),
                               ),
                             );

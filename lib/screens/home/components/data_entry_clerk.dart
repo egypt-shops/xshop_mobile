@@ -6,6 +6,7 @@ import 'package:xshop_mobile/screens/customer/products/products.dart';
 import 'package:xshop_mobile/screens/data_entry/new_order.dart';
 import 'package:xshop_mobile/screens/data_entry/product_creating.dart';
 import 'package:xshop_mobile/screens/home/components/profile.dart';
+import 'package:xshop_mobile/screens/login/components/login_screen.dart';
 import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/services/products.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
@@ -53,7 +54,9 @@ class _DataEntryClerkState extends State<DataEntryClerk> {
 
   logout() {
     sharedPreferences.clear();
-    Navigator.pushNamed(context, "/login");
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+    );
   }
 
   createAlertDialog(BuildContext context, String userInfo) {

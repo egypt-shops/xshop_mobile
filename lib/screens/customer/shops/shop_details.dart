@@ -80,25 +80,26 @@ class _ShopDetailsState extends State<ShopDetails> {
               ),
               body: TabBarView(
                 children: [
-                  GetShop(widget.id),
+                  GetShop(widget.shopname),
                   CartPage(),
                 ],
               ),
             )),
         backLayer: Products(
-          shopId: widget.id.toString(),
+          shopName: widget.shopname,
         ));
   }
 }
 
 class GetShop extends StatelessWidget {
-  GetShop(this.id);
-  final int id;
+  GetShop(this.name);
+  final String name;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: FutureBuilder<Shop>(
-            future: fetchShopByID(http.Client(), id.toString()),
+            future: fetchShopByID(
+                http.Client(), name.replaceAll(' ', '').toLowerCase()),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ShopHome(shop: snapshot.data);

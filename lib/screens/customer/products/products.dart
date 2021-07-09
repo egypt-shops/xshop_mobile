@@ -16,9 +16,9 @@ import 'package:xshop_mobile/models/product.dart';
 List<Product> products = [];
 
 class Products extends StatefulWidget {
-  final String shopId;
+  final String shopName;
 
-  Products({Key products, this.shopId}) : super(key: products);
+  Products({Key products, this.shopName}) : super(key: products);
   @override
   _ProductsState createState() => _ProductsState();
 }
@@ -30,7 +30,8 @@ class _ProductsState extends State<Products> {
         child: Scaffold(
             backgroundColor: Theme.of(context).primaryColor,
             body: FutureBuilder<List<Product>>(
-                future: fetchProducts(http.Client(), widget.shopId),
+                future: fetchProducts(http.Client(),
+                    widget.shopName.replaceAll(' ', '').toLowerCase()),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     products = snapshot.data;
@@ -165,12 +166,12 @@ class ProductListItem extends StatelessWidget {
                                                         color: Colors.grey,
                                                       ),
                                                 onPressed: () {
-                                                  !favoritesList.items
+                                                  favoritesList.items
                                                           .where((element) =>
                                                               element.name ==
                                                               (products[index]
                                                                   .name))
-                                                          .isNotEmpty
+                                                          .isEmpty
                                                       ? favoritesList
                                                           .add(products[index])
                                                       : favoritesList.remove(
@@ -180,9 +181,13 @@ class ProductListItem extends StatelessWidget {
                                                     SnackBar(
                                                       content: Text(favoritesList
                                                               .items
-                                                              .contains(
-                                                                  products[
-                                                                      index])
+                                                              .where((element) =>
+                                                                  element
+                                                                      .name ==
+                                                                  (products[
+                                                                          index]
+                                                                      .name))
+                                                              .isNotEmpty
                                                           ? 'Added to favorites.'
                                                           : 'Removed from favorites.'),
                                                       duration:

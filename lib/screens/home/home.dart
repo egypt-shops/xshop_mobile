@@ -21,21 +21,11 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    checkLoginStatus();
-  }
-
-  checkLoginStatus() async {
-    if (sharedPreferences.getString("token") == null) {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-          (Route<dynamic> route) => false);
-    } else {
-      setState(() {
-        usertype = sharedPreferences.getString('type');
-        mobile = sharedPreferences.getString('mobile');
-        email = sharedPreferences.getString('email');
-      });
-    }
+    setState(() {
+      usertype = sharedPreferences.getString('type');
+      mobile = sharedPreferences.getString('mobile');
+      email = sharedPreferences.getString('email');
+    });
   }
 
   @override

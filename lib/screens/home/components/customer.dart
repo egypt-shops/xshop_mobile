@@ -77,9 +77,9 @@ class _CustomerState extends State<Customer> {
 
   logout() {
     sharedPreferences.clear();
-    Navigator.of(context).pushAndRemoveUntil(
+    Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-        (Route<dynamic> route) => false);
+        );
   }
 
   createAlertDialog(BuildContext context, String userInfo) {

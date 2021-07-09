@@ -6,7 +6,7 @@ import 'package:hive/hive.dart';
 part 'product.g.dart';
 
 @JsonSerializable()
-@HiveType(typeId: 1)
+@HiveType(typeId: 2)
 class Product {
   @HiveField(0)
   final int id;

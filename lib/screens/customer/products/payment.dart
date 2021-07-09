@@ -1,13 +1,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebViewExample extends StatefulWidget {
+class PaymentWebView extends StatefulWidget {
+  final String url;
+  PaymentWebView(this.url);
   @override
-  WebViewExampleState createState() => WebViewExampleState();
+  PaymentWebViewState createState() => PaymentWebViewState();
 }
 
-class WebViewExampleState extends State<WebViewExample> {
+class PaymentWebViewState extends State<PaymentWebView> {
   @override
   void initState() {
     super.initState();
@@ -21,7 +24,7 @@ class WebViewExampleState extends State<WebViewExample> {
         width: 400,
         height: 550,
         child: WebView(
-          initialUrl: 'https://flutter.dev',
+          initialUrl: widget.url,
         ));
   }
 }

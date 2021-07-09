@@ -32,15 +32,16 @@ Future<Product> postProducts(http.Client client, String name, String price,
   }
 }
 
-Future<List<Product>> fetchProducts(http.Client client, String id) async {
-  final response = await client.get(
-      Uri.parse('https://dev-egshops.herokuapp.com/api/products/shop/$id/'));
+Future<List<Product>> fetchProducts(http.Client client, String shopName) async {
+  final response = await client.get(Uri.parse(
+      'https://dev-egshops.herokuapp.com/api/products/shop/$shopName/'));
 
   // Use the compute function to run parseProducts in a separate isolate.
+  print(shopName.replaceAll(' ', '').toLowerCase());
   if (response.statusCode == 200)
     return compute(parseProducts, response.body);
   else {
-    throw Exception('failed to load products for shop with id: $id');
+    throw Exception('failed to load products for shop with id: $shopName');
   }
 }
 
