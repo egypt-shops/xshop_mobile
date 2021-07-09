@@ -66,44 +66,45 @@ class OrdersList extends StatelessWidget {
                   child: Container(
                       padding: EdgeInsets.symmetric(vertical: 4),
                       child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: Colors.blueGrey,
-                            child: Text('${orders[index].user}'),
-                          ),
-                          title: Text('user: ${orders[index].user}'),
-                          subtitle: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text('shop: ${orders[index].shop}'),
-                              Padding(padding: EdgeInsets.only(left: 10)),
-                              Text("Paid:"),
-                              Icon(
-                                orders[index].paid.toString() == 'true'
-                                    ? Icons.done
-                                    : Icons.close,
-                                size: 16,
-                                color: AppTheme.colors.secondryDark,
-                              )
-                            ],
-                          ),
-                          trailing: CircleAvatar(
-                              backgroundColor: Colors.grey.shade300,
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.edit,
-                                  size: 18,
-                                  color: AppTheme.colors.primaryDark,
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            UpdateOrders(id: orders[index].id)),
-                                  );
-                                },
-                              ))))
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.blueGrey,
+                          child: Text('${orders[index].user}'),
+                        ),
+                        title: Text('user: ${orders[index].user}'),
+                        subtitle: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text('shop: ${orders[index].shop}'),
+                            Padding(padding: EdgeInsets.only(left: 10)),
+                            Text("Paid:"),
+                            Icon(
+                              orders[index].paid.toString() == 'true'
+                                  ? Icons.done
+                                  : Icons.close,
+                              size: 16,
+                              color: AppTheme.colors.secondryDark,
+                            )
+                          ],
+                        ),
+                        // trailing: CircleAvatar(
+                        //     backgroundColor: Colors.grey.shade300,
+                        //     child: IconButton(
+                        //       icon: Icon(
+                        //         Icons.edit,
+                        //         size: 18,
+                        //         color: AppTheme.colors.primaryDark,
+                        //       ),
+                        //       onPressed: () {
+                        //         Navigator.push(
+                        //           context,
+                        //           MaterialPageRoute(
+                        //               builder: (context) =>
+                        //                   UpdateOrders(id: orders[index].id)),
+                        //         );
+                        //       },
+                        //     ))
+                      ))
 
                   // Column(
                   //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
