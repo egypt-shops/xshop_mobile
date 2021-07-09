@@ -98,7 +98,7 @@ class ShopList extends StatelessWidget {
                         height: 140,
                         decoration: BoxDecoration(
                           image: const DecorationImage(
-                            image: AssetImage('images/try.jpg'),
+                            image: AssetImage('images/store.jpg'),
                             fit: BoxFit.fill,
                           ),
                           border: Border.all(
