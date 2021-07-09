@@ -4,6 +4,7 @@ import 'package:xshop_mobile/models/product.dart';
 import 'package:xshop_mobile/screens/Cashier/new_order.dart';
 import 'package:xshop_mobile/screens/customer/products/product_search.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
+import 'package:xshop_mobile/screens/profile.dart';
 import 'package:xshop_mobile/services/products.dart';
 import 'package:http/http.dart' as http;
 
@@ -130,25 +131,15 @@ class _CashierState extends State<Cashier> {
               leading: Icon(Icons.account_circle),
               onTap: () {
                 //Navigator.pop(context);
-              },
-            ),
-            ListTile(
-                title: Text(
-                  '$mobile',
-                  style: TextStyle(color: Colors.black38),
-                ),
-                leading: Icon(Icons.phone_iphone_outlined),
-                onTap: () {
-                  createAlertDialog(context, 'mobile');
-                }),
-            ListTile(
-              title: Text(
-                '$email',
-                style: TextStyle(color: Colors.black38),
-              ),
-              leading: Icon(Icons.email),
-              onTap: () {
-                createAlertDialog(context, 'email');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => Profile(
+                              name: name,
+                              email: email,
+                              phone: mobile,
+                              type: 'Cashier',
+                            )));
               },
             ),
             Divider(),
