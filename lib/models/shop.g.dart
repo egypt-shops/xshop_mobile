@@ -1,41 +1,38 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'product.dart';
+part of 'shop.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ProductAdapter extends TypeAdapter<Product> {
+class ShopAdapter extends TypeAdapter<Shop> {
   @override
   final int typeId = 1;
 
   @override
-  Product read(BinaryReader reader) {
+  Shop read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Product(
+    return Shop(
       id: fields[0] as int,
       name: fields[1] as String,
-      price: fields[2] as String,
-      stock: fields[3] as int,
+      mobile: fields[2] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Product obj) {
+  void write(BinaryWriter writer, Shop obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.price)
-      ..writeByte(3)
-      ..write(obj.stock);
+      ..write(obj.mobile);
   }
 
   @override
@@ -44,7 +41,7 @@ class ProductAdapter extends TypeAdapter<Product> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ProductAdapter &&
+      other is ShopAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -53,18 +50,16 @@ class ProductAdapter extends TypeAdapter<Product> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Product _$ProductFromJson(Map<String, dynamic> json) {
-  return Product(
+Shop _$ShopFromJson(Map<String, dynamic> json) {
+  return Shop(
     id: json['id'] as int,
     name: json['name'] as String,
-    price: json['price'] as String,
-    stock: json['stock'] as int,
+    mobile: json['mobile'] as String,
   );
 }
 
-Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
+Map<String, dynamic> _$ShopToJson(Shop instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'price': instance.price,
-      'stock': instance.stock,
+      'mobile': instance.mobile,
     };

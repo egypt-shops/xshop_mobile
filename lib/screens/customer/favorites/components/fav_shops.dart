@@ -5,8 +5,6 @@ import 'package:xshop_mobile/models/shop.dart';
 import 'package:xshop_mobile/screens/customer/shops/shop_details.dart';
 
 class FavoritesShopsPage extends StatelessWidget {
-  static String routeName = '/favorites_page';
-
   @override
   Widget build(BuildContext context) {
     return Consumer<FavoritesShops>(

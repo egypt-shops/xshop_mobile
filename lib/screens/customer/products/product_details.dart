@@ -48,7 +48,10 @@ class GetProduct extends StatelessWidget {
                         );
                       })
                   : IconButton(
-                      icon: favoritesList.items.contains(product)
+                      icon: favoritesList.items
+                              .where(
+                                  (element) => element.name == (product.name))
+                              .isNotEmpty
                           ? Icon(
                               Icons.favorite,
                               color: Colors.red[600],
@@ -58,7 +61,10 @@ class GetProduct extends StatelessWidget {
                               color: Theme.of(context).primaryColor,
                             ),
                       onPressed: () {
-                        !favoritesList.items.contains(product)
+                        !favoritesList.items
+                                .where(
+                                    (element) => element.name == (product.name))
+                                .isNotEmpty
                             ? favoritesList.add(product)
                             : favoritesList.remove(product);
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -174,11 +180,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
-                        color:
-                            /*cartList.items.contains(widget.product)
-                                  ? Colors.red[700]
-                                  :*/
-                            Colors.green,
+                        color: Colors.green,
                         textColor: Colors.white,
                         padding: EdgeInsets.all(8.0),
                         onPressed: () async {

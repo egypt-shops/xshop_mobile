@@ -71,13 +71,14 @@ class Profile extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.white,
           leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios, color: AppColors().primary),
+              icon: Icon(Icons.arrow_back_ios,
+                  color: Theme.of(context).primaryColor),
               onPressed: () {
                 Navigator.pop(context);
               }),
           actions: [
             IconButton(
-                icon: Icon(Icons.edit, color: AppColors().primary),
+                icon: Icon(Icons.edit, color: Theme.of(context).primaryColor),
                 onPressed: () {
                   createAlertDialog(context);
                 })
@@ -109,9 +110,7 @@ class Profile extends StatelessWidget {
                     Text(
                       'Mohamed Boyka',
                       style: TextStyle(
-                          color: Color(0xff3F4F85),
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold),
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       height: 5.0,
@@ -121,9 +120,7 @@ class Profile extends StatelessWidget {
                       child: Text(
                         '$type',
                         style: TextStyle(
-                            color: Color(0xff3F4F85),
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.bold),
+                            fontSize: 12.0, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -138,13 +135,11 @@ class Profile extends StatelessWidget {
               child: ListTile(
                 leading: Icon(
                   Icons.phone,
-                  color: Color(0xff4C5C91),
                 ),
                 title: Text(
                   '$phone',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Color(0xff4C5C91),
                   ),
                 ),
               ),
@@ -154,13 +149,11 @@ class Profile extends StatelessWidget {
               child: ListTile(
                 leading: Icon(
                   Icons.mail,
-                  color: Color(0xff4C5C91),
                 ),
                 title: Text(
                   '$email',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Color(0xff4C5C91),
                   ),
                 ),
               ),
