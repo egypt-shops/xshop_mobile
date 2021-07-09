@@ -12,7 +12,7 @@ import 'package:xshop_mobile/screens/customer/orders/create_order.dart';
 import 'package:xshop_mobile/screens/customer/shops/shop_search.dart';
 import 'package:xshop_mobile/screens/customer/shops/shops.dart';
 import 'package:xshop_mobile/screens/login/components/login_screen.dart';
-import 'package:xshop_mobile/screens/profile.dart';
+import 'package:xshop_mobile/screens/home/components/profile.dart';
 
 import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:xshop_mobile/screens/login/login.dart';
@@ -209,7 +209,7 @@ class _CustomerState extends State<Customer> {
             ),
             ListTile(
               title: Text(
-                'account user',
+                'user account',
                 style: TextStyle(color: Colors.black38),
               ),
               leading: Icon(Icons.account_circle),

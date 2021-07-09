@@ -151,8 +151,11 @@ class ProductListItem extends StatelessWidget {
                                                 })
                                             : IconButton(
                                                 icon: favoritesList.items
-                                                        .contains(
-                                                            products[index])
+                                                        .where((element) =>
+                                                            element.name ==
+                                                            (products[index]
+                                                                .name))
+                                                        .isNotEmpty
                                                     ? Icon(
                                                         Icons.favorite,
                                                         color: Colors.red[600],
@@ -162,8 +165,12 @@ class ProductListItem extends StatelessWidget {
                                                         color: Colors.grey,
                                                       ),
                                                 onPressed: () {
-                                                  !favoritesList.items.contains(
-                                                          products[index])
+                                                  !favoritesList.items
+                                                          .where((element) =>
+                                                              element.name ==
+                                                              (products[index]
+                                                                  .name))
+                                                          .isNotEmpty
                                                       ? favoritesList
                                                           .add(products[index])
                                                       : favoritesList.remove(

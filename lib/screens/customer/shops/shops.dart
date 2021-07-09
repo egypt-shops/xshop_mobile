@@ -166,7 +166,10 @@ class ShopList extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                          icon: favoritesList.items.contains(shops[index])
+                          icon: favoritesList.items
+                                  .where((element) =>
+                                      element.name == (shops[index].name))
+                                  .isNotEmpty
                               ? Icon(
                                   Icons.favorite,
                                   color: Colors.red[600],
@@ -176,7 +179,10 @@ class ShopList extends StatelessWidget {
                                   color: Colors.grey,
                                 ),
                           onPressed: () {
-                            !favoritesList.items.contains(shops[index])
+                            !favoritesList.items
+                                    .where((element) =>
+                                        element.name == (shops[index].name))
+                                    .isNotEmpty
                                 ? favoritesList.add(shops[index])
                                 : favoritesList.remove(shops[index]);
                             ScaffoldMessenger.of(context).showSnackBar(

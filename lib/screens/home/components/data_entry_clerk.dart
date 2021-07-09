@@ -5,7 +5,7 @@ import 'package:xshop_mobile/screens/customer/products/product_search.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
 import 'package:xshop_mobile/screens/data_entry/new_order.dart';
 import 'package:xshop_mobile/screens/data_entry/product_creating.dart';
-import 'package:xshop_mobile/screens/profile.dart';
+import 'package:xshop_mobile/screens/home/components/profile.dart';
 import 'package:xshop_mobile/services/orders_api.dart';
 import 'package:xshop_mobile/services/products.dart';
 import 'package:xshop_mobile/services/shop_api.dart';
@@ -130,7 +130,7 @@ class _DataEntryClerkState extends State<DataEntryClerk> {
             ),
             ListTile(
               title: Text(
-                'account user',
+                'user account',
                 style: TextStyle(color: Colors.black38),
               ),
               leading: Icon(Icons.account_circle),

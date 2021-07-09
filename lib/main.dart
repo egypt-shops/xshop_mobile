@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:xshop_mobile/models/favorites.dart';
+import 'package:xshop_mobile/models/product.dart';
+import 'package:xshop_mobile/models/shop.dart';
 import 'package:xshop_mobile/screens/home/home.dart';
 import 'package:xshop_mobile/screens/login/components/login_screen.dart';
 
@@ -9,17 +15,27 @@ SharedPreferences sharedPreferences;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Directory appDocDirectory = await getApplicationDocumentsDirectory();
+  var path = appDocDirectory.path;
+  Hive
+    ..init(path)
+    ..registerAdapter(ShopAdapter());
+
+  var box = await Hive.openBox('shopBox');
+
   sharedPreferences = await SharedPreferences.getInstance();
-  runApp(Xshop());
+  runApp(Xshop(box));
 }
 
 class Xshop extends StatelessWidget {
+  final Box box;
+  Xshop(this.box);
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => FavoritesShops()),
-          ChangeNotifierProvider(create: (context) => FavoritesProducts()),
+          ChangeNotifierProvider(create: (context) => FavoritesShops(box)),
+          ChangeNotifierProvider(create: (context) => FavoritesProducts(box)),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

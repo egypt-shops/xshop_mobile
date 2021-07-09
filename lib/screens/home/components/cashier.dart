@@ -4,7 +4,7 @@ import 'package:xshop_mobile/models/product.dart';
 import 'package:xshop_mobile/screens/Cashier/new_order.dart';
 import 'package:xshop_mobile/screens/customer/products/product_search.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
-import 'package:xshop_mobile/screens/profile.dart';
+import 'package:xshop_mobile/screens/home/components/profile.dart';
 import 'package:xshop_mobile/services/products.dart';
 import 'package:http/http.dart' as http;
 
@@ -125,7 +125,7 @@ class _CashierState extends State<Cashier> {
             ),
             ListTile(
               title: Text(
-                'account user',
+                'user account',
                 style: TextStyle(color: Colors.black38),
               ),
               leading: Icon(Icons.account_circle),
