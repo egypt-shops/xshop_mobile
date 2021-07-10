@@ -20,19 +20,25 @@ class ShopAdapter extends TypeAdapter<Shop> {
       id: fields[0] as int,
       name: fields[1] as String,
       mobile: fields[2] as String,
+      dashboard_modules: fields[3] as String,
+      subdomain: fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Shop obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.mobile);
+      ..write(obj.mobile)
+      ..writeByte(3)
+      ..write(obj.dashboard_modules)
+      ..writeByte(4)
+      ..write(obj.subdomain);
   }
 
   @override
@@ -55,6 +61,8 @@ Shop _$ShopFromJson(Map<String, dynamic> json) {
     id: json['id'] as int,
     name: json['name'] as String,
     mobile: json['mobile'] as String,
+    dashboard_modules: json['dashboard_modules'] as String,
+    subdomain: json['subdomain'] as String,
   );
 }
 
@@ -62,4 +70,6 @@ Map<String, dynamic> _$ShopToJson(Shop instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'mobile': instance.mobile,
+      'dashboard_modules': instance.dashboard_modules,
+      'subdomain': instance.subdomain,
     };

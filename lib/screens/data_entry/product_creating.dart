@@ -17,6 +17,8 @@ class _ProductCreatingPageState extends State<ProductCreatingPage> {
     final TextEditingController nameController = new TextEditingController();
     final TextEditingController priceController = new TextEditingController();
     final TextEditingController stockController = new TextEditingController();
+    final TextEditingController descriptionController =
+        new TextEditingController();
 
     return MaterialApp(
       home: Scaffold(
@@ -211,6 +213,7 @@ class _ProductCreatingPageState extends State<ProductCreatingPage> {
                                           MainAxisAlignment.start,
                                       children: [
                                         TextField(
+                                            controller: descriptionController,
                                             key: Key('description_controller'),
                                             autofocus: true,
                                             maxLength: 85,
@@ -299,7 +302,7 @@ class _ProductCreatingPageState extends State<ProductCreatingPage> {
                   GestureDetector(
                       onTap: () {
                         _handleSubmit(context, nameController.text,
-                            priceController.text, stockController.text);
+                            priceController.text, stockController.text,descriptionController.text);
                       },
                       key: Key('Create_Product'),
                       child: Container(
@@ -343,11 +346,11 @@ class _ProductCreatingPageState extends State<ProductCreatingPage> {
   }
 
   Future<void> _handleSubmit(
-      BuildContext context, String name, String price, String stock) async {
+      BuildContext context, String name, String price, String stock,String description) async {
     try {
       Dialogs.showLoadingDialog(context, _keyLoader); //invoking login
       Product response =
-          await postProducts(http.Client(), name, price, stock, 2);
+          await postProducts(http.Client(), name, price, stock, description);
 
       // Find the ScaffoldMessenger in the widget tree
       // and use it to show a SnackBar.
