@@ -1,8 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:xshop_mobile/main.dart';
 import 'package:xshop_mobile/screens/home/home.dart';
 
 class PaymentWebView extends StatefulWidget {
@@ -28,9 +27,9 @@ class PaymentWebViewState extends State<PaymentWebView> {
         appBar: AppBar(
           iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
           title: !isPaid
-              ? Text('Payment', style: TextStyle(color: Colors.grey[700]))
+              ? Text('Payment', style: TextStyle(color: Colors.grey[800]))
               : Text(isSuccess ? 'Successful payment' : 'Unsuccessful payment',
-                  style: TextStyle(color: Colors.grey[700])),
+                  style: TextStyle(color: Colors.grey[800])),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
@@ -38,12 +37,14 @@ class PaymentWebViewState extends State<PaymentWebView> {
             ? Container(
                 child: isSuccess ? SuccessfulPayment() : UnSuccessfulPayment())
             : WebView(
-                onPageFinished: (page) {
+                onPageFinished: (page) async {
                   if (page.contains("success=true")) {
                     setState(() {
                       isPaid = true;
                       isSuccess = true;
                     });
+                    SharedPreferences sharedPreferences =
+                        await SharedPreferences.getInstance();
                     sharedPreferences.remove('sessionid');
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       backgroundColor: Colors.green,
