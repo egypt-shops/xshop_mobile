@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:xshop_mobile/screens/customer/products/payment.dart';
 import 'package:xshop_mobile/services/checkout.dart';
 import 'package:http/http.dart' as http;
@@ -161,32 +162,11 @@ class Cheked extends StatelessWidget {
               Center(
                   child: OutlinedButton(
                       onPressed: () {
-                        showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                elevation: 5,
-                                backgroundColor: Theme.of(context).primaryColor,
-                                title: Text(
-                                    '${checkoutdata.payingMethod} payment',
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1),
-                                content:
-                                    PaymentWebView(checkoutdata.paymentUrl),
-                                actions: <Widget>[
-                                  OutlinedButton(
-                                      child: new Text(
-                                        "Cancel",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 15),
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      })
-                                ],
-                              );
-                            });
+                        Navigator.of(context).push(new MaterialPageRoute<Null>(
+                            builder: (BuildContext context) {
+                              return PaymentWebView(checkoutdata.paymentUrl);
+                            },
+                            fullscreenDialog: true));
                       },
                       child: Text(
                         'Pay',

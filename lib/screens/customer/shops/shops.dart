@@ -72,8 +72,8 @@ class ShopList extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    ShopDetails(shops[index].id, shops[index].name)),
+                builder: (context) => ShopDetails(shops[index].id,
+                    shops[index].name, shops[index].subdomain)),
           );
         },
         child: Container(

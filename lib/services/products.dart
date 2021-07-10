@@ -4,23 +4,28 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xshop_mobile/models/product.dart';
 import 'package:http/http.dart' as http;
 import 'package:xshop_mobile/screens/customer/products/products.dart';
 
+SharedPreferences sharedPreferences;
+
 Future<Product> postProducts(http.Client client, String name, String price,
-    String stock, int addedBy) async {
+    String stock, String description) async {
+  sharedPreferences = await SharedPreferences.getInstance();
   final response = await client.post(
       Uri.parse("https://dev-egshops.herokuapp.com/api/products/"),
       headers: <String, String>{
         "accept": "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": "Token ${sharedPreferences.getString("token")}",
       },
       body: jsonEncode(<String, dynamic>{
         "name": name,
         "price": price,
         "stock": int.parse(stock),
-        "added_by": addedBy
+        "description": description
       }));
 
   // Use the compute function to run parseProducts in a separate isolate.
@@ -28,7 +33,7 @@ Future<Product> postProducts(http.Client client, String name, String price,
     print('doneeeeeeeeeeeeeeee============================');
     return Product.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('failed to add product for shop $addedBy');
+    throw Exception('failed to add product $name');
   }
 }
 

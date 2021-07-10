@@ -33,7 +33,8 @@ class FavoriteItemTile extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => ShopDetails(item.id, item.name)),
+                  builder: (context) =>
+                      ShopDetails(item.id, item.name, item.subdomain)),
             );
           },
           child: Container(
