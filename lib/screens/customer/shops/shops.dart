@@ -122,7 +122,7 @@ class ShopList extends StatelessWidget {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              'the shop is fantastic , ',
+                              'the shop is fantastic',
                               style: TextStyle(fontSize: 12),
                               softWrap: true,
                             ),
