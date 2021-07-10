@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 final TextEditingController addressController = new TextEditingController();
 
 class Checkout extends StatefulWidget {
-  const Checkout({Key key}) : super(key: key);
-
+  const Checkout({Key key, this.shopName}) : super(key: key);
+  final String shopName;
   @override
   _CheckoutState createState() => _CheckoutState();
 }
@@ -22,7 +22,7 @@ class _CheckoutState extends State<Checkout> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text('Checkout'),
+            title: Text('Checkout', style: TextStyle(color: Colors.grey[700])),
             backgroundColor: Colors.transparent,
             elevation: 0, // 1
 
@@ -39,7 +39,10 @@ class _CheckoutState extends State<Checkout> {
                     http.Client(), addressController.text, dropdownValue),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return Cheked(checkoutdata: snapshot.data);
+                    return Cheked(
+                      checkoutdata: snapshot.data,
+                      shopName: widget.shopName,
+                    );
                   } else if (snapshot.hasError) {
                     return Text('${snapshot.error}');
                   } else {
@@ -139,8 +142,9 @@ class _CheckoutState extends State<Checkout> {
 }
 
 class Cheked extends StatelessWidget {
-  const Cheked({Key key, this.checkoutdata}) : super(key: key);
+  const Cheked({Key key, this.checkoutdata, this.shopName}) : super(key: key);
   final CheckoutData checkoutdata;
+  final String shopName;
 
   @override
   Widget build(BuildContext context) {
@@ -150,12 +154,23 @@ class Cheked extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text('shop:             ${checkoutdata.shoppk}'),
-                Text('item count:   ${checkoutdata.itemcount}'),
-                Text('full price:      ${checkoutdata.fullprice}'),
-                Text('address:        ${checkoutdata.address}'),
-              ]),
+              Container(
+                  margin: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(20),
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.grey)),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('shop:              $shopName',
+                            style: TextStyle(fontSize: 18)),
+                        Text('item count:   ${checkoutdata.itemcount}',
+                            style: TextStyle(fontSize: 18)),
+                        Text('full price:       ${checkoutdata.fullprice}',
+                            style: TextStyle(fontSize: 18)),
+                        Text('''address:         ${checkoutdata.address}''',
+                            style: TextStyle(fontSize: 18)),
+                      ])),
               SizedBox(
                 height: 50,
               ),

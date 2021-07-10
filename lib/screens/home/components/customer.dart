@@ -11,6 +11,7 @@ import 'package:xshop_mobile/screens/customer/invoices/search.dart';
 import 'package:xshop_mobile/screens/customer/orders/create_order.dart';
 import 'package:xshop_mobile/screens/customer/shops/shop_search.dart';
 import 'package:xshop_mobile/screens/customer/shops/shops.dart';
+import 'package:xshop_mobile/screens/home/components/about.dart';
 import 'package:xshop_mobile/screens/login/components/login_screen.dart';
 import 'package:xshop_mobile/screens/home/components/profile.dart';
 
@@ -78,8 +79,8 @@ class _CustomerState extends State<Customer> {
   logout() {
     sharedPreferences.clear();
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-        );
+      MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+    );
   }
 
   createAlertDialog(BuildContext context, String userInfo) {
@@ -234,7 +235,7 @@ class _CustomerState extends State<Customer> {
               ),
               leading: Icon(Icons.info),
               onTap: () {
-                //Navigator.pop(context);
+                openAbout(context);
               },
             ),
             ListTile(

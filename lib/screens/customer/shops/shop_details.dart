@@ -63,7 +63,9 @@ class _ShopDetailsState extends State<ShopDetails> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Checkout(),
+                        builder: (context) => Checkout(
+                          shopName: widget.shopname,
+                        ),
                       ),
                     );
                   }),
