@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:xshop_mobile/models/product.dart';
@@ -7,38 +8,26 @@ import 'dart:convert';
 class PostProductQrScanner {
   String qr_result_response;
   String bar_result_response;
-
-  Future<String> postProductsByQR(http.Client client, String QR_Result) async {
-    final response = await client.post(
-        Uri.parse("https://dev-egshops.herokuapp.com/api/products/"),
-        headers: <String, String>{
-          "accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        body: QR_Result);
-    if (response.statusCode == 200) {
-      qr_result_response = 'done';
-    } else {
-      qr_result_response = 'Wrong';
-      throw ('failed to load');
-    }
-    return qr_result_response;
-  }
+  SharedPreferences sharedPreferences;
 
   Future<String> postProductsBYBarCode(http.Client client, String name,
-      String price, String stock, String addedBy) async {
+      String price, String stock, String description) async {
+    sharedPreferences = await SharedPreferences.getInstance();
+
     final response = await (client.post(
         Uri.parse("https://dev-egshops.herokuapp.com/api/products/"),
         headers: <String, String>{
           "accept": "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": "Token ${sharedPreferences.getString("token")}",
         },
         body: jsonEncode(<String, dynamic>{
           "name": name,
           "price": price,
           "stock": int.parse(stock),
-          "added_by": int.parse(addedBy)
+          "description": description
         })));
+    print(response.statusCode);
     if (response.statusCode == 200) {
       bar_result_response = 'done';
     } else {

@@ -14,6 +14,7 @@ Barcode result;
 List addedProduct = [];
 List quantity = [];
 TextEditingController _controllerQuatity = TextEditingController();
+TextEditingController _controllerDescription = TextEditingController();
 
 class QRViewScanner extends StatefulWidget {
   @override
@@ -104,6 +105,16 @@ class _QRViewScannerState extends State<QRViewScanner> {
                   labelText: 'Enter Quantity',
                 ),
               ),
+              TextField(
+                controller: _controllerDescription,
+                decoration: InputDecoration(
+                  icon: Icon(
+                    Icons.add_box,
+                    size: 30,
+                  ),
+                  labelText: 'Enter Description',
+                ),
+              ),
             ],
           ),
           buttons: [
@@ -116,7 +127,7 @@ class _QRViewScannerState extends State<QRViewScanner> {
                         barResult[0],
                         barResult[1],
                         _controllerQuatity.text.toString(),
-                        barResult[2]);
+                        _controllerDescription.text.toString());
                 if (resultresponse == 'done') {
                   addedProduct.add(result.code);
                   quantity.add(_controllerQuatity.text.toString());
