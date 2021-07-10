@@ -47,6 +47,7 @@ class Xshop extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'xshop',
           theme: ThemeData(
+            primarySwatch: Colors.grey,
             // Define the default brightness and colors.
             brightness: Brightness.light,
             iconTheme: IconThemeData(color: Colors.white),

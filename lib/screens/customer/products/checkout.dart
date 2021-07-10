@@ -7,8 +7,8 @@ import 'package:http/http.dart' as http;
 final TextEditingController addressController = new TextEditingController();
 
 class Checkout extends StatefulWidget {
-  const Checkout({Key key}) : super(key: key);
-
+  const Checkout({Key key, this.shopName}) : super(key: key);
+  final String shopName;
   @override
   _CheckoutState createState() => _CheckoutState();
 }
