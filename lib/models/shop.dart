@@ -14,8 +14,17 @@ class Shop {
   final String name;
   @HiveField(2)
   final String mobile;
+  @HiveField(3)
+  final String dashboard_modules;
+  @HiveField(4)
+  final String subdomain;
 
-  Shop({this.id, this.name, this.mobile});
+  Shop(
+      {this.id,
+      this.name,
+      this.mobile,
+      this.dashboard_modules,
+      this.subdomain});
 
   factory Shop.fromJson(Map<String, dynamic> json) => _$ShopFromJson(json);
 

@@ -13,9 +13,10 @@ import 'package:xshop_mobile/theme/apptheme.dart';
 import 'package:http/http.dart' as http;
 
 class ShopDetails extends StatefulWidget {
-  ShopDetails(this.id, this.shopname);
+  ShopDetails(this.id, this.shopname, this.subdomain);
   final int id;
   final String shopname;
+  final String subdomain;
   @override
   _ShopDetailsState createState() => _ShopDetailsState();
 }
@@ -80,26 +81,25 @@ class _ShopDetailsState extends State<ShopDetails> {
               ),
               body: TabBarView(
                 children: [
-                  GetShop(widget.shopname),
+                  GetShop(widget.subdomain),
                   CartPage(),
                 ],
               ),
             )),
         backLayer: Products(
-          shopName: widget.shopname,
+          shopName: widget.subdomain,
         ));
   }
 }
 
 class GetShop extends StatelessWidget {
-  GetShop(this.name);
-  final String name;
+  GetShop(this.subdomain);
+  final String subdomain;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: FutureBuilder<Shop>(
-            future: fetchShopByID(
-                http.Client(), name.replaceAll(' ', '').toLowerCase()),
+            future: fetchShopByID(http.Client(), subdomain),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ShopHome(shop: snapshot.data);

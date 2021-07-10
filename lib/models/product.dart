@@ -16,8 +16,10 @@ class Product {
   final String price;
   @HiveField(3)
   final int stock;
+  @HiveField(4)
+  final String description;
 
-  Product({this.id, this.name, this.price, this.stock});
+  Product({this.id, this.name, this.price, this.stock, this.description});
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
 
