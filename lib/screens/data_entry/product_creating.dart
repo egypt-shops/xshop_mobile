@@ -230,65 +230,6 @@ class _ProductCreatingPageState extends State<ProductCreatingPage> {
                             ),
                           ),
                           // for row of specification and its text field
-                          Container(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // for specification label
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(10, 20, 10, 10),
-                                  height: 100,
-                                  child: Column(children: [
-                                    Text(
-                                      'specification :',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                  ]),
-                                ),
-                                // for textfield of specification
-                                Expanded(
-                                  child: Container(
-                                    margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
-                                    width: 250,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white30,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8))),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        TextField(
-                                            key:
-                                                Key('specification_controller'),
-                                            autofocus: true,
-                                            maxLength: 100,
-                                            maxLines: 3,
-                                            style:
-                                                TextStyle(color: Colors.black),
-                                            decoration: InputDecoration(
-                                                border: OutlineInputBorder()))
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          /// asking for adding image of product
-                          Container(
-                            padding: EdgeInsets.fromLTRB(40, 40, 40, 100),
-                            margin: EdgeInsets.fromLTRB(20, 30, 20, 20),
-                            decoration: BoxDecoration(
-                                color: Colors.white30,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8))),
-                            child: Text(
-                              'add image of product',
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                          ),
                         ],
                       )),
                 ),
@@ -301,8 +242,31 @@ class _ProductCreatingPageState extends State<ProductCreatingPage> {
                 children: [
                   GestureDetector(
                       onTap: () {
-                        _handleSubmit(context, nameController.text,
-                            priceController.text, stockController.text,descriptionController.text);
+                        if (nameController.text == '' ||
+                            priceController.text == '' ||
+                            stockController.text == '' ||
+                            descriptionController.text == '') {
+                          final snackBar = SnackBar(
+                            content: Text('You must enter the whole fileds'),
+                            action: SnackBarAction(
+                              label: 'Undo',
+                              onPressed: () {
+                                // Some code to undo the change.
+                              },
+                            ),
+                          );
+                          // Find the ScaffoldMessenger in the widget tree
+                          // and use it to show a SnackBar.
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          return;
+                        } else {
+                          _handleSubmit(
+                              context,
+                              nameController.text,
+                              priceController.text,
+                              stockController.text,
+                              descriptionController.text);
+                        }
                       },
                       key: Key('Create_Product'),
                       child: Container(
@@ -319,23 +283,6 @@ class _ProductCreatingPageState extends State<ProductCreatingPage> {
                               color: Theme.of(context).primaryColor),
                         ),
                       )),
-                  GestureDetector(
-                      onTap: () {},
-                      key: Key('save_Product'),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white30,
-                            borderRadius: BorderRadius.all(Radius.circular(8))),
-                        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                        margin: EdgeInsets.only(right: 20),
-                        child: Text(
-                          'save',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor),
-                        ),
-                      )),
                 ],
               ),
             )
@@ -345,8 +292,8 @@ class _ProductCreatingPageState extends State<ProductCreatingPage> {
     );
   }
 
-  Future<void> _handleSubmit(
-      BuildContext context, String name, String price, String stock,String description) async {
+  Future<void> _handleSubmit(BuildContext context, String name, String price,
+      String stock, String description) async {
     try {
       Dialogs.showLoadingDialog(context, _keyLoader); //invoking login
       Product response =
