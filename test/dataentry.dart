@@ -46,15 +46,12 @@ void main() {
     expect(find.text('Price :'), findsOneWidget);
     expect(find.text('stock :'), findsOneWidget);
     expect(find.text('description :'), findsOneWidget);
-    expect(find.text('specification :'), findsOneWidget);
 
     await tester.enterText(find.byKey(ValueKey('name_controller')), 'one cup');
     await tester.enterText(find.byKey(ValueKey('price_controller')), '5');
     await tester.enterText(find.byKey(ValueKey('stock_controller')), 'Aswan');
     await tester.enterText(
         find.byKey(ValueKey('description_controller')), 'has only one');
-    await tester.enterText(
-        find.byKey(ValueKey('specification_controller')), 'gold');
 
     // await tester.tap(find.byKey(ValueKey('Create_Product')));
     //await tester.tap(find.byKey(ValueKey('save_Product')));

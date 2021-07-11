@@ -12,6 +12,8 @@ import 'package:xshop_mobile/models/sound_manager.dart';
 // list of added products
 Barcode result;
 List addedProduct = [];
+bool loading = false;
+
 List quantity = [];
 TextEditingController _controllerQuatity = TextEditingController();
 TextEditingController _controllerDescription = TextEditingController();
