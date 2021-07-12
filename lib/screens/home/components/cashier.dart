@@ -202,8 +202,13 @@ class ProductCashier extends StatelessWidget {
         floating: _floating,
         expandedHeight: 160.0,
         flexibleSpace: FlexibleSpaceBar(
-          title: Text('          Cashier ',
-              style: Theme.of(context).textTheme.bodyText1),
+          title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text('Cashier         ',
+                    style: Theme.of(context).textTheme.bodyText1)
+              ]),
           background: Icon(
             Icons.attach_money,
             size: 50,
@@ -238,7 +243,7 @@ class ProductCashier extends StatelessWidget {
         ),
       ),
       FutureBuilder<List<Product>>(
-          future: fetchProducts(http.Client(), '2'),
+          future: fetchProducts(http.Client(), 'boyka'),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               products = snapshot.data;

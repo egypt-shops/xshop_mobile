@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class SignIn {
-  var jsonResponse = null;
+  var jsonResponse;
   Future<User> signIn(mobile, pass) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map data = {'mobile': mobile, 'password': pass};

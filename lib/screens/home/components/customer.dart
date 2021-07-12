@@ -143,7 +143,7 @@ class _CustomerState extends State<Customer> {
               IconButton(
                 key: Key("search for shop"),
                 icon: Icon(Icons.search, color: Theme.of(context).primaryColor),
-                tooltip: 'search for shop',
+                tooltip: "search for shop",
                 onPressed: () {
                   showSearch(
                       context: context,
