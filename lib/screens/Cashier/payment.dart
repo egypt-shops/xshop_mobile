@@ -56,9 +56,7 @@ class CashierPayment extends StatelessWidget {
                                     Text(
                                         'full price:       ${checkoutdata.fullprice}',
                                         style: TextStyle(fontSize: 18)),
-                                    Text(
-                                        '''address:         ${checkoutdata.address}''',
-                                        style: TextStyle(fontSize: 18)),
+                                  
                                   ])),
                           SizedBox(
                             height: 50,
