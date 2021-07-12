@@ -16,7 +16,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  bool isloading = false;
   bool issignup = false;
   bool isChecked = false;
 
@@ -97,7 +96,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           ],
                                         ));
                                   } else if (snapshot.hasError) {
-                                    return Text('${snapshot.error}');
+                                    return Center(
+                                        child: Text('${snapshot.error}'));
                                   }
                                   return Center(
                                       child: SizedBox(

@@ -104,7 +104,7 @@ class ProductListItem extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5),
                                   child: Image(
                                       image: NetworkImage(
-                                          'https://picsum.photos/300?image=${products[index].id.toString()}')))),
+                                          'https://picsum.photos/300?image=${index.toString()}')))),
                           Expanded(
                               child: Container(
                                   padding: EdgeInsets.fromLTRB(5, 0, 0, 0),

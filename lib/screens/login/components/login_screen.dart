@@ -18,7 +18,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool isloading = false;
-  bool issignup = false;
   bool isChecked = false;
 
   final signin = SignIn();
@@ -176,6 +175,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   },
                                                   child: Text('Reset',
                                                       style: TextStyle(
+                                                          color:
+                                                              Colors.blue[400],
                                                           fontSize: 12)))
                                             ],
                                           ),
