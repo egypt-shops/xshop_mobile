@@ -4,6 +4,7 @@ import 'package:xshop_mobile/models/product.dart';
 import 'package:xshop_mobile/screens/Cashier/new_order.dart';
 import 'package:xshop_mobile/screens/customer/products/product_search.dart';
 import 'package:xshop_mobile/screens/customer/products/products.dart';
+import 'package:xshop_mobile/screens/home/components/about.dart';
 import 'package:xshop_mobile/screens/home/components/profile.dart';
 import 'package:xshop_mobile/screens/login/components/login_screen.dart';
 import 'package:xshop_mobile/services/products.dart';
@@ -153,7 +154,7 @@ class _CashierState extends State<Cashier> {
               ),
               leading: Icon(Icons.info),
               onTap: () {
-                //Navigator.pop(context);
+                openAbout(context, "Cashier");
               },
             ),
             ListTile(
@@ -254,7 +255,7 @@ class ProductCashier extends StatelessWidget {
                         (MediaQuery.of(context).size.height / 1.6),
                   ),
                   delegate: SliverChildBuilderDelegate((context, index) {
-                    return ProductListItem(index: index);
+                    return ProductListItem(index: index, type: "cashier");
                   }, childCount: products.length));
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');

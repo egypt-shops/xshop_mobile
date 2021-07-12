@@ -63,15 +63,19 @@ class ProductsList extends StatelessWidget {
               (MediaQuery.of(context).size.height / 1.6),
         ),
         itemBuilder: (BuildContext context, int index) {
-          return ProductListItem(index: index);
+          return ProductListItem(
+            index: index,
+            type: "customer",
+          );
         },
         itemCount: products.length);
   }
 }
 
 class ProductListItem extends StatelessWidget {
-  ProductListItem({Key key, this.index}) : super(key: key);
+  ProductListItem({Key key, this.index, this.type}) : super(key: key);
   final int index;
+  final String type;
 
   @override
   Widget build(BuildContext context) {

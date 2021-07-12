@@ -5,6 +5,7 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:http/http.dart' as http;
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:xshop_mobile/services/cart.dart';
 
 import 'package:xshop_mobile/services/post_product_by_scanning.dart';
 import 'package:xshop_mobile/models/sound_manager.dart';
@@ -130,6 +131,7 @@ class _QRViewScannerState extends State<QRViewScanner> {
                         barResult[1],
                         _controllerQuatity.text.toString(),
                         _controllerDescription.text.toString());
+
                 if (resultresponse == 'done') {
                   addedProduct.add(result.code);
                   quantity.add(_controllerQuatity.text.toString());

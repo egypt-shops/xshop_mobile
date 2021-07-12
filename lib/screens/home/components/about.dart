@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-void openAbout(context) {
+void openAbout(context, String type) {
   LicenseRegistry.reset();
 
   LicenseRegistry.addLicense(() async* {
@@ -30,7 +30,7 @@ void openAbout(context) {
     children: <Widget>[
       Padding(
           padding: EdgeInsets.only(top: 15),
-          child: Text('xshop Customer app for shopping and online payment'))
+          child: Text('xshop $type login type'))
     ],
   );
 }
