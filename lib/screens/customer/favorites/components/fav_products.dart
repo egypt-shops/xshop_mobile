@@ -7,7 +7,6 @@ import 'package:xshop_mobile/screens/customer/products/product_details.dart';
 import 'package:xshop_mobile/screens/customer/shops/shop_details.dart';
 
 class FavoritesProductsPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Consumer<FavoritesProducts>(
@@ -18,7 +17,7 @@ class FavoritesProductsPage extends StatelessWidget {
                   (MediaQuery.of(context).size.height / 1.6),
             ),
             itemBuilder: (BuildContext context, int index) {
-              return FavoriteItemTile(value.items[index]);
+              return FavoriteItemTile(value.items[index], index);
             },
             itemCount: value.items.length));
   }
@@ -26,10 +25,9 @@ class FavoritesProductsPage extends StatelessWidget {
 
 class FavoriteItemTile extends StatelessWidget {
   final Product item;
+  final int index;
 
-  const FavoriteItemTile(
-    this.item,
-  );
+  const FavoriteItemTile(this.item, this.index);
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +61,7 @@ class FavoriteItemTile extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(5),
                                       child: Image(
                                           image: NetworkImage(
-                                              'https://picsum.photos/300?image=${item.id.toString()}')))),
+                                              'https://picsum.photos/300?image=${index.toString()}')))),
                               Expanded(
                                   child: Container(
                                       padding: EdgeInsets.fromLTRB(5, 0, 0, 0),

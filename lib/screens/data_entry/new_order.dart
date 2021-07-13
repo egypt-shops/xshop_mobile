@@ -1,7 +1,7 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:xshop_mobile/screens/Cashier/qrscanner.dart';
+import 'package:xshop_mobile/screens/data_entry/qrscanner.dart';
 import 'package:xshop_mobile/screens/data_entry/product_creating.dart';
 
 class NewOrder extends StatefulWidget {
@@ -22,12 +22,7 @@ class _NewOrderState extends State<NewOrder> {
               style: Theme.of(context).textTheme.bodyText1,
             ),
             actions: <Widget>[
-              IconButton(
-                  icon: Icon(
-                    Icons.payment,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {})
+              BackdropToggleButton(icon: AnimatedIcons.list_view),
             ]),
         stickyFrontLayer: false,
         frontLayer: DefaultTabController(

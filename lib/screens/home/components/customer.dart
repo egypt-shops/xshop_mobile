@@ -235,7 +235,7 @@ class _CustomerState extends State<Customer> {
               ),
               leading: Icon(Icons.info),
               onTap: () {
-                openAbout(context);
+                openAbout(context, "Customer");
               },
             ),
             ListTile(

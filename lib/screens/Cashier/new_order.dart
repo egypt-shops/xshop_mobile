@@ -1,7 +1,9 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:xshop_mobile/screens/Cashier/cashierScanner.dart';
+import 'package:xshop_mobile/screens/Cashier/payment.dart';
 import 'package:xshop_mobile/screens/Cashier/search.dart';
+import 'package:xshop_mobile/screens/customer/products/checkout.dart';
 import 'cashierScanner.dart';
 
 class NewOrder extends StatefulWidget {
@@ -26,7 +28,16 @@ class _NewOrderState extends State<NewOrder> {
                     Icons.payment,
                     color: Colors.white,
                   ),
-                  onPressed: () {})
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CashierPayment(
+                          shopName: "cashier",
+                        ),
+                      ),
+                    );
+                  }),
             ]),
         stickyFrontLayer: false,
         frontLayer: DefaultTabController(
